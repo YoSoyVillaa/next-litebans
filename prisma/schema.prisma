@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model litebans_allow {
+  id   BigInt @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  uuid Bytes  @db.Binary(16)
+  type Int    @db.UnsignedTinyInt
+}
+
+model litebans_bans {
+  id                BigInt   @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  uuid              String?  @db.VarChar(36)
+  ip                String?  @db.VarChar(45)
+  reason            String?  @db.VarChar(2048)
+  banned_by_uuid    String   @db.VarChar(36)
+  banned_by_name    String?  @db.VarChar(128)
+  removed_by_uuid   String?  @db.VarChar(36)
+  removed_by_name   String?  @db.VarChar(128)
+  removed_by_reason String?  @db.VarChar(2048)
+  removed_by_date   DateTime @default(now()) @db.Timestamp(0)
+  time              BigInt
+  until             BigInt
+  template          Int      @default(255) @db.UnsignedTinyInt
+  server_scope      String?  @db.VarChar(32)
+  server_origin     String?  @db.VarChar(32)
+  silent            Boolean  @db.Bit(1)
+  ipban             Boolean  @db.Bit(1)
+  ipban_wildcard    Boolean  @default(dbgenerated("(b'0')")) @db.Bit(1)
+  active            Boolean  @db.Bit(1)
+}
+
+model litebans_config {
+  id       BigInt @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  version  String @db.VarChar(128)
+  build    String @db.VarChar(128)
+  timezone String @default("+00:00") @db.VarChar(64)
+}
+
+model litebans_history {
+  id   BigInt   @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  date DateTime @default(now()) @db.Timestamp(0)
+  name String?  @db.VarChar(16)
+  uuid String?  @db.VarChar(36)
+  ip   String?  @db.VarChar(45)
+}
+
+model litebans_kicks {
+  id             BigInt  @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  uuid           String? @db.VarChar(36)
+  ip             String? @db.VarChar(45)
+  reason         String? @db.VarChar(2048)
+  banned_by_uuid String  @db.VarChar(36)
+  banned_by_name String? @db.VarChar(128)
+  time           BigInt
+  until          BigInt
+  template       Int     @default(255) @db.UnsignedTinyInt
+  server_scope   String? @db.VarChar(32)
+  server_origin  String? @db.VarChar(32)
+  silent         Boolean @db.Bit(1)
+  ipban          Boolean @db.Bit(1)
+  ipban_wildcard Boolean @default(dbgenerated("(b'0')")) @db.Bit(1)
+  active         Boolean @db.Bit(1)
+}
+
+model litebans_mutes {
+  id                BigInt   @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  uuid              String?  @db.VarChar(36)
+  ip                String?  @db.VarChar(45)
+  reason            String?  @db.VarChar(2048)
+  banned_by_uuid    String   @db.VarChar(36)
+  banned_by_name    String?  @db.VarChar(128)
+  removed_by_uuid   String?  @db.VarChar(36)
+  removed_by_name   String?  @db.VarChar(128)
+  removed_by_reason String?  @db.VarChar(2048)
+  removed_by_date   DateTime @default(now()) @db.Timestamp(0)
+  time              BigInt
+  until             BigInt
+  template          Int      @default(255) @db.UnsignedTinyInt
+  server_scope      String?  @db.VarChar(32)
+  server_origin     String?  @db.VarChar(32)
+  silent            Boolean  @db.Bit(1)
+  ipban             Boolean  @db.Bit(1)
+  ipban_wildcard    Boolean  @default(dbgenerated("(b'0')")) @db.Bit(1)
+  active            Boolean  @db.Bit(1)
+}
+
+model litebans_servers {
+  id   BigInt   @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  name String   @db.VarChar(32)
+  uuid String   @db.VarChar(32)
+  date DateTime @default(now()) @db.Timestamp(0)
+}
+
+model litebans_sync {
+  id   BigInt   @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  info Int      @db.UnsignedInt
+  msg  String   @db.VarChar(4096)
+  time DateTime @default(now()) @db.Timestamp(0)
+}
+
+model litebans_warnings {
+  id                BigInt   @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  uuid              String?  @db.VarChar(36)
+  ip                String?  @db.VarChar(45)
+  reason            String?  @db.VarChar(2048)
+  banned_by_uuid    String   @db.VarChar(36)
+  banned_by_name    String?  @db.VarChar(128)
+  removed_by_uuid   String?  @db.VarChar(36)
+  removed_by_name   String?  @db.VarChar(128)
+  removed_by_reason String?  @db.VarChar(2048)
+  removed_by_date   DateTime @default(now()) @db.Timestamp(0)
+  time              BigInt
+  until             BigInt
+  template          Int      @default(255) @db.UnsignedTinyInt
+  server_scope      String?  @db.VarChar(32)
+  server_origin     String?  @db.VarChar(32)
+  silent            Boolean  @db.Bit(1)
+  ipban             Boolean  @db.Bit(1)
+  ipban_wildcard    Boolean  @default(dbgenerated("(b'0')")) @db.Bit(1)
+  active            Boolean  @db.Bit(1)
+  warned            Boolean  @db.Bit(1)
+}
