@@ -1,10 +1,11 @@
 import "server-only"
-import { langConfig } from "@config/languages"
+
 import { getLang } from "./actions/get-lang"
+import { siteConfig } from "@config/site"
 
 const dictionaries: Record<string, any> = {}
 
-langConfig.available.forEach(async (lang) => {
+siteConfig.languages.available.forEach(async (lang) => {
   const dictionary = await import(`../../../language/${lang}.js`)
   dictionaries[lang] = dictionary.default
 })
