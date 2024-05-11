@@ -11,9 +11,9 @@ export const Icons = {
       <path 
         d="M18.364 18.364C19.9926 16.7353 21 14.4853 21 12C21 7.02944 16.9706 3 12 3C9.51472 3 7.26472 4.00736 5.63604 5.63604M18.364 18.364C16.7353 19.9926 14.4853 21 12 21C7.02944 21 3 16.9706 3 12C3 9.51472 4.00736 7.26472 5.63604 5.63604M18.364 18.364L5.63604 5.63604" 
         stroke={props.color || 'currentColor'} 
-        stroke-width="2" 
-        stroke-linecap="round" 
-        stroke-linejoin="round"
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
       />
     </svg>
   ),
@@ -40,9 +40,9 @@ export const Icons = {
       <path 
         d="M12 15H12.01M12 12V9M4.98207 19H19.0179C20.5615 19 21.5233 17.3256 20.7455 15.9923L13.7276 3.96153C12.9558 2.63852 11.0442 2.63852 10.2724 3.96153L3.25452 15.9923C2.47675 17.3256 3.43849 19 4.98207 19Z" 
         stroke={props.color || 'currentColor'}
-        stroke-width="2" 
-        stroke-linecap="round" 
-        stroke-linejoin="round"
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
       />
     </svg>
   ),
@@ -56,9 +56,9 @@ export const Icons = {
       <path 
         d="M16 8L8 16M8.00001 8L16 16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" 
         stroke={props.color || 'currentColor'}
-        stroke-width="1.5" 
-        stroke-linecap="round" 
-        stroke-linejoin="round"
+        strokeWidth="1.5" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
       />
     </svg>
   )
