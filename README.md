@@ -47,6 +47,24 @@ Then, run `npm run setup:db:pull` to pull the database schema.
 
 You can configure any website option on `config/site.ts`, such as the page title, icon, and more.
 
+### 🖼️ Images
+
+You can place the images in the `public/` folder, then you can use them in the website with the `/` path. But, if you want to use an external link images, you will need to add the following config to the `next.config.js` file:
+
+```js
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      // One object for each domain
+      {
+        protocol: 'https',
+        hostname: 'domain.example',
+      }
+    ]
+  }
+};
+```
+
 ### 🌍 Internacionalization
 
 To configure the available languages, you can edit the `config/site.ts` file, modifying the `languages` object, then, you can edit existing translations in the `language/` folder, or create new ones copying the existing ones and changing the values.
