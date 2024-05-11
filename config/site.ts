@@ -1,5 +1,6 @@
 export const siteConfig = {
   title: "Next Litebans",
+  logo: "/logo.svg",
   languages: {
     available: [
       "en",
