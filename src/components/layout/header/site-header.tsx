@@ -3,6 +3,7 @@ import { LanguageChanger } from "@/lib/language/components/LanguageChanger";
 import { getDictionaries } from "@/lib/language/dictionaries";
 import { MainNav } from "./main-nav";
 import { getPunishmentCount } from "@/lib/punishment";
+import { MobileNav } from "./mobile-nav";
 
 export const SiteHeader = async () => {
   const dictionaries = getDictionaries();
@@ -11,8 +12,9 @@ export const SiteHeader = async () => {
   return(
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 max-w-screen-2xl items-center">
+        <MobileNav bans={bans} mutes={mutes} warns={warns} kicks={kicks} dictionaries={dictionaries} />
         <MainNav bans={bans} mutes={mutes} warns={warns} kicks={kicks} />
-        <div className="flex flex-1 items-center space-x-2 justify-end">
+        <div className="flex flex-1 justify-end">
           <nav className="flex items-center">
             <LanguageChanger dictionaries={dictionaries} />
             <ThemeToggle />
