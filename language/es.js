@@ -30,6 +30,26 @@ const language = {
       // Placeholders: {total}, {bans}, {mutes}, {kicks}, {warns}
       subtitle: "¡Bienvenido a la interfaz web de Litebans!"
     },
+    bans: {
+      title: "Baneos",
+      // Placeholders: {total}
+      subtitle: "Baneos totales: {total}",
+      table: {
+        heads: {
+          player: "Jugador",
+          by: "Baneado por",
+          reason: "Razón",
+          date: "Fecha",
+          expires: "Expiración"
+        },
+        permanent: "Baneo permanente",
+        active: {
+          true: "Activo",
+          temporal: "Temporal activo",
+          false: "Expirado"
+        }
+      }
+    },
     errors: {
       notFound: {
         title: "404",

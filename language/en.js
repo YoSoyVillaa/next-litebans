@@ -32,6 +32,26 @@ const language = {
       // Placeholders: {total}, {bans}, {mutes}, {kicks}, {warns}
       subtitle: "Welcome to Litebans Web Interface!"
     },
+    bans: {
+      title: "Bans",
+      // Placeholders: {total}
+      subtitle: "Ban count: {total}",
+      table: {
+        heads: {
+          player: "Player",
+          by: "Banned by",
+          reason: "Reason",
+          date: "Date",
+          expires: "Expires"
+        },
+        permanent: "Permanent ban",
+        active: {
+          true: "Active",
+          temporal: "Temporal active",
+          false: "Expired"
+        }
+      }
+    },
     errors: {
       notFound: {
         title: "404",

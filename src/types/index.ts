@@ -6,3 +6,7 @@ export type PageProps = {
 export type PageLangProps = {
   params: { lang: string }
 }
+
+export type SearchParams = {
+  searchParams: { [key: string]: string | string[] | undefined }
+}

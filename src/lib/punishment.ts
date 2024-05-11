@@ -9,4 +9,20 @@ const getPunishmentCount = async () => {
   return { bans, mutes, warns, kicks }
 }
 
-export { getPunishmentCount }
+const getPlayerName = async (uuid: string) => {
+  const player = await db.litebans_history.findFirst({
+    where: {
+      uuid
+    },
+    orderBy: {
+      date: 'desc'
+    },
+    select: {
+      name: true
+    }
+  });
+
+  return player?.name;
+}
+
+export { getPunishmentCount, getPlayerName }
