@@ -7,10 +7,22 @@ const language = {
     description: "Una interfaz web simple para LiteBans."
   },
   words: {
-    bans: "Baneos",
-    mutes: "Muteos",
-    kicks: "Expulsiones",
-    warns: "Avisos"
+    bans: {
+      singular: "Baneo",
+      plural: "Baneos"
+    },
+    mutes: {
+      singular: "Mute",
+      plural: "Muteos"
+    },
+    kicks: {
+      singular: "Expulsión",
+      plural: "Expulsiones"
+    },
+    warns: {
+      singular: "Aviso",
+      plural: "Avisos"
+    }
   },
   pages: {
     home: {

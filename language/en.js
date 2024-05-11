@@ -1,3 +1,5 @@
+const { sign } = require("crypto");
+
 const language = {
   info: {
     country_code: "GB",
@@ -7,10 +9,22 @@ const language = {
     description: "A simple and lightweight Litebans web interface."
   },
   words: {
-    bans: "Bans",
-    mutes: "Mutes",
-    kicks: "Kicks",
-    warns: "Warns"
+    bans: {
+      singular: "Ban",
+      plural: "Bans"
+    },
+    mutes: {
+      singular: "Mute",
+      plural: "Mutes"
+    },
+    kicks: {
+      singular: "Kick",
+      plural: "Kicks"
+    },
+    warns: {
+      singular: "Warn",
+      plural: "Warns"
+    }
   },
   pages: {
     home: {
