@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { language } from "@/lib/language/dictionaries";
 import { ThemeProvider } from "@/components/theme/theme-provider";
-import { SiteHeader } from "@/components/layout/site-header";
+import { SiteHeader } from "@/components/layout/header/site-header";
 import { siteConfig } from "@config/site";
 import { LanguageProvider } from "@/lib/language/components/LanguageProvider";
 
