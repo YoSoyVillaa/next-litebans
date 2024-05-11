@@ -47,7 +47,7 @@ const language = {
         permanent: "Permanent ban",
         active: {
           true: "Active",
-          temporal: "Temporal active",
+          temporal: "Temporal",
           false: "Expired"
         }
       }

@@ -45,7 +45,7 @@ const language = {
         permanent: "Baneo permanente",
         active: {
           true: "Activo",
-          temporal: "Temporal activo",
+          temporal: "Temporal",
           false: "Expirado"
         }
       }
