@@ -57,6 +57,10 @@ const language = {
         button: "Volver a la página de inicio"
       }
     }
+  },
+  pagination: {
+    previous: "Anterior",
+    next: "Siguiente"
   }
 }
 

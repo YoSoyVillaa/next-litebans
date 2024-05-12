@@ -7,6 +7,7 @@ export const siteConfig = {
       "es",
     ],
     default: "en",
-  }
+  },
+  consoleIcon: "/console.webp"
 }
 export type SiteConfig = typeof siteConfig;

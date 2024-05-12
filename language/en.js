@@ -59,6 +59,10 @@ const language = {
         button: "Back to home page"
       }
     }
+  },
+  pagination: {
+    previous: "Previous",
+    next: "Next"
   }
 }
 

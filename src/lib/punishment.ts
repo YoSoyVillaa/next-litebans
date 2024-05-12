@@ -25,4 +25,26 @@ const getPlayerName = async (uuid: string) => {
   return player?.name;
 }
 
-export { getPunishmentCount, getPlayerName }
+const getBans = async (page: number) => {
+  const bans =  await db.litebans_bans.findMany({
+    take: 10,
+    skip: (page - 1) * 10,
+    select: {
+      id: true,
+      uuid: true,
+      banned_by_name: true,
+      banned_by_uuid: true,
+      reason: true,
+      time: true,
+      until: true,
+      active: true
+    },
+    orderBy: {
+      time: "desc"
+    }
+  });
+
+  return bans;
+}
+
+export { getPunishmentCount, getPlayerName, getBans }
