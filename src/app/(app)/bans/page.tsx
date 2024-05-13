@@ -5,18 +5,18 @@ import Link from "next/link";
 import { language } from "@/lib/language/dictionaries";
 import { db } from "@/lib/db";
 import { cn } from "@/lib/utils";
-import { getPlayerName } from "@/lib/punishment/punishment";
 import { getBans, sanitizeBans } from "@/lib/punishment/ban";
 import p from "@/lib/language/utils/parse";
 
 import { SearchParams } from "@/types";
 import { getRelativeDifference, getRelativeDifferenceText } from "@/utils/date";
+import { siteConfig } from "@config/site";
 
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { PunishmentListPage } from "@/components/layout/punishment-list-page";
-import { siteConfig } from "@config/site";
+import { TablePagination } from "@/components/table/pagination";
 import {
   Table,
   TableBody,
@@ -25,7 +25,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { TablePagination } from "@/components/table/pagination";
 
 export async function generateMetadata() {
   
