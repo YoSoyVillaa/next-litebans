@@ -1,3 +1,4 @@
+import { PunishmentListItem } from "@/types";
 import { db } from "../db";
 import { Dictionary } from "../language/types";
 import { getPlayerName } from "./punishment";
@@ -24,16 +25,7 @@ const getBans = async (page: number) => {
   return bans;
 }
 
-const sanitizeBans = async (dictionary: Dictionary, bans: {
-  id: bigint;
-  uuid: string | null;
-  reason: string | null;
-  banned_by_uuid: string;
-  banned_by_name: string | null;
-  time: bigint;
-  until: bigint;
-  active: boolean;
-}[]) => {
+const sanitizeBans = async (dictionary: Dictionary, bans: PunishmentListItem[]) => {
 
   const sanitized = await Promise.all(bans.map(async (ban) => {
     const name = await getPlayerName(ban.uuid!);
