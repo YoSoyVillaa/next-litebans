@@ -30,7 +30,8 @@ export const TablePagination = ({
   const dictionary = useLang().dictionary.pagination;
 
   useEffect(() => {
-    if (searchParams.get("page") === actualPage.toString()) return;
+    const param = searchParams.get("page"); 
+    if (param === actualPage.toString() || (actualPage == 1 && !param)) return;
 
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", actualPage.toString());
