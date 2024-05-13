@@ -41,11 +41,11 @@ export default async function Bans({
 }: SearchParams) {
   let { lang, dictionary } = await language();
   dictionary = dictionary.pages.bans;
+  
   const banCount = await db.litebans_bans.count();
   const pages = Math.ceil(banCount / 10);
   
   let page = searchParams.page ? parseInt(searchParams.page as string) : 1;
-
   if (isNaN(page) || page < 1) {
     page = 1;
   }

@@ -4,14 +4,13 @@ import { usePathname, useSearchParams } from "next/navigation";
 
 import { 
   Pagination, 
-  PaginationContent, 
-  PaginationEllipsis, 
+  PaginationContent,
   PaginationItem, 
   PaginationLink, 
   PaginationNext, 
   PaginationPrevious 
 } from "@/components/ui/pagination";
-import { act, useEffect } from "react";
+import { useEffect } from "react";
 import { useLang } from "@/lib/language/components/LanguageProvider";
 
 interface TablePaginationProps {
