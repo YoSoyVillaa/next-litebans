@@ -3,6 +3,11 @@ import { db } from "../db";
 import { Dictionary } from "../language/types";
 import { getPlayerName } from "./punishment";
 
+const getBanCount = async () => {
+  const count = await db.litebans_bans.count();
+  return count;
+}
+
 const getBans = async (page: number) => {
   const bans =  await db.litebans_bans.findMany({
     take: 10,
@@ -46,4 +51,4 @@ const sanitizeBans = async (dictionary: Dictionary, bans: PunishmentListItem[]) 
   return sanitized;
 }
 
-export { getBans, sanitizeBans }
+export { getBanCount, getBans, sanitizeBans }

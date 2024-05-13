@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { language } from "@/lib/language/dictionaries";
 import { cn } from "@/lib/utils";
-import { getBanCount, getBans, sanitizeBans } from "@/lib/punishment/ban";
 import p from "@/lib/language/utils/parse";
 
 import { SearchParams } from "@/types";
@@ -24,38 +23,39 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { getMuteCount, getMutes, sanitizeMutes } from "@/lib/punishment/mute";
 
 export async function generateMetadata() {
   
   const { dictionary } = await language();
   
   return {
-    title: dictionary.pages.bans.title
+    title: dictionary.pages.mutes.title
   }
 }
 
-export default async function Bans({
+export default async function Mutes({
   searchParams
 }: SearchParams) {
   let { lang, dictionary } = await language();
-  dictionary = dictionary.pages.bans;
+  dictionary = dictionary.pages.mutes;
   
-  const banCount = await getBanCount();
-  const pages = Math.ceil(banCount / 10);
+  const muteCount = await getMuteCount();
+  const pages = Math.ceil(muteCount / 10);
   
   let page = searchParams.page ? parseInt(searchParams.page as string) : 1;
   if (isNaN(page) || page < 1) {
     page = 1;
   }
 
-  const dbBans = await getBans(page);
-  const bans = await sanitizeBans(dictionary, dbBans);
+  const dbMutes = await getMutes(page);
+  const mutes = await sanitizeMutes(dictionary, dbMutes);
 
   return (
     <PunishmentListPage
       title={dictionary.title}
       description={p(dictionary.subtitle, {
-        total: banCount
+        total: muteCount
       })}
       className="w-full lg:w-[975px]"
     >
@@ -72,50 +72,50 @@ export default async function Bans({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {bans.map((ban) => (
-              <TableRow key={ban.id}>
+            {mutes.map((mute) => (
+              <TableRow key={mute.id}>
                 <TableCell className="space-y-1 w-32 text-center">
-                  <Link href={`/history?player=${ban.uuid}`}>
+                  <Link href={`/history?player=${mute.uuid}`}>
                     <Image 
-                      src={`https://crafatar.com/avatars/${ban.uuid}`}
-                      alt={`${ban.name}'s avatar`}
+                      src={`https://crafatar.com/avatars/${mute.uuid}`}
+                      alt={`${mute.name}'s avatar`}
                       width={32}
                       height={32}
                       className="mx-auto rounded-sm"
                     />
-                    <p>{ban.name}</p>
+                    <p>{mute.name}</p>
                   </Link>
                 </TableCell>
                 <TableCell className="space-y-1 w-32 text-center">
-                  <Link href={`/history?staff=${ban.banned_by_uuid}`}>
-                    {ban.console ? 
+                  <Link href={`/history?staff=${mute.banned_by_uuid}`}>
+                    {mute.console ? 
                       <Image 
                         src={siteConfig.consoleIcon}
-                        alt={`${ban.banned_by_name}'s avatar`}
+                        alt={`${mute.banned_by_name}'s avatar`}
                         width={32}
                         height={32}
                         className="mx-auto rounded-sm"
                       /> : 
                       <Image 
-                        src={`https://crafatar.com/avatars/${ban.banned_by_uuid}`}
-                        alt={`${ban.banned_by_name}'s avatar`}
+                        src={`https://crafatar.com/avatars/${mute.banned_by_uuid}`}
+                        alt={`${mute.banned_by_name}'s avatar`}
                         width={32}
                         height={32}
                         className="mx-auto rounded-sm"
                       />
                     }
-                    <p>{ban.banned_by_name}</p>
+                    <p>{mute.banned_by_name}</p>
                   </Link>
                 </TableCell>
-                <TableCell className="w-[250px]">{ban.reason}</TableCell>
+                <TableCell className="w-[250px]">{mute.reason}</TableCell>
                 <TableCell className="w-[200px]">
                   <TooltipProvider delayDuration={50}>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <span className="cursor-default">{ban.time.toLocaleString()}</span>
+                          <span className="cursor-default">{mute.time.toLocaleString()}</span>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>{getRelativeDifferenceText(lang, getRelativeDifference(ban.time))}</p>
+                          <p>{getRelativeDifferenceText(lang, getRelativeDifference(mute.time))}</p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
@@ -127,26 +127,26 @@ export default async function Bans({
                         <TooltipTrigger asChild>
                           <span 
                             className={cn(
-                              ban.status === undefined ? 
+                              mute.status === undefined ? 
                                 "bg-orange-500" :
-                                ban.status ? "bg-green-500" : "bg-red-500",
+                                mute.status ? "bg-green-500" : "bg-red-500",
                               "flex rounded-full p-1 mr-2"
                             )} 
                           /> 
                         </TooltipTrigger>
                         <TooltipContent>
-                          {ban.status === undefined ? dictionary.table.active.temporal : (ban.status ? dictionary.table.active.true : dictionary.table.active.false)}
+                          {mute.status === undefined ? dictionary.table.active.temporal : (mute.status ? dictionary.table.active.true : dictionary.table.active.false)}
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
                     <TooltipProvider delayDuration={50}>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <span className="cursor-default">{ban.until.toLocaleString()}</span>
+                          <span className="cursor-default">{mute.until.toLocaleString()}</span>
                         </TooltipTrigger>
-                        <TooltipContent className={ban.until instanceof Date ? "" : "hidden"}>
-                          {ban.until instanceof Date && (
-                            <p>{getRelativeDifferenceText(lang, getRelativeDifference(ban.until))}</p>
+                        <TooltipContent className={mute.until instanceof Date ? "" : "hidden"}>
+                          {mute.until instanceof Date && (
+                            <p>{getRelativeDifferenceText(lang, getRelativeDifference(mute.until))}</p>
                           )}
                         </TooltipContent>
                       </Tooltip>
@@ -154,7 +154,7 @@ export default async function Bans({
                   </p>
                 </TableCell>
                 <TableCell>
-                  <Link href={`/bans/${ban.id}`}>
+                  <Link href={`/mutes/${mute.id}`}>
                     <Button size="icon" variant="secondary" className="transition ease-in-out hover:scale-110">
                       <LuExternalLink />
                     </Button>

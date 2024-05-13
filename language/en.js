@@ -52,6 +52,53 @@ const language = {
         }
       }
     },
+    mutes: {
+      title: "Mutes",
+      // Placeholders: {total}
+      subtitle: "Mute count: {total}",
+      table: {
+        heads: {
+          player: "Player",
+          by: "Muted by",
+          reason: "Reason",
+          date: "Date",
+          expires: "Expires"
+        },
+        permanent: "Permanent mute",
+        active: {
+          true: "Active",
+          temporal: "Temporal",
+          false: "Expired"
+        }
+      }
+    },
+    warns: {
+      title: "Warns",
+      // Placeholders: {total}
+      subtitle: "Warn count: {total}",
+      table: {
+        heads: {
+          player: "Player",
+          by: "Warned by",
+          reason: "Reason",
+          date: "Date",
+          notified: "Notified"
+        },
+      }
+    },
+    kicks: {
+      title: "Kicks",
+      // Placeholders: {total}
+      subtitle: "Kick count: {total}",
+      table: {
+        heads: {
+          player: "Player",
+          by: "Kicked by",
+          reason: "Reason",
+          date: "Date"
+        }
+      }
+    },
     errors: {
       notFound: {
         title: "404",

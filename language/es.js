@@ -50,6 +50,53 @@ const language = {
         }
       }
     },
+    mutes: {
+      title: "Muteos",
+      // Placeholders: {total}
+      subtitle: "Muteos totales: {total}",
+      table: {
+        heads: {
+          player: "Jugador",
+          by: "Silenciado por",
+          reason: "Razón",
+          date: "Fecha",
+          expires: "Expiración"
+        },
+        permanent: "Muteo permanente",
+        active: {
+          true: "Activo",
+          temporal: "Temporal",
+          false: "Expirado"
+        }
+      }
+    },
+    warns: {
+      title: "Avisos",
+      // Placeholders: {total}
+      subtitle: "Avisos totales: {total}",
+      table: {
+        heads: {
+          player: "Jugador",
+          by: "Avisado por",
+          reason: "Razón",
+          date: "Fecha",
+          notified: "Notificado"
+        }
+      }
+    },
+    kicks: {
+      title: "Kicks",
+      // Placeholders: {total}
+      subtitle: "Kick count: {total}",
+      table: {
+        heads: {
+          player: "Jugador",
+          by: "Expulsado por",
+          reason: "Razón",
+          date: "Fecha"
+        }
+      }
+    },
     errors: {
       notFound: {
         title: "404",

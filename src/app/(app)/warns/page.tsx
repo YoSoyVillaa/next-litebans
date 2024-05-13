@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { language } from "@/lib/language/dictionaries";
 import { cn } from "@/lib/utils";
-import { getBanCount, getBans, sanitizeBans } from "@/lib/punishment/ban";
 import p from "@/lib/language/utils/parse";
 
 import { SearchParams } from "@/types";
@@ -24,40 +23,43 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { getWarnCount, getWarns, sanitizeWarns } from "@/lib/punishment/warn";
+import { FaCheck } from "react-icons/fa6";
+import { FaTimes } from "react-icons/fa";
 
 export async function generateMetadata() {
   
   const { dictionary } = await language();
   
   return {
-    title: dictionary.pages.bans.title
+    title: dictionary.pages.warns.title
   }
 }
 
-export default async function Bans({
+export default async function Warns({
   searchParams
 }: SearchParams) {
   let { lang, dictionary } = await language();
-  dictionary = dictionary.pages.bans;
+  dictionary = dictionary.pages.warns;
   
-  const banCount = await getBanCount();
-  const pages = Math.ceil(banCount / 10);
+  const warnCount = await getWarnCount();
+  const pages = Math.ceil(warnCount / 10);
   
   let page = searchParams.page ? parseInt(searchParams.page as string) : 1;
   if (isNaN(page) || page < 1) {
     page = 1;
   }
 
-  const dbBans = await getBans(page);
-  const bans = await sanitizeBans(dictionary, dbBans);
+  const dbWarns = await getWarns(page);
+  const warns = await sanitizeWarns(dbWarns);
 
   return (
     <PunishmentListPage
       title={dictionary.title}
       description={p(dictionary.subtitle, {
-        total: banCount
+        total: warnCount
       })}
-      className="w-full lg:w-[975px]"
+      className="w-full lg:w-[876px]"
     >
       <ScrollArea>
         <Table>
@@ -67,95 +69,69 @@ export default async function Bans({
               <TableHead className="text-center px-2">{dictionary.table.heads.by}</TableHead>
               <TableHead>{dictionary.table.heads.reason}</TableHead>
               <TableHead>{dictionary.table.heads.date}</TableHead>
-              <TableHead>{dictionary.table.heads.expires}</TableHead>
+              <TableHead className="text-center px-2">{dictionary.table.heads.notified}</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {bans.map((ban) => (
-              <TableRow key={ban.id}>
+            {warns.map((warn) => (
+              <TableRow key={warn.id}>
                 <TableCell className="space-y-1 w-32 text-center">
-                  <Link href={`/history?player=${ban.uuid}`}>
+                  <Link href={`/history?player=${warn.uuid}`}>
                     <Image 
-                      src={`https://crafatar.com/avatars/${ban.uuid}`}
-                      alt={`${ban.name}'s avatar`}
+                      src={`https://crafatar.com/avatars/${warn.uuid}`}
+                      alt={`${warn.name}'s avatar`}
                       width={32}
                       height={32}
                       className="mx-auto rounded-sm"
                     />
-                    <p>{ban.name}</p>
+                    <p>{warn.name}</p>
                   </Link>
                 </TableCell>
                 <TableCell className="space-y-1 w-32 text-center">
-                  <Link href={`/history?staff=${ban.banned_by_uuid}`}>
-                    {ban.console ? 
+                  <Link href={`/history?staff=${warn.banned_by_uuid}`}>
+                    {warn.console ? 
                       <Image 
                         src={siteConfig.consoleIcon}
-                        alt={`${ban.banned_by_name}'s avatar`}
+                        alt={`${warn.banned_by_name}'s avatar`}
                         width={32}
                         height={32}
                         className="mx-auto rounded-sm"
                       /> : 
                       <Image 
-                        src={`https://crafatar.com/avatars/${ban.banned_by_uuid}`}
-                        alt={`${ban.banned_by_name}'s avatar`}
+                        src={`https://crafatar.com/avatars/${warn.banned_by_uuid}`}
+                        alt={`${warn.banned_by_name}'s avatar`}
                         width={32}
                         height={32}
                         className="mx-auto rounded-sm"
                       />
                     }
-                    <p>{ban.banned_by_name}</p>
+                    <p>{warn.banned_by_name}</p>
                   </Link>
                 </TableCell>
-                <TableCell className="w-[250px]">{ban.reason}</TableCell>
+                <TableCell className="w-[250px]">{warn.reason}</TableCell>
                 <TableCell className="w-[200px]">
                   <TooltipProvider delayDuration={50}>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <span className="cursor-default">{ban.time.toLocaleString()}</span>
+                          <span className="cursor-default">{warn.time.toLocaleString()}</span>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>{getRelativeDifferenceText(lang, getRelativeDifference(ban.time))}</p>
+                          <p>{getRelativeDifferenceText(lang, getRelativeDifference(warn.time))}</p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
                 </TableCell>
-                <TableCell className="w-[200px]">
-                  <p className="flex items-center">
-                    <TooltipProvider delayDuration={50}>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <span 
-                            className={cn(
-                              ban.status === undefined ? 
-                                "bg-orange-500" :
-                                ban.status ? "bg-green-500" : "bg-red-500",
-                              "flex rounded-full p-1 mr-2"
-                            )} 
-                          /> 
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          {ban.status === undefined ? dictionary.table.active.temporal : (ban.status ? dictionary.table.active.true : dictionary.table.active.false)}
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                    <TooltipProvider delayDuration={50}>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <span className="cursor-default">{ban.until.toLocaleString()}</span>
-                        </TooltipTrigger>
-                        <TooltipContent className={ban.until instanceof Date ? "" : "hidden"}>
-                          {ban.until instanceof Date && (
-                            <p>{getRelativeDifferenceText(lang, getRelativeDifference(ban.until))}</p>
-                          )}
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </p>
+                <TableCell className="w-[100px]">
+                  {warn.warned ?
+                    <FaCheck className="mx-auto text-xl" />
+                    :
+                    <FaTimes className="mx-auto text-lg" />
+                  }
                 </TableCell>
                 <TableCell>
-                  <Link href={`/bans/${ban.id}`}>
-                    <Button size="icon" variant="secondary" className="transition ease-in-out hover:scale-110">
+                  <Link href={`/warns/${warn.id}`}>
+                    <Button size="icon" variant="secondary" className="ml-auto transition ease-in-out hover:scale-110">
                       <LuExternalLink />
                     </Button>
                   </Link>
