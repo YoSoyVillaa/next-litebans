@@ -35,7 +35,7 @@ export default async function Home() {
         total: banCount + muteCount + warnCount + kickCount
       })}
     >
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <PunishmentTypeCard
           title={q(dictionary.words.bans, banCount)}
           count={banCount}

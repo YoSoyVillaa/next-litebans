@@ -18,10 +18,10 @@ export const PunishmentTypeCard = ({
     <Link
       href={href}
     >
-      <Card className="overflow-hidden w-64 h-36 flex-col flex items-center relative transition ease-in-out hover:scale-110">
+      <Card className="overflow-hidden w-60 h-36 flex-col flex items-center relative transition ease-in-out hover:scale-110">
         {punishmentIcon}
         <CardContent className="text-center mt-auto">
-          <p className="text-6xl font-bold">{count}</p>
+          <p className="text-[3.5rem] leading-none font-bold">{count}</p>
           <CardTitle className="text-2xl font-medium">{title}</CardTitle>
         </CardContent>
       </Card>
