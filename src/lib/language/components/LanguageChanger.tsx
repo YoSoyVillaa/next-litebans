@@ -5,8 +5,9 @@ import { useLang } from "./LanguageProvider";
 import { Button } from "@/components/ui/button";
 import ReactCountryFlag from "react-country-flag";
 import { siteConfig } from "@config/site";
+import { Dictionary } from "../types";
 
-export const LanguageChanger = ({dictionaries} : {dictionaries: Record<string, any>}) => {
+export const LanguageChanger = ({dictionaries} : {dictionaries: Record<string, Dictionary>}) => {
   const { lang, dictionary, setLang } = useLang();
 
   return (

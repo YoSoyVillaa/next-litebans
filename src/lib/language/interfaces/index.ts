@@ -1,12 +1,14 @@
-interface LanguageProviderProps extends React.PropsWithChildren {
+import { Dictionary } from "../types"
+
+export interface LanguageProviderProps extends React.PropsWithChildren {
   lang: string
   defaultLang: string
-  dictionary: Record<string, any>
+  dictionary: Dictionary
 }
 
-interface UseLangProps {
+export interface UseLangProps {
   lang: string
   defaultLang: string
-  dictionary: Record<string, any>
+  dictionary: Dictionary
   setLang: React.Dispatch<string>
 }

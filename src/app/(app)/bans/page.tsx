@@ -5,7 +5,8 @@ import Link from "next/link";
 import { language } from "@/lib/language/dictionaries";
 import { db } from "@/lib/db";
 import { cn } from "@/lib/utils";
-import { getBans, getPlayerName } from "@/lib/punishment";
+import { getPlayerName } from "@/lib/punishment/punishment";
+import { getBans, sanitizeBans } from "@/lib/punishment/ban";
 import p from "@/lib/language/utils/parse";
 
 import { SearchParams } from "@/types";
@@ -50,24 +51,7 @@ export default async function Bans({
   }
 
   const dbBans = await getBans(page);
-
-  
-  
-  const bans = await Promise.all(dbBans.map(async (ban) => {
-    const name = await getPlayerName(ban.uuid!);
-    const until = ban.until.toString() === "0" ? dictionary.table.permanent : new Date(parseInt(ban.until.toString()));
-    return {
-      ...ban,
-      id: ban.id.toString(),
-      time: new Date(parseInt(ban.time.toString())),
-      status: until == dictionary.table.permanent ? 
-                (ban.active ? true : false) : 
-                (until < new Date() ? false : undefined),
-      console: ban.banned_by_uuid === "[Console]",
-      until,
-      name
-    }
-  }));
+  const bans = await sanitizeBans(dictionary, dbBans);
 
   return (
     <PunishmentListPage
@@ -75,10 +59,10 @@ export default async function Bans({
       description={p(dictionary.subtitle, {
         total: banCount
       })}
-      className="w-full lg:px-8"
+      className="w-full lg:w-[945px] lg:px-8"
     >
       <ScrollArea>
-        <Table className="lg:w-[945px] mx-auto">
+        <Table>
           <TableHeader>
             <TableRow>
               <TableHead className="text-center">{dictionary.table.heads.player}</TableHead>

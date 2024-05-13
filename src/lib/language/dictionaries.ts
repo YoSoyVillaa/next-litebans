@@ -2,8 +2,9 @@ import "server-only"
 
 import { getLang } from "./actions/get-lang"
 import { siteConfig } from "@config/site"
+import { Dictionary } from "./types"
 
-const dictionaries: Record<string, any> = {}
+const dictionaries: Record<string, Dictionary> = {}
 
 siteConfig.languages.available.forEach(async (lang) => {
   const dictionary = await import(`../../../language/${lang}.js`)

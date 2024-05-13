@@ -6,6 +6,7 @@ import { changeLang } from "../actions/change-lang";
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import { LanguageProviderProps, UseLangProps } from "../interfaces";
 
 const LanguageContext = React.createContext<UseLangProps | undefined>(undefined);
 const defaultContext = { lang: siteConfig.languages.default, defaultLang: siteConfig.languages.default, dictionary: {} as Record<string, any>, setLang: () => {} };

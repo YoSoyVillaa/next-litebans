@@ -2,7 +2,7 @@ import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { LanguageChanger } from "@/lib/language/components/LanguageChanger";
 import { getDictionaries } from "@/lib/language/dictionaries";
 import { MainNav } from "./main-nav";
-import { getPunishmentCount } from "@/lib/punishment";
+import { getPunishmentCount } from "@/lib/punishment/punishment";
 import { MobileNav } from "./mobile-nav";
 
 export const SiteHeader = async () => {
