@@ -71,7 +71,7 @@ export default async function Home({
           punishmentIcon={Icons.kick({ className: "size-[8.5rem] opacity-20 absolute top-[-35px] right-[-25px] text-sky-600 ml-2" })}
         />
       </div>
-      <div className="mx-auto w-full lg:w-[1022px]">
+      <div className="mx-auto w-full lg:w-[1024px]">
         <PunishmentHistoryTable page={page} />
       </div>
     </DefaultPage>

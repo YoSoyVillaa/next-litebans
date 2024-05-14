@@ -45,8 +45,8 @@ export const PunishmentHistoryTable = async ({
           <TableHeader>
             <TableRow>
               <TableHead className="text-center px-2">{localDictionary.table.heads.type}</TableHead>
-              <TableHead className="text-center px-2">{localDictionary.table.heads.player}</TableHead>
-              <TableHead className="text-center px-2">{localDictionary.table.heads.by}</TableHead>
+              <TableHead className="text-center px-1">{localDictionary.table.heads.player}</TableHead>
+              <TableHead className="text-center px-1">{localDictionary.table.heads.by}</TableHead>
               <TableHead>{localDictionary.table.heads.reason}</TableHead>
               <TableHead>{localDictionary.table.heads.date}</TableHead>
               <TableHead>{localDictionary.table.heads.expires}</TableHead>
@@ -56,18 +56,18 @@ export const PunishmentHistoryTable = async ({
           <TableBody>
             {punishments.map((punishment) => (
               <TableRow key={`${punishment.type}:${punishment.id}`}>
-                <TableCell className="text-center w-20 max-w-20 px-1">
+                <TableCell className="text-center w-24 px-0.5">
                   <Badge variant={punishment.type} className="px-1">
                     {dictionary.words[`${punishment.type!}s`].singular.toUpperCase()}
                   </Badge>
                 </TableCell>
-                <TableCell className="space-y-1 w-32 text-center">
+                <TableCell className="space-y-1 w-[7.5rem] text-center">
                   <Link href={`/history?player=${punishment.uuid}`}>
                     <PlayerAvatar uuid={punishment.uuid!} name={punishment.name!} />
                     <p>{punishment.name}</p>
                   </Link>
                 </TableCell>
-                <TableCell className="space-y-1 w-32 text-center">
+                <TableCell className="space-y-1 w-[122px] text-center">
                     <Link href={`/history?staff=${punishment.banned_by_uuid}`}>
                       {punishment.console ? 
                         <ConsoleAvatar name={punishment.banned_by_name!} />
