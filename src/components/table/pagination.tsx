@@ -60,19 +60,38 @@ export const TablePagination = ({
             href={`${pathname}?${createQueryString(totalPages == 2 ? 1 : actualPage - 1)}`} 
             className={actualPage <= 1 ? "hover:!cursor-default" : ""}
             disabled={actualPage == 1}
+            scroll={false}
           />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href={`${pathname}?${createQueryString(leftNumber)}`} isActive={actualPage == 1}>{leftNumber}</PaginationLink>
+          <PaginationLink 
+            href={`${pathname}?${createQueryString(leftNumber)}`} 
+            isActive={actualPage == 1}
+            scroll={false}
+          >
+            {leftNumber}
+          </PaginationLink>
         </PaginationItem>
         { totalPages > 1 &&
           <PaginationItem>
-            <PaginationLink href={`${pathname}?${createQueryString(leftNumber + 1)}`} isActive={actualPage == leftNumber + 1}>{leftNumber + 1}</PaginationLink>
+            <PaginationLink 
+              href={`${pathname}?${createQueryString(leftNumber + 1)}`} 
+              isActive={actualPage == leftNumber + 1}
+              scroll={false}
+            >
+              {leftNumber + 1}
+            </PaginationLink>
           </PaginationItem>
         }
         { totalPages > 2 &&
           <PaginationItem>
-            <PaginationLink href={`${pathname}?${createQueryString(leftNumber + 2)}`} isActive={actualPage == leftNumber + 2}>{leftNumber + 2}</PaginationLink>
+            <PaginationLink 
+              href={`${pathname}?${createQueryString(leftNumber + 2)}`} 
+              isActive={actualPage == leftNumber + 2}
+              scroll={false}
+            >
+              {leftNumber + 2}
+            </PaginationLink>
           </PaginationItem>
         }
         <PaginationItem>
@@ -81,6 +100,7 @@ export const TablePagination = ({
             href={`${pathname}?${createQueryString(totalPages == 2 ? 2 : actualPage + 1)}`} 
             className={actualPage >= totalPages ? "hover:!cursor-default" : "" }
             disabled={actualPage >= totalPages}
+            scroll={false}
           />
         </PaginationItem>
       </PaginationContent>
