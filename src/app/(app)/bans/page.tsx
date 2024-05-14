@@ -6,8 +6,8 @@ import p from "@/lib/language/utils/parse";
 
 import { SearchParams } from "@/types";
 
+import { DefaultPage } from "@/components/layout/default-page";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { PunishmentListPage } from "@/components/layout/punishment-list-page";
 import { TablePagination } from "@/components/table/pagination";
 import {
   Table,
@@ -50,7 +50,7 @@ export default async function Bans({
   const bans = await sanitizeBans(dictionary, dbBans);
 
   return (
-    <PunishmentListPage
+    <DefaultPage
       title={dictionary.title}
       description={p(dictionary.subtitle, {
         total: banCount
@@ -110,6 +110,6 @@ export default async function Bans({
         <ScrollBar className="md:hidden" orientation="horizontal" />
       </ScrollArea>
       <TablePagination className="mt-4" actualPage={page} totalPages={pages} />
-    </PunishmentListPage>
+    </DefaultPage>
   );
 }
