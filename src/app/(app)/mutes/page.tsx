@@ -1,17 +1,11 @@
-import { LuExternalLink } from "react-icons/lu";
-import Image from "next/image";
 import Link from "next/link";
 
 import { language } from "@/lib/language/dictionaries";
-import { cn } from "@/lib/utils";
+import { getMuteCount, getMutes, sanitizeMutes } from "@/lib/punishment/mute";
 import p from "@/lib/language/utils/parse";
 
 import { SearchParams } from "@/types";
-import { getRelativeDifference, getRelativeDifferenceText } from "@/utils/date";
-import { siteConfig } from "@config/site";
 
-import { Button } from "@/components/ui/button";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { PunishmentListPage } from "@/components/layout/punishment-list-page";
 import { TablePagination } from "@/components/table/pagination";
@@ -23,7 +17,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { getMuteCount, getMutes, sanitizeMutes } from "@/lib/punishment/mute";
+import { PlayerAvatar } from "@/components/avatar/player-avatar";
+import { ConsoleAvatar } from "@/components/avatar/console-avatar";
+import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
+import { PunishmentStatusDot } from "@/components/punishments/punishment-status-dot";
+import { PunishmentInfoButton } from "@/components/buttons/punishment-info-button";
 
 export async function generateMetadata() {
   
@@ -76,89 +74,34 @@ export default async function Mutes({
               <TableRow key={mute.id}>
                 <TableCell className="space-y-1 w-32 text-center">
                   <Link href={`/history?player=${mute.uuid}`}>
-                    <Image 
-                      src={`https://crafatar.com/avatars/${mute.uuid}`}
-                      alt={`${mute.name}'s avatar`}
-                      width={32}
-                      height={32}
-                      className="mx-auto rounded-sm"
-                    />
+                    <PlayerAvatar uuid={mute.uuid!} name={mute.name!} />
                     <p>{mute.name}</p>
                   </Link>
                 </TableCell>
                 <TableCell className="space-y-1 w-32 text-center">
                   <Link href={`/history?staff=${mute.banned_by_uuid}`}>
                     {mute.console ? 
-                      <Image 
-                        src={siteConfig.consoleIcon}
-                        alt={`${mute.banned_by_name}'s avatar`}
-                        width={32}
-                        height={32}
-                        className="mx-auto rounded-sm"
-                      /> : 
-                      <Image 
-                        src={`https://crafatar.com/avatars/${mute.banned_by_uuid}`}
-                        alt={`${mute.banned_by_name}'s avatar`}
-                        width={32}
-                        height={32}
-                        className="mx-auto rounded-sm"
-                      />
+                      <ConsoleAvatar name={mute.banned_by_name!} />
+                      : 
+                      <PlayerAvatar uuid={mute.banned_by_uuid!} name={mute.banned_by_name!} />
                     }
                     <p>{mute.banned_by_name}</p>
                   </Link>
                 </TableCell>
-                <TableCell className="w-[250px]">{mute.reason}</TableCell>
+                <TableCell className="w-[250px]">
+                  {mute.reason}
+                </TableCell>
                 <TableCell className="w-[200px]">
-                  <TooltipProvider delayDuration={50}>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <span className="cursor-default">{mute.time.toLocaleString()}</span>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{getRelativeDifferenceText(lang, getRelativeDifference(mute.time))}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
+                  <RelativeTimeTooltip lang={lang} time={mute.time} />
                 </TableCell>
                 <TableCell className="w-[200px]">
                   <p className="flex items-center">
-                    <TooltipProvider delayDuration={50}>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <span 
-                            className={cn(
-                              mute.status === undefined ? 
-                                "bg-orange-500" :
-                                mute.status ? "bg-green-500" : "bg-red-500",
-                              "flex rounded-full p-1 mr-2"
-                            )} 
-                          /> 
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          {mute.status === undefined ? dictionary.table.active.temporal : (mute.status ? dictionary.table.active.true : dictionary.table.active.false)}
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                    <TooltipProvider delayDuration={50}>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <span className="cursor-default">{mute.until.toLocaleString()}</span>
-                        </TooltipTrigger>
-                        <TooltipContent className={mute.until instanceof Date ? "" : "hidden"}>
-                          {mute.until instanceof Date && (
-                            <p>{getRelativeDifferenceText(lang, getRelativeDifference(mute.until))}</p>
-                          )}
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
+                    <PunishmentStatusDot dictionary={dictionary} status={mute.status} />
+                    <RelativeTimeTooltip lang={lang} time={mute.until} />
                   </p>
                 </TableCell>
                 <TableCell>
-                  <Link href={`/mutes/${mute.id}`}>
-                    <Button size="icon" variant="secondary" className="transition ease-in-out hover:scale-110">
-                      <LuExternalLink />
-                    </Button>
-                  </Link>
+                  <PunishmentInfoButton type="mute" id={mute.id} />
                 </TableCell>
               </TableRow>
             ))}

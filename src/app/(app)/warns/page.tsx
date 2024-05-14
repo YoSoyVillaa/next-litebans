@@ -1,17 +1,11 @@
-import { LuExternalLink } from "react-icons/lu";
-import Image from "next/image";
 import Link from "next/link";
 
 import { language } from "@/lib/language/dictionaries";
-import { cn } from "@/lib/utils";
+import { getWarnCount, getWarns, sanitizeWarns } from "@/lib/punishment/warn";
 import p from "@/lib/language/utils/parse";
 
 import { SearchParams } from "@/types";
-import { getRelativeDifference, getRelativeDifferenceText } from "@/utils/date";
-import { siteConfig } from "@config/site";
 
-import { Button } from "@/components/ui/button";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { PunishmentListPage } from "@/components/layout/punishment-list-page";
 import { TablePagination } from "@/components/table/pagination";
@@ -23,9 +17,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { getWarnCount, getWarns, sanitizeWarns } from "@/lib/punishment/warn";
 import { FaCheck } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
+import { PlayerAvatar } from "@/components/avatar/player-avatar";
+import { ConsoleAvatar } from "@/components/avatar/console-avatar";
+import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
+import { PunishmentInfoButton } from "@/components/buttons/punishment-info-button";
 
 export async function generateMetadata() {
   
@@ -78,49 +75,25 @@ export default async function Warns({
               <TableRow key={warn.id}>
                 <TableCell className="space-y-1 w-32 text-center">
                   <Link href={`/history?player=${warn.uuid}`}>
-                    <Image 
-                      src={`https://crafatar.com/avatars/${warn.uuid}`}
-                      alt={`${warn.name}'s avatar`}
-                      width={32}
-                      height={32}
-                      className="mx-auto rounded-sm"
-                    />
+                    <PlayerAvatar uuid={warn.uuid!} name={warn.name!} />
                     <p>{warn.name}</p>
                   </Link>
                 </TableCell>
                 <TableCell className="space-y-1 w-32 text-center">
                   <Link href={`/history?staff=${warn.banned_by_uuid}`}>
                     {warn.console ? 
-                      <Image 
-                        src={siteConfig.consoleIcon}
-                        alt={`${warn.banned_by_name}'s avatar`}
-                        width={32}
-                        height={32}
-                        className="mx-auto rounded-sm"
-                      /> : 
-                      <Image 
-                        src={`https://crafatar.com/avatars/${warn.banned_by_uuid}`}
-                        alt={`${warn.banned_by_name}'s avatar`}
-                        width={32}
-                        height={32}
-                        className="mx-auto rounded-sm"
-                      />
+                      <ConsoleAvatar name={warn.banned_by_name!} />
+                      : 
+                      <PlayerAvatar uuid={warn.banned_by_uuid!} name={warn.banned_by_name!} />
                     }
                     <p>{warn.banned_by_name}</p>
                   </Link>
                 </TableCell>
-                <TableCell className="w-[250px]">{warn.reason}</TableCell>
+                <TableCell className="w-[250px]">
+                  {warn.reason}
+                </TableCell>
                 <TableCell className="w-[200px]">
-                  <TooltipProvider delayDuration={50}>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <span className="cursor-default">{warn.time.toLocaleString()}</span>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{getRelativeDifferenceText(lang, getRelativeDifference(warn.time))}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
+                  <RelativeTimeTooltip lang={lang} time={warn.time} />
                 </TableCell>
                 <TableCell className="w-[100px]">
                   {warn.warned ?
@@ -130,11 +103,7 @@ export default async function Warns({
                   }
                 </TableCell>
                 <TableCell>
-                  <Link href={`/warns/${warn.id}`}>
-                    <Button size="icon" variant="secondary" className="ml-auto transition ease-in-out hover:scale-110">
-                      <LuExternalLink />
-                    </Button>
-                  </Link>
+                  <PunishmentInfoButton type="warn" id={warn.id} />
                 </TableCell>
               </TableRow>
             ))}
