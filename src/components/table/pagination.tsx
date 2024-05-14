@@ -10,7 +10,7 @@ import {
   PaginationNext, 
   PaginationPrevious 
 } from "@/components/ui/pagination";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useLang } from "@/lib/language/components/LanguageProvider";
 
 interface TablePaginationProps {
@@ -39,6 +39,16 @@ export const TablePagination = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const createQueryString = useCallback(
+    (page: number) => {
+      const newParams = new URLSearchParams(searchParams.toString())
+      newParams.set('page', page.toString())
+ 
+      return newParams.toString()
+    },
+    [searchParams]
+  )
+
   const leftNumber = actualPage == 1 || totalPages == 2 ? 1 : actualPage == totalPages ? totalPages - 2 : actualPage - 1;
 
   return (
@@ -47,28 +57,28 @@ export const TablePagination = ({
         <PaginationItem>
           <PaginationPrevious 
             text={dictionary.previous}
-            href={`${pathname}?page=${totalPages == 2 ? 1 : actualPage - 1}`} 
+            href={`${pathname}?${createQueryString(totalPages == 2 ? 1 : actualPage - 1)}`} 
             className={actualPage <= 1 ? "hover:!cursor-default" : ""}
             disabled={actualPage == 1}
           />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href={`${pathname}?page=${leftNumber}`} isActive={actualPage == 1}>{leftNumber}</PaginationLink>
+          <PaginationLink href={`${pathname}?${createQueryString(leftNumber)}`} isActive={actualPage == 1}>{leftNumber}</PaginationLink>
         </PaginationItem>
         { totalPages > 1 &&
           <PaginationItem>
-            <PaginationLink href={`${pathname}?page=${leftNumber + 1}`} isActive={actualPage == leftNumber + 1}>{leftNumber + 1}</PaginationLink>
+            <PaginationLink href={`${pathname}?${createQueryString(leftNumber + 1)}`} isActive={actualPage == leftNumber + 1}>{leftNumber + 1}</PaginationLink>
           </PaginationItem>
         }
         { totalPages > 2 &&
           <PaginationItem>
-            <PaginationLink href={`${pathname}?page=${leftNumber + 2}`} isActive={actualPage == leftNumber + 2}>{leftNumber + 2}</PaginationLink>
+            <PaginationLink href={`${pathname}?${createQueryString(leftNumber + 2)}`} isActive={actualPage == leftNumber + 2}>{leftNumber + 2}</PaginationLink>
           </PaginationItem>
         }
         <PaginationItem>
           <PaginationNext 
             text={dictionary.next}
-            href={`${pathname}?page=${totalPages == 2 ? 2 : actualPage + 1}`} 
+            href={`${pathname}?${createQueryString(totalPages == 2 ? 2 : actualPage + 1)}`} 
             className={actualPage >= totalPages ? "hover:!cursor-default" : "" }
             disabled={actualPage >= totalPages}
           />
