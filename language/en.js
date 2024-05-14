@@ -32,6 +32,28 @@ const language = {
       // Placeholders: {total}, {bans}, {mutes}, {kicks}, {warns}
       subtitle: "Welcome to Litebans Web Interface!"
     },
+    history: {
+      title: "History",
+      // Placeholders: {total}
+      subtitle: "Total punishments: {total}",
+      table: {
+        heads: {
+          type: "Type",
+          player: "Player",
+          by: "Punished by",
+          reason: "Reason",
+          date: "Date",
+          expires: "Expires"
+        },
+        permanent: "Permanent punishment",
+        expire_not_applicable: "N/A",
+        active: {
+          true: "Active",
+          temporal: "Temporal",
+          false: "Expired"
+        }
+      }
+    },
     bans: {
       title: "Bans",
       // Placeholders: {total}

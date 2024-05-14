@@ -1,8 +1,10 @@
+import { cn } from "@/lib/utils";
 import Balance from "react-wrap-balancer";
 
 interface DefaultPageProps {
   title: string;
   description: string;
+  padding?: string;
   className?: string;
   children: React.ReactNode;
 }
@@ -10,12 +12,13 @@ interface DefaultPageProps {
 export const DefaultPage = ({
   title,
   description,
+  padding,
   className,
   children,
 }: DefaultPageProps) => {
   return (
     <>
-      <div className="flex h-full flex-col items-center gap-4 py-8 md:py-12 md:pb-8 lg:py-18 px-8">
+      <div className={cn("flex h-full flex-col items-center gap-4 py-8 md:py-12 md:pb-8 lg:py-18", padding)}>
         <h1 className="text-center text-5xl font-bold leading-tight tracking-tighter sm:text-6xl lg:leading-[1.1]">
           {title}
         </h1>

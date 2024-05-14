@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { db } from "../db";
 import { PunishmentListItem } from "@/types";
+import { Dictionary } from "../language/types";
 
 const getPunishmentCount = async () => {
   const bans = await db.litebans_bans.count();
@@ -47,4 +48,31 @@ const getPunishments = async (page: number) => {
   return punishments;
 }
 
-export { getPunishmentCount, getPlayerName, getPunishments }
+const sanitizePunishments = async (dictionary: Dictionary, punishments: PunishmentListItem[]) => {
+  const sanitized = await Promise.all(punishments.map(async (punishment) => {
+    const name = await getPlayerName(punishment.uuid!);
+    const until = (punishment.type == "ban" || punishment.type == "mute") ? 
+                    punishment.until.toString() === "0" ? 
+                    dictionary.table.permanent : 
+                    new Date(parseInt(punishment.until.toString())) : 
+                  "";
+    const status = (punishment.type == "ban" || punishment.type == "mute") ?
+                    until == dictionary.table.permanent ? 
+                    (punishment.active ? true : false) : 
+                    (until < new Date() ? false : undefined) :
+                  undefined;
+    return {
+      ...punishment,
+      id: punishment.id.toString(),
+      time: new Date(parseInt(punishment.time.toString())),
+      console: punishment.banned_by_uuid === "[Console]",
+      status,
+      until,
+      name
+    }
+  }));
+
+  return sanitized;
+}
+
+export { getPunishmentCount, getPlayerName, getPunishments, sanitizePunishments }

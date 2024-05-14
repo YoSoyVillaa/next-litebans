@@ -18,6 +18,8 @@ const PUNISMENT_TYPES = {
   KICK: "kick"
 } as const
 
+export type PunishmentType = typeof PUNISMENT_TYPES[keyof typeof PUNISMENT_TYPES]
+
 export type PunishmentListItem = {
   id: bigint
   uuid: string | null
@@ -27,5 +29,5 @@ export type PunishmentListItem = {
   time: bigint
   until: bigint
   active: boolean
-  type?: typeof PUNISMENT_TYPES[keyof typeof PUNISMENT_TYPES]
+  type?: PunishmentType
 }
