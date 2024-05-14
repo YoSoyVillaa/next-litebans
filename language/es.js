@@ -43,7 +43,7 @@ const language = {
           date: "Fecha",
           expires: "Expiración"
         },
-        permanent: "Sancción permanente",
+        permanent: "Sanción permanente",
         expire_not_applicable: "N/A",
         active: {
           true: "Activo",
