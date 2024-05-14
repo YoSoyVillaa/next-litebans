@@ -14,7 +14,7 @@ export const PunishmentInfoButton = ({
   type,
   id
 }: PunishmentInfoButtonProps) => (
-  <Link href={`/${type}/${id}`}>
+  <Link href={`/${type}s/${id}`}>
     <Button size="icon" variant="secondary" className="transition ease-in-out hover:scale-110">
       <LuExternalLink />
     </Button>
