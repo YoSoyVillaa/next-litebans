@@ -2,8 +2,8 @@
 
 import { Suspense } from "react";
 
-import { db } from "@/lib/db";
 import { language } from "@/lib/language/dictionaries";
+import { getBanCount } from "@/lib/punishment/ban";
 
 import { TablePagination } from "@/components/table/pagination";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -27,7 +27,7 @@ export const BansTable = async ({
   const { lang, dictionary } = await language();
   const localDictionary = dictionary.pages.bans;
 
-  const banCount = await db.litebans_bans.count();
+  const banCount = await getBanCount();
   const totalPages = Math.ceil(banCount / 10);
 
   return (
