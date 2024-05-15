@@ -57,10 +57,10 @@ export const TablePagination = ({
         <PaginationItem>
           <PaginationPrevious 
             text={dictionary.previous}
-            href={`${pathname}?${createQueryString(totalPages == 2 ? 1 : actualPage - 1)}`} 
             className={actualPage <= 1 ? "hover:!cursor-default" : ""}
             disabled={actualPage == 1}
-            scroll={false}
+            href={actualPage == 1 ? undefined : `${pathname}?${createQueryString(totalPages == 2 ? 1 : actualPage - 1)}`} 
+            scroll={actualPage == 1 ? undefined : false}
           />
         </PaginationItem>
         <PaginationItem>
@@ -97,10 +97,10 @@ export const TablePagination = ({
         <PaginationItem>
           <PaginationNext 
             text={dictionary.next}
-            href={`${pathname}?${createQueryString(totalPages == 2 ? 2 : actualPage + 1)}`} 
             className={actualPage >= totalPages ? "hover:!cursor-default" : "" }
             disabled={actualPage >= totalPages}
-            scroll={false}
+            href={actualPage >= totalPages ? undefined : `${pathname}?${createQueryString(totalPages == 2 ? 2 : actualPage + 1)}`} 
+            scroll={actualPage >= totalPages ? undefined : false}
           />
         </PaginationItem>
       </PaginationContent>
