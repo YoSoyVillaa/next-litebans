@@ -6,7 +6,7 @@ import p from "@/lib/language/utils/parse";
 import q from "@/lib/language/utils/quantity";
 import { PunishmentTypeCard } from "@/components/punishments/punishment-type-card";
 import { Icons } from "@/components/layout/icons";
-import { PunishmentHistoryTable } from "@/components/punishments/punishment-history-table";
+import { HistoryTable } from "@/components/punishments/history/history-table";
 import { SearchParams } from "@/types";
 
 export async function generateMetadata() {
@@ -72,7 +72,7 @@ export default async function Home({
         />
       </div>
       <div className="mx-auto w-full lg:w-[1024px]">
-        <PunishmentHistoryTable page={page} />
+        <HistoryTable page={page} />
       </div>
     </DefaultPage>
   );
