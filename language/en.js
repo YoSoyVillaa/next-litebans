@@ -132,6 +132,12 @@ const language = {
   pagination: {
     previous: "Previous",
     next: "Next"
+  },
+  notifications: {
+    player_not_found: {
+      title: "Error",
+      description: "The player does not exist in the database.",
+    }
   }
 }
 

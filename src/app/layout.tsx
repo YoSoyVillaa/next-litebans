@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 import { SiteHeader } from "@/components/layout/header/site-header";
 import { siteConfig } from "@config/site";
 import { LanguageProvider } from "@/lib/language/components/LanguageProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,6 +46,7 @@ export default async function RootLayout({
                 <main className="flex-1">{children}</main>
               </div>
             </div>
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>

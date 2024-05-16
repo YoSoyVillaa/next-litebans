@@ -1,19 +1,24 @@
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 interface PlayerAvatarProps {
-  uuid: string;
   name: string;
+  uuid?: string;
+  size?: number;
+  className?: string;
 }
 
 export const PlayerAvatar = ({
+  name,
   uuid,
-  name
+  size,
+  className
 }: PlayerAvatarProps) => (
   <Image 
-    src={`https://minotar.net/helm/${uuid}`}
+    src={`https://minotar.net/helm/${uuid ?? name}`}
     alt={`${name}'s avatar`}
-    width={32}
-    height={32}
-    className="mx-auto rounded-sm"
+    width={size ?? 32}
+    height={size ?? 32}
+    className={cn("mx-auto rounded-sm", className)}
   />
 )
