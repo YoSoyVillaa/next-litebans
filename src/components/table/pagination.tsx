@@ -24,6 +24,7 @@ export const TablePagination = ({
   totalPages,
   className
 }: TablePaginationProps) => {
+
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -48,6 +49,8 @@ export const TablePagination = ({
     },
     [searchParams]
   )
+
+  if (totalPages <= 1 ) return null;
 
   const leftNumber = actualPage == 1 || totalPages == 2 ? 1 : actualPage == totalPages ? totalPages - 2 : actualPage - 1;
 
