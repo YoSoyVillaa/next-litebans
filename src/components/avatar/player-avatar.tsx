@@ -10,7 +10,7 @@ export const PlayerAvatar = ({
   name
 }: PlayerAvatarProps) => (
   <Image 
-    src={`https://crafatar.com/avatars/${uuid}`}
+    src={`https://minotar.net/helm/${uuid}`}
     alt={`${name}'s avatar`}
     width={32}
     height={32}

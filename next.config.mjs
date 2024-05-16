@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'crafatar.com'
+        hostname: 'minotar.net'
       }
     ]
   }
