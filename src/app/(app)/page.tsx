@@ -8,6 +8,7 @@ import { PunishmentTypeCard } from "@/components/punishments/punishment-type-car
 import { Icons } from "@/components/layout/icons";
 import { HistoryTable } from "@/components/punishments/history/history-table";
 import { SearchParams } from "@/types";
+import { getPage } from "@/utils/searchParams";
 
 export async function generateMetadata() {
   
@@ -18,9 +19,7 @@ export async function generateMetadata() {
   }
 }
 
-export default async function Home({
-  searchParams
-}: SearchParams) {
+export default async function Home(searchParams: SearchParams) {
   const { dictionary } = await language();
 
   const banCount = await db.litebans_bans.count();
@@ -28,10 +27,7 @@ export default async function Home({
   const warnCount = await db.litebans_warnings.count();
   const kickCount = await db.litebans_kicks.count();
 
-  let page = searchParams.page ? parseInt(searchParams.page as string) : 1;
-  if (isNaN(page) || page < 1) {
-    page = 1;
-  }
+  const page = getPage(searchParams);
 
   return (
     <DefaultPage

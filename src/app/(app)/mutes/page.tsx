@@ -6,6 +6,7 @@ import { SearchParams } from "@/types";
 
 import { DefaultPage } from "@/components/layout/default-page";
 import { MutesTable } from "@/components/punishments/mutes/mutes-table";
+import { getPage } from "@/utils/searchParams";
 
 export async function generateMetadata() {
   
@@ -16,17 +17,12 @@ export async function generateMetadata() {
   }
 }
 
-export default async function Mutes({
-  searchParams
-}: SearchParams) {
+export default async function Mutes(searchParams: SearchParams) {
   const dictionary = (await language()).dictionary.pages.mutes;
   
   const muteCount = await getMuteCount();
   
-  let page = searchParams.page ? parseInt(searchParams.page as string) : 1;
-  if (isNaN(page) || page < 1) {
-    page = 1;
-  }
+  const page = getPage(searchParams);
 
   return (
     <DefaultPage

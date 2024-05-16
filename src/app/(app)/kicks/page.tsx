@@ -22,6 +22,7 @@ import { ConsoleAvatar } from "@/components/avatar/console-avatar";
 import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 import { PunishmentInfoButton } from "@/components/buttons/punishment-info-button";
 import { KicksTable } from "@/components/punishments/kicks/kicks-table";
+import { getPage } from "@/utils/searchParams";
 
 export async function generateMetadata() {
   
@@ -32,17 +33,12 @@ export async function generateMetadata() {
   }
 }
 
-export default async function Kicks({
-  searchParams
-}: SearchParams) {
+export default async function Kicks(searchParams: SearchParams) {
   const dictionary = (await language()).dictionary.pages.kicks;
   
   const kickCount = await getKickCount();
   
-  let page = searchParams.page ? parseInt(searchParams.page as string) : 1;
-  if (isNaN(page) || page < 1) {
-    page = 1;
-  }
+  const page = getPage(searchParams);
 
   return (
     <DefaultPage
