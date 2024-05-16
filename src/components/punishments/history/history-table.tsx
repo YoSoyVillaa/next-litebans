@@ -32,10 +32,10 @@ export const HistoryTable = async ({
 
   return (
     <>
-      <ScrollArea>
+      <ScrollArea className="shadow border-y lg:rounded-xl lg:border">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-muted/50">
               <TableHead className="text-center px-2">{localDictionary.table.heads.type}</TableHead>
               <TableHead className="text-center px-1">{localDictionary.table.heads.player}</TableHead>
               <TableHead className="text-center px-1">{localDictionary.table.heads.by}</TableHead>

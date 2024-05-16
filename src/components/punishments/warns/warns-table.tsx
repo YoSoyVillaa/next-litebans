@@ -32,7 +32,7 @@ export const WarnsTable = async ({
 
   return (
     <>
-      <ScrollArea>
+      <ScrollArea className="shadow border-y lg:rounded-xl lg:border">
         <Table>
           <TableHeader>
             <TableRow>

@@ -41,7 +41,7 @@ export default async function Home(searchParams: SearchParams) {
       })}
       className="w-full space-y-6"
     >
-      <div className="mx-auto grid gap-4 sm:grid-cols-2 sm:w-[496px] lg:grid-cols-4 lg:w-[1008px]">
+      <div className="mx-auto grid gap-4 sm:grid-cols-2 sm:w-[496px] lg:grid-cols-4 lg:w-[1024px]">
         <PunishmentTypeCard
           title={q(dictionary.words.bans, banCount)}
           count={banCount}

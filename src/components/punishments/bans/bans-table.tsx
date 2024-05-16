@@ -32,7 +32,7 @@ export const BansTable = async ({
 
   return (
     <>
-      <ScrollArea>
+      <ScrollArea className="shadow border-y lg:rounded-xl lg:border">
         <Table>
           <TableHeader>
             <TableRow>
