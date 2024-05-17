@@ -8,6 +8,7 @@ export const siteConfig = {
     ],
     default: "en",
   },
-  consoleIcon: "/console.webp"
+  consoleIcon: "/console.webp",
+  defaultPlayerLookup: "YoSoyVilla",
 }
 export type SiteConfig = typeof siteConfig;

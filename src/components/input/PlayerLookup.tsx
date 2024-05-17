@@ -8,6 +8,7 @@ import { checkPlayer } from "@/actions/check-player"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
 import { useLang } from "@/lib/language/components/LanguageProvider"
+import { siteConfig } from "@config/site"
 
 export const PlayerInput = () => {
   const [playerName, setPlayerName] = useState("")
@@ -44,11 +45,11 @@ export const PlayerInput = () => {
 
   return (
     <div className={cn("relative h-10", isError ? "animate-shake" : "")}>
-      <PlayerAvatar className="absolute right-1 top-1/2 transform -translate-y-1/2 z-10" name={playerName != "" ? playerName : "YoSoyVilla"}/>
+      <PlayerAvatar className="absolute right-1 top-1/2 transform -translate-y-1/2 z-10" name={playerName != "" ? playerName : siteConfig.defaultPlayerLookup}/>
       <Input 
         type="text" 
         value={playerName} 
-        placeholder="YoSoyVilla" 
+        placeholder={siteConfig.defaultPlayerLookup}
         onChange={handlePlayerNameChange} 
         onKeyDown={handleEnter} 
         disabled={isPending}
