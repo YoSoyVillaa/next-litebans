@@ -1,26 +1,10 @@
-import Link from "next/link";
-
 import { language } from "@/lib/language/dictionaries";
-import { getKickCount, getKicks, sanitizeKicks } from "@/lib/punishment/kick";
+import { getKickCount } from "@/lib/punishment/kick";
 import p from "@/lib/language/utils/parse";
 
 import { SearchParams } from "@/types";
 
 import { DefaultPage } from "@/components/layout/default-page";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { TablePagination } from "@/components/table/pagination";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import { PlayerAvatar } from "@/components/avatar/player-avatar";
-import { ConsoleAvatar } from "@/components/avatar/console-avatar";
-import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
-import { PunishmentInfoButton } from "@/components/buttons/punishment-info-button";
 import { KicksTable } from "@/components/punishments/kicks/kicks-table";
 import { getPage } from "@/utils/searchParams";
 
