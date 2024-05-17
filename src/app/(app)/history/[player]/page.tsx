@@ -1,0 +1,102 @@
+import Image from "next/image";
+import { notFound } from "next/navigation";
+
+import { language } from "@/lib/language/dictionaries";
+import p from "@/lib/language/utils/parse";
+import q from "@/lib/language/utils/quantity";
+import { 
+  getPlayerBanCount, 
+  getPlayerByName, 
+  getPlayerKickCount, 
+  getPlayerMuteCount, 
+  getPlayerWarnCount 
+} from "@/lib/punishment/player";
+
+import { getPage } from "@/utils/searchParams";
+
+import { HistoryTable } from "@/components/punishments/history/history-table";
+import { Icons } from "@/components/layout/icons";
+import { Badge } from "@/components/ui/badge";
+
+export async function generateMetadata({ params }: { params: { player: string } }) {
+  
+  const { dictionary } = await language();
+  
+  return {
+    title: p(dictionary.pages.playerHistory.title, {
+      player: params.player.replace("%40", '')
+    })
+  }
+}
+
+export default async function History({
+  searchParams,
+  params
+}: {
+  searchParams: { [key: string]: string | string[] | undefined },
+  params: { player: string }
+}) {
+  const { dictionary } = await language();
+  const localDictionary = dictionary.pages.playerHistory;
+  
+  const page = getPage({searchParams});
+
+  const playerName = params.player.replace("%40", '');
+  const player = await getPlayerByName(playerName);
+
+  if (!player) {
+    notFound();
+  }
+
+  const banCount = await getPlayerBanCount(player.uuid!);
+  const muteCount = await getPlayerMuteCount(player.uuid!);
+  const warnCount = await getPlayerWarnCount(player.uuid!);
+  const kickCount = await getPlayerKickCount(player.uuid!);
+
+  return (
+    <div className="flex h-full flex-col items-center gap-4 py-8 md:py-12 md:pb-8 lg:py-18">
+      <div className="space-y-2 md:flex md:space-x-4">
+        <Image 
+          src={`https://skins.mcstats.com/bust/${player.uuid}`} 
+          alt={playerName}
+          width={192}
+          height={192}
+          className="mx-auto"
+        />
+        <div className="md:w-[350px] md:py-4 space-y-1">
+          <h1 className="text-center md:text-left text-4xl font-bold leading-tight tracking-tighter sm:text-5xl lg:leading-[1.1]">
+            {p(localDictionary.title, {
+              player: params.player.replace("%40", '')
+            })}
+          </h1>
+          <div className="flex space-x-2 whitespace-nowrap">
+            {banCount > 0 && 
+              <Badge variant="secondary" className="px-1 text-secondary-foreground/50">
+                <Icons.ban className="w-4 h-4 mr-1" /> {banCount} {q(dictionary.words.bans, banCount).toUpperCase()}
+              </Badge>
+            }
+            {muteCount > 0 && 
+              <Badge variant="secondary" className="px-1 text-secondary-foreground/50">
+                <Icons.mute className="w-4 h-3 mr-1" /> {muteCount} {q(dictionary.words.mutes, muteCount).toUpperCase()}
+              </Badge>
+            }
+            {warnCount > 0 && 
+              <Badge variant="secondary" className="px-1 text-secondary-foreground/50">
+                <Icons.warn className="w-4 h-4 mr-1" /> {warnCount} {q(dictionary.words.warns, warnCount).toUpperCase()}
+              </Badge>
+            }
+            {kickCount > 0 && 
+              <Badge variant="secondary" className="px-1 text-secondary-foreground/50">
+                <Icons.kick className="w-4 h-4 mr-1" /> {kickCount} {q(dictionary.words.kicks, kickCount).toUpperCase()}
+              </Badge>
+            }
+          </div>
+        </div>
+      </div>
+
+      <section className="w-full lg:w-[1024px]">
+        <HistoryTable page={page} player={player.uuid!} />
+      </section>
+    </div>
+  );
+}

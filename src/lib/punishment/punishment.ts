@@ -3,11 +3,27 @@ import { db } from "../db";
 import { PunishmentListItem } from "@/types";
 import { Dictionary } from "../language/types";
 
-const getPunishmentCount = async () => {
-  const bans = await db.litebans_bans.count();
-  const mutes = await db.litebans_mutes.count();
-  const warns = await db.litebans_warnings.count();
-  const kicks = await db.litebans_kicks.count();
+const getPunishmentCount = async (player?: string) => {
+  const bans = await db.litebans_bans.count({
+    where: {
+      uuid: player
+    }
+  });
+  const mutes = await db.litebans_mutes.count({
+    where: {
+      uuid: player
+    }
+  });
+  const warns = await db.litebans_warnings.count({
+    where: {
+      uuid: player
+    }
+  });
+  const kicks = await db.litebans_kicks.count({
+    where: {
+      uuid: player
+    }
+  });
 
   return { bans, mutes, warns, kicks }
 }
@@ -28,16 +44,16 @@ const getPlayerName = async (uuid: string) => {
   return player?.name;
 }
 
-const getPunishments = async (page: number) => {
+const getPunishments = async (page: number, player?: string) => {
   const query = Prisma.sql`
   (
-    SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, 'ban' AS 'type' FROM litebans_bans
+    SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, 'ban' AS 'type' FROM litebans_bans ${player ? Prisma.sql`WHERE uuid = ${player}` : Prisma.sql``}
     UNION ALL 
-    SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, 'mute' AS 'type' FROM litebans_mutes
+    SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, 'mute' AS 'type' FROM litebans_mutes ${player ? Prisma.sql`WHERE uuid = ${player}` : Prisma.sql``}
     UNION ALL 
-    SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, 'warn' AS 'type' FROM litebans_warnings
+    SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, 'warn' AS 'type' FROM litebans_warnings ${player ? Prisma.sql`WHERE uuid = ${player}` : Prisma.sql``}
     UNION ALL 
-    SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, 'kick' AS 'type' FROM litebans_kicks
+    SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, 'kick' AS 'type' FROM litebans_kicks ${player ? Prisma.sql`WHERE uuid = ${player}` : Prisma.sql``}
   ) 
   ORDER BY time DESC
   LIMIT 10

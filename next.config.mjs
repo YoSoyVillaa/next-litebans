@@ -5,6 +5,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'minotar.net'
+      },
+      {
+        protocol: 'https',
+        hostname: 'skins.mcstats.com'
       }
     ]
   }

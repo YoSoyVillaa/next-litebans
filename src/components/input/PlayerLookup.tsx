@@ -29,6 +29,7 @@ export const PlayerInput = () => {
     if (event.key === "Enter") {
       startTransition(() => {
         checkPlayer(playerName).then(({ exists, name }) => {
+          setPlayerName("")
           if (exists) {
             router.push(`/history/@${name}`)
           } else {
@@ -36,7 +37,6 @@ export const PlayerInput = () => {
             toast.error(dictionary.notifications.playerNotFound.title, {
               description: dictionary.notifications.playerNotFound.description
             })
-            setPlayerName("")
           }
         })
       })

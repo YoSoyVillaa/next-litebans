@@ -18,16 +18,18 @@ import {
 
 interface HistoryTableProps {
   page: number;
+  player?: string;
 }
 
 export const HistoryTable = async ({ 
-  page 
+  page,
+  player
 }: HistoryTableProps) => {
 
   const { lang, dictionary } = await language();
   const localDictionary = dictionary.pages.history;
 
-  const punishmentCount = await getPunishmentCount().then(({ bans, mutes, warns, kicks }) => bans + mutes + warns + kicks);
+  const punishmentCount = await getPunishmentCount(player).then(({ bans, mutes, warns, kicks }) => bans + mutes + warns + kicks);
   const totalPages = Math.ceil(punishmentCount / 10);
 
   return (
@@ -46,7 +48,7 @@ export const HistoryTable = async ({
             </TableRow>
           </TableHeader>
           <Suspense fallback={<HistoryBodySkeleton />}>
-            <HistoryBodyData language={lang} dictionary={dictionary} page={page} />
+            <HistoryBodyData language={lang} dictionary={dictionary} page={page} player={player} />
           </Suspense>
         </Table>
         <ScrollBar className="md:hidden" orientation="horizontal" />

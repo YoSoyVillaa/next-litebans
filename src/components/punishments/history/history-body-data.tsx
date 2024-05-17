@@ -19,16 +19,18 @@ interface HistoryBodyDataProps {
   language: string;
   dictionary: Dictionary;
   page: number;
+  player?: string;
 }
 
 export const HistoryBodyData = async ({
   language,
   dictionary,
-  page
+  page,
+  player
 }: HistoryBodyDataProps) => {
 
   const localDictionary = dictionary.pages.history;
-  const dBPunishments = await getPunishments(page);
+  const dBPunishments = await getPunishments(page, player);
   const punishments = await sanitizePunishments(localDictionary, dBPunishments);
 
   return (  

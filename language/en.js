@@ -121,6 +121,10 @@ const language = {
         }
       }
     },
+    playerHistory: {
+      // Placeholders: {player}
+      title: "{player}"
+    },
     errors: {
       notFound: {
         title: "404",
