@@ -1,5 +1,4 @@
 import { language } from "@/lib/language/dictionaries";
-import { getKickCount } from "@/lib/punishment/kick";
 import p from "@/lib/language/utils/parse";
 
 import { SearchParams } from "@/types";
