@@ -32,8 +32,8 @@ export const PlayerInput = () => {
             router.push(`/history/@${name}`)
           } else {
             setError(true)
-            toast.error(dictionary.notifications.player_not_found.title, {
-              description: dictionary.notifications.player_not_found.description
+            toast.error(dictionary.notifications.playerNotFound.title, {
+              description: dictionary.notifications.playerNotFound.description
             })
             setPlayerName("")
           }

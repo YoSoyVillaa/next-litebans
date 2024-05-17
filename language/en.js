@@ -134,7 +134,7 @@ const language = {
     next: "Next"
   },
   notifications: {
-    player_not_found: {
+    playerNotFound: {
       title: "Error",
       description: "The player does not exist in the database.",
     }
