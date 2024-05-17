@@ -4,7 +4,7 @@ import { getDictionaries } from "@/lib/language/dictionaries";
 import { MainNav } from "./main-nav";
 import { getPunishmentCount } from "@/lib/punishment/punishment";
 import { MobileNav } from "./mobile-nav";
-import { PlayerInput } from "@/components/input/PlayerInput";
+import { PlayerInput } from "@/components/input/PlayerLookup";
 
 export const SiteHeader = async () => {
   const dictionaries = getDictionaries();
