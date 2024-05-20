@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 import { language } from "@/lib/language/dictionaries";
 import p from "@/lib/language/utils/parse";
@@ -14,10 +15,9 @@ import {
 
 import { getPage, getStaff } from "@/utils/searchParams";
 
-import { HistoryTable } from "@/components/punishments/history/history-table";
 import { Icons } from "@/components/layout/icons";
 import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
+import { WarnsTable } from "@/components/punishments/warns/warns-table";
 
 export async function generateMetadata({ params }: { params: { player: string } }) {
   
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: { player: string } 
   }
 }
 
-export default async function History({
+export default async function Warns({
   searchParams,
   params
 }: {
@@ -89,7 +89,7 @@ export default async function History({
             }
             {warnCount > 0 && 
               <Link href={`/@${playerName}/warns`}>
-                <Badge variant="secondary" className="px-1 text-secondary-foreground/50">
+                <Badge className="px-1">
                   <Icons.warn className="w-4 h-4 mr-1" /> {warnCount} {q(dictionary.words.warns, warnCount).toUpperCase()}
                 </Badge>
               </Link>
@@ -105,8 +105,8 @@ export default async function History({
         </div>
       </div>
 
-      <section className="w-full lg:w-[1024px]">
-        <HistoryTable page={page} player={player.uuid!} staff={staff} />
+      <section className="w-full lg:w-[876px]">
+        <WarnsTable page={page} player={player.uuid!} staff={staff} />
       </section>
     </div>
   );
