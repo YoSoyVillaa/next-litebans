@@ -5,7 +5,7 @@ import { SearchParams } from "@/types";
 
 import { DefaultPage } from "@/components/layout/default-page";
 import { HistoryTable } from "@/components/punishments/history/history-table";
-import { getPage } from "@/utils/searchParams";
+import { getPage, getPlayer, getStaff } from "@/utils/searchParams";
 import { getPunishmentCount } from "@/lib/punishment/punishment";
 
 export async function generateMetadata() {
@@ -20,9 +20,12 @@ export async function generateMetadata() {
 export default async function History(searchParams: SearchParams) {
   const dictionary = (await language()).dictionary.pages.history;
   
-  const punishmentCount = await getPunishmentCount().then(({ bans, mutes, warns, kicks }) => bans + mutes + warns + kicks);
   
   const page = getPage(searchParams);
+  const player = getPlayer(searchParams);
+  const staff = getStaff(searchParams);
+
+  const punishmentCount = await getPunishmentCount(player, staff).then(({ bans, mutes, warns, kicks }) => bans + mutes + warns + kicks);
 
   return (
     <DefaultPage
@@ -32,7 +35,7 @@ export default async function History(searchParams: SearchParams) {
       })}
       className="w-full lg:w-[1024px]"
     >
-      <HistoryTable page={page} />
+      <HistoryTable page={page} player={player} staff={staff} />
     </DefaultPage>
   );
 }

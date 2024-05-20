@@ -14,23 +14,26 @@ import {
   TableCell,
   TableRow,
 } from "@/components/ui/table"
+import { AvatarName } from "@/components/table/avatar-name";
 
 interface HistoryBodyDataProps {
   language: string;
   dictionary: Dictionary;
   page: number;
   player?: string;
+  staff?: string;
 }
 
 export const HistoryBodyData = async ({
   language,
   dictionary,
   page,
-  player
+  player,
+  staff
 }: HistoryBodyDataProps) => {
 
   const localDictionary = dictionary.pages.history;
-  const dBPunishments = await getPunishments(page, player);
+  const dBPunishments = await getPunishments(page, player, staff);
   const punishments = await sanitizePunishments(localDictionary, dBPunishments);
 
   return (  
@@ -43,20 +46,10 @@ export const HistoryBodyData = async ({
             </Badge>
           </TableCell>
           <TableCell className="space-y-1 w-[7.5rem] text-center">
-            <Link href={`/history?player=${punishment.uuid}`}>
-              <PlayerAvatar uuid={punishment.uuid!} name={punishment.name!} />
-              <p>{punishment.name}</p>
-            </Link>
+            <AvatarName query="player" name={punishment.name!} uuid={punishment.uuid!} />
           </TableCell>
           <TableCell className="space-y-1 w-[122px] text-center">
-              <Link href={`/history?staff=${punishment.banned_by_uuid}`}>
-                {punishment.console ? 
-                  <ConsoleAvatar name={punishment.banned_by_name!} />
-                  : 
-                  <PlayerAvatar uuid={punishment.banned_by_uuid!} name={punishment.banned_by_name!} />
-                }
-                <p>{punishment.banned_by_name}</p>
-              </Link>
+            <AvatarName query="staff" name={punishment.banned_by_name!} uuid={punishment.banned_by_uuid!} console={punishment.console} />
           </TableCell>
           <TableCell className="w-[200px]">
             {punishment.reason}
