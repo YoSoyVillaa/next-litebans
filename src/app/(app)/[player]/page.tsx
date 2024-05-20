@@ -22,6 +22,15 @@ import Link from "next/link";
 export async function generateMetadata({ params }: { params: { player: string } }) {
   
   const { dictionary } = await language();
+
+  const playerName = params.player.replace("%40", '');
+  const player = await getPlayerByName(playerName);
+
+  if (!player) {
+    return {
+      title: dictionary.pages.errors.notFound.title
+    }
+  }
   
   return {
     title: p(dictionary.pages.playerHistory.title, {
