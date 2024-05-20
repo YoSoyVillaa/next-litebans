@@ -12,7 +12,7 @@ import {
   getPlayerWarnCount 
 } from "@/lib/punishment/player";
 
-import { getPage } from "@/utils/searchParams";
+import { getPage, getStaff } from "@/utils/searchParams";
 
 import { HistoryTable } from "@/components/punishments/history/history-table";
 import { Icons } from "@/components/layout/icons";
@@ -47,6 +47,8 @@ export default async function History({
   if (!player) {
     notFound();
   }
+
+  const staff = getStaff({searchParams});
 
   const banCount = await getPlayerBanCount(player.uuid!);
   const muteCount = await getPlayerMuteCount(player.uuid!);
@@ -95,7 +97,7 @@ export default async function History({
       </div>
 
       <section className="w-full lg:w-[1024px]">
-        <HistoryTable page={page} player={player.uuid!} />
+        <HistoryTable page={page} player={player.uuid!} staff={staff} />
       </section>
     </div>
   );
