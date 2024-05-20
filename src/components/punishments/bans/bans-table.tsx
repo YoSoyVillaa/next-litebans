@@ -32,7 +32,7 @@ export const BansTable = async ({
   const { lang, dictionary } = await language();
   const localDictionary = dictionary.pages.bans;
 
-  const banCount = await getBanCount();
+  const banCount = await getBanCount(player, staff);
   const totalPages = Math.ceil(banCount / 10);
 
   return (

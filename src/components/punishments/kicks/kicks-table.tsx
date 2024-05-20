@@ -32,7 +32,7 @@ export const KicksTable = async ({
   const { lang, dictionary } = await language();
   const localDictionary = dictionary.pages.kicks;
 
-  const kickCount = await getKickCount();
+  const kickCount = await getKickCount(player, staff);
   const totalPages = Math.ceil(kickCount / 10);
 
   return (

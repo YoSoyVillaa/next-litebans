@@ -32,7 +32,7 @@ export const WarnsTable = async ({
   const { lang, dictionary } = await language();
   const localDictionary = dictionary.pages.warns;
 
-  const warnCount = await getWarnCount();
+  const warnCount = await getWarnCount(player, staff);
   const totalPages = Math.ceil(warnCount / 10);
 
   return (

@@ -3,8 +3,13 @@ import { db } from "../db";
 import { Dictionary } from "../language/types";
 import { getPlayerName } from "./punishment";
 
-const getMuteCount = async () => {
-  const count = await db.litebans_mutes.count();
+const getMuteCount = async (player?: string, staff?: string) => {
+  const count = await db.litebans_mutes.count({
+    where: {
+      uuid: player,
+      banned_by_uuid: staff
+    }
+  });
   return count;
 }
 

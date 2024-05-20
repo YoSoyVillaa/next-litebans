@@ -2,8 +2,13 @@ import { PunishmentListItem } from "@/types";
 import { db } from "../db";
 import { getPlayerName } from "./punishment";
 
-const getWarnCount = async () => {
-  const count = await db.litebans_warnings.count();
+const getWarnCount = async (player?: string, staff?: string) => {
+  const count = await db.litebans_warnings.count({
+    where: {
+      uuid: player,
+      banned_by_uuid: staff
+    }
+  });
   return count;
 }
 

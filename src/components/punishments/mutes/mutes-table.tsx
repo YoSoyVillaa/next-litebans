@@ -32,7 +32,7 @@ export const MutesTable = async ({
   const { lang, dictionary } = await language();
   const localDictionary = dictionary.pages.mutes;
 
-  const muteCount = await getMuteCount();
+  const muteCount = await getMuteCount(player, staff);
   const totalPages = Math.ceil(muteCount / 10);
 
   return (
