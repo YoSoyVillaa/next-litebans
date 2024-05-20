@@ -6,7 +6,7 @@ import { SearchParams } from "@/types";
 
 import { DefaultPage } from "@/components/layout/default-page";
 import { KicksTable } from "@/components/punishments/kicks/kicks-table";
-import { getPage } from "@/utils/searchParams";
+import { getPage, getPlayer, getStaff } from "@/utils/searchParams";
 
 export async function generateMetadata() {
   
@@ -23,6 +23,8 @@ export default async function Kicks(searchParams: SearchParams) {
   const kickCount = await getKickCount();
   
   const page = getPage(searchParams);
+  const player = getPlayer(searchParams);
+  const staff = getStaff(searchParams);
 
   return (
     <DefaultPage
@@ -32,7 +34,7 @@ export default async function Kicks(searchParams: SearchParams) {
       })}
       className="w-full lg:w-[761px]"
     >
-      <KicksTable page={page} />
+      <KicksTable page={page} player={player} staff={staff} />
     </DefaultPage>
   );
 }

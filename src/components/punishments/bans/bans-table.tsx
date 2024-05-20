@@ -15,13 +15,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Filters } from "@/components/table/filters";
 
 interface BansTableProps {
   page: number;
+  player?: string;
+  staff?: string;
 }
 
 export const BansTable = async ({ 
-  page 
+  page,
+  player,
+  staff
 }: BansTableProps) => {
 
   const { lang, dictionary } = await language();
@@ -31,11 +36,12 @@ export const BansTable = async ({
   const totalPages = Math.ceil(banCount / 10);
 
   return (
-    <>
+    <div className="space-y-2">
+      <Filters player={player} staff={staff} />
       <ScrollArea className="shadow border-y lg:rounded-xl lg:border">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-muted/50">
               <TableHead className="text-center px-2">{localDictionary.table.heads.player}</TableHead>
               <TableHead className="text-center px-2">{localDictionary.table.heads.by}</TableHead>
               <TableHead>{localDictionary.table.heads.reason}</TableHead>
@@ -45,12 +51,12 @@ export const BansTable = async ({
             </TableRow>
           </TableHeader>
           <Suspense fallback={<BansBodySkeleton />}>
-            <BansBodyData language={lang} dictionary={dictionary} page={page} />
+            <BansBodyData language={lang} dictionary={dictionary} page={page} player={player} staff={staff} />
           </Suspense>
         </Table>
         <ScrollBar className="md:hidden" orientation="horizontal" />
       </ScrollArea>
-      <TablePagination className="mt-4" actualPage={page} totalPages={totalPages} />
-    </>
+      <TablePagination actualPage={page} totalPages={totalPages} />
+    </div>
   );
 };

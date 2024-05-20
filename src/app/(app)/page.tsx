@@ -8,7 +8,7 @@ import { PunishmentTypeCard } from "@/components/punishments/punishment-type-car
 import { Icons } from "@/components/layout/icons";
 import { HistoryTable } from "@/components/punishments/history/history-table";
 import { SearchParams } from "@/types";
-import { getPage } from "@/utils/searchParams";
+import { getPage, getPlayer, getStaff } from "@/utils/searchParams";
 
 export async function generateMetadata() {
   
@@ -28,6 +28,8 @@ export default async function Home(searchParams: SearchParams) {
   const kickCount = await db.litebans_kicks.count();
 
   const page = getPage(searchParams);
+  const player = getPlayer(searchParams);
+  const staff = getStaff(searchParams);
 
   return (
     <DefaultPage
@@ -68,7 +70,7 @@ export default async function Home(searchParams: SearchParams) {
         />
       </div>
       <div className="mx-auto w-full lg:w-[1024px]">
-        <HistoryTable page={page} />
+        <HistoryTable page={page} player={player} staff={staff} />
       </div>
     </DefaultPage>
   );

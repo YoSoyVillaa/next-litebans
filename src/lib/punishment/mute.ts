@@ -8,8 +8,12 @@ const getMuteCount = async () => {
   return count;
 }
 
-const getMutes = async (page: number) => {
+const getMutes = async (page: number, player?: string, staff?: string) => {
   const mutes =  await db.litebans_mutes.findMany({
+    where: {
+      uuid: player,
+      banned_by_uuid: staff
+    },
     take: 10,
     skip: (page - 1) * 10,
     select: {

@@ -3,31 +3,34 @@ import Link from "next/link";
 import { Dictionary } from "@/lib/language/types";
 import { getBans, sanitizeBans } from "@/lib/punishment/ban";
 
-import { PlayerAvatar } from "@/components/avatar/player-avatar";
 import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 import { PunishmentInfoButton } from "@/components/buttons/punishment-info-button";
 import { PunishmentStatusDot } from "@/components/punishments/punishment-status-dot";
-import { ConsoleAvatar } from "@/components/avatar/console-avatar";
 import {
   TableBody,
   TableCell,
   TableRow,
 } from "@/components/ui/table"
+import { AvatarName } from "@/components/table/avatar-name";
 
 interface BansBodyDataProps {
   language: string;
   dictionary: Dictionary;
   page: number;
+  player?: string;
+  staff?: string;
 }
 
 export const BansBodyData = async ({
   language,
   dictionary,
-  page
+  page,
+  player,
+  staff
 }: BansBodyDataProps) => {
 
   const localDictionary = dictionary.pages.bans;
-  const dbBans = await getBans(page);
+  const dbBans = await getBans(page, player, staff);
   const bans = await sanitizeBans(localDictionary, dbBans);
 
   return (  
@@ -35,20 +38,10 @@ export const BansBodyData = async ({
       {bans.map((ban) => (
         <TableRow key={ban.id}>
           <TableCell className="space-y-1 w-32 text-center">
-            <Link href={`/history?player=${ban.uuid}`}>
-              <PlayerAvatar uuid={ban.uuid!} name={ban.name!} />
-              <p>{ban.name}</p>
-            </Link>
+            <AvatarName query="player" name={ban.name!} uuid={ban.uuid!} />
           </TableCell>
           <TableCell className="space-y-1 w-32 text-center">
-            <Link href={`/history?staff=${ban.banned_by_uuid}`}>
-              {ban.console ? 
-                <ConsoleAvatar name={ban.banned_by_name!} />
-                : 
-                <PlayerAvatar uuid={ban.banned_by_uuid!} name={ban.banned_by_name!} />
-              }
-              <p>{ban.banned_by_name}</p>
-            </Link>
+            <AvatarName query="staff" name={ban.banned_by_name!} uuid={ban.banned_by_uuid!} console={ban.console} />
           </TableCell>
           <TableCell className="w-[250px]">
             {ban.reason}

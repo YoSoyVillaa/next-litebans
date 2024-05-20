@@ -6,7 +6,7 @@ import { SearchParams } from "@/types";
 
 import { DefaultPage } from "@/components/layout/default-page";
 import { BansTable } from "@/components/punishments/bans/bans-table";
-import { getPage } from "@/utils/searchParams";
+import { getPage, getPlayer, getStaff } from "@/utils/searchParams";
 
 export async function generateMetadata() {
   
@@ -23,6 +23,8 @@ export default async function Bans(searchParams: SearchParams) {
   const banCount = await getBanCount();
   
   const page = getPage(searchParams);
+  const player = getPlayer(searchParams);
+  const staff = getStaff(searchParams);
 
   return (
     <DefaultPage
@@ -32,7 +34,7 @@ export default async function Bans(searchParams: SearchParams) {
       })}
       className="w-full lg:w-[975px]"
     >
-      <BansTable page={page} />
+      <BansTable page={page} player={player} staff={staff} />
     </DefaultPage>
   );
 }

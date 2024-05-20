@@ -1,28 +1,29 @@
-import Link from "next/link";
-
 import { getKicks, sanitizeKicks } from "@/lib/punishment/kick";
 
-import { PlayerAvatar } from "@/components/avatar/player-avatar";
 import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 import { PunishmentInfoButton } from "@/components/buttons/punishment-info-button";
-import { ConsoleAvatar } from "@/components/avatar/console-avatar";
 import {
   TableBody,
   TableCell,
   TableRow,
 } from "@/components/ui/table"
+import { AvatarName } from "@/components/table/avatar-name";
 
 interface KicksBodyDataProps {
   language: string;
   page: number;
+  player?: string;
+  staff?: string;
 }
 
 export const KicksBodyData = async ({
   language,
-  page
+  page,
+  player,
+  staff
 }: KicksBodyDataProps) => {
 
-  const dbKicks = await getKicks(page);
+  const dbKicks = await getKicks(page, player, staff);
   const kicks = await sanitizeKicks(dbKicks);
 
   return (  
@@ -30,20 +31,10 @@ export const KicksBodyData = async ({
       {kicks.map((kick) => (
         <TableRow key={kick.id}>
           <TableCell className="space-y-1 w-32 text-center">
-            <Link href={`/history?player=${kick.uuid}`}>
-              <PlayerAvatar uuid={kick.uuid!} name={kick.name!} />
-              <p>{kick.name}</p>
-            </Link>
+            <AvatarName query="player" name={kick.name!} uuid={kick.uuid!} />
           </TableCell>
           <TableCell className="space-y-1 w-32 text-center">
-            <Link href={`/history?staff=${kick.banned_by_uuid}`}>
-              {kick.console ? 
-                <ConsoleAvatar name={kick.banned_by_name!} />
-                : 
-                <PlayerAvatar uuid={kick.banned_by_uuid!} name={kick.banned_by_name!} />
-              }
-              <p>{kick.banned_by_name}</p>
-            </Link>
+            <AvatarName query="staff" name={kick.banned_by_name!} uuid={kick.banned_by_uuid!} console={kick.console} />
           </TableCell>
           <TableCell className="w-[250px]">
             {kick.reason}

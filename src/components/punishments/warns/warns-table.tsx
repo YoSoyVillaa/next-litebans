@@ -15,13 +15,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Filters } from "@/components/table/filters";
 
 interface WarnsTableProps {
   page: number;
+  player?: string;
+  staff?: string;
 }
 
 export const WarnsTable = async ({ 
-  page 
+  page,
+  player,
+  staff
 }: WarnsTableProps) => {
 
   const { lang, dictionary } = await language();
@@ -31,11 +36,12 @@ export const WarnsTable = async ({
   const totalPages = Math.ceil(warnCount / 10);
 
   return (
-    <>
+    <div className="space-y-2">
+      <Filters player={player} staff={staff} />
       <ScrollArea className="shadow border-y lg:rounded-xl lg:border">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-muted/50">
               <TableHead className="text-center px-2">{localDictionary.table.heads.player}</TableHead>
               <TableHead className="text-center px-2">{localDictionary.table.heads.by}</TableHead>
               <TableHead>{localDictionary.table.heads.reason}</TableHead>
@@ -45,12 +51,12 @@ export const WarnsTable = async ({
             </TableRow>
           </TableHeader>
           <Suspense fallback={<WarnsBodySkeleton />}>
-            <WarnsBodyData language={lang} page={page} />
+            <WarnsBodyData language={lang} page={page} player={player} staff={staff} />
           </Suspense>
         </Table>
         <ScrollBar className="md:hidden" orientation="horizontal" />
       </ScrollArea>
-      <TablePagination className="mt-4" actualPage={page} totalPages={totalPages} />
-    </>
+      <TablePagination actualPage={page} totalPages={totalPages} />
+    </div>
   );
 };

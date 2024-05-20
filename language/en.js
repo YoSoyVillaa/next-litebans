@@ -24,7 +24,9 @@ const language = {
     warns: {
       singular: "Warn",
       plural: "Warns"
-    }
+    },
+    player: "Player",
+    staff: "Staff",
   },
   pages: {
     home: {

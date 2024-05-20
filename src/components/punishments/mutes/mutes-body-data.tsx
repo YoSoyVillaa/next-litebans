@@ -3,31 +3,34 @@ import Link from "next/link";
 import { Dictionary } from "@/lib/language/types";
 import { getMutes, sanitizeMutes } from "@/lib/punishment/mute";
 
-import { PlayerAvatar } from "@/components/avatar/player-avatar";
 import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 import { PunishmentInfoButton } from "@/components/buttons/punishment-info-button";
 import { PunishmentStatusDot } from "@/components/punishments/punishment-status-dot";
-import { ConsoleAvatar } from "@/components/avatar/console-avatar";
 import {
   TableBody,
   TableCell,
   TableRow,
 } from "@/components/ui/table"
+import { AvatarName } from "@/components/table/avatar-name";
 
 interface MutesBodyDataProps {
   language: string;
   dictionary: Dictionary;
   page: number;
+  player?: string;
+  staff?: string;
 }
 
 export const MutesBodyData = async ({
   language,
   dictionary,
-  page
+  page,
+  player,
+  staff
 }: MutesBodyDataProps) => {
 
   const localDictionary = dictionary.pages.mutes;
-  const dbMutes = await getMutes(page);
+  const dbMutes = await getMutes(page, player, staff);
   const mutes = await sanitizeMutes(localDictionary, dbMutes);
 
   return (  
@@ -35,20 +38,10 @@ export const MutesBodyData = async ({
       {mutes.map((mute) => (
         <TableRow key={mute.id}>
           <TableCell className="space-y-1 w-32 text-center">
-            <Link href={`/history?player=${mute.uuid}`}>
-              <PlayerAvatar uuid={mute.uuid!} name={mute.name!} />
-              <p>{mute.name}</p>
-            </Link>
+            <AvatarName query="player" name={mute.name!} uuid={mute.uuid!} />
           </TableCell>
           <TableCell className="space-y-1 w-32 text-center">
-            <Link href={`/history?staff=${mute.banned_by_uuid}`}>
-              {mute.console ? 
-                <ConsoleAvatar name={mute.banned_by_name!} />
-                : 
-                <PlayerAvatar uuid={mute.banned_by_uuid!} name={mute.banned_by_name!} />
-              }
-              <p>{mute.banned_by_name}</p>
-            </Link>
+            <AvatarName query="staff" name={mute.banned_by_name!} uuid={mute.banned_by_uuid!} console={mute.console} />
           </TableCell>
           <TableCell className="w-[250px]">
             {mute.reason}

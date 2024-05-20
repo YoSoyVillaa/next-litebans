@@ -22,7 +22,9 @@ const language = {
     warns: {
       singular: "Aviso",
       plural: "Avisos"
-    }
+    },
+    player: "Jugador",
+    staff: "Staff",
   },
   pages: {
     home: {

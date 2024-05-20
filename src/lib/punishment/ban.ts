@@ -8,8 +8,12 @@ const getBanCount = async () => {
   return count;
 }
 
-const getBans = async (page: number) => {
+const getBans = async (page: number, player?: string, staff?: string) => {
   const bans =  await db.litebans_bans.findMany({
+    where: {
+      uuid: player,
+      banned_by_uuid: staff
+    },
     take: 10,
     skip: (page - 1) * 10,
     select: {

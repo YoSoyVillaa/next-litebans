@@ -3,7 +3,6 @@
 import { Suspense } from "react";
 
 import { language } from "@/lib/language/dictionaries";
-import { getMuteCount } from "@/lib/punishment/mute";
 
 import { TablePagination } from "@/components/table/pagination";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -16,13 +15,18 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { getKickCount } from "@/lib/punishment/kick";
+import { Filters } from "@/components/table/filters";
 
 interface KicksTableProps {
   page: number;
+  player?: string;
+  staff?: string;
 }
 
 export const KicksTable = async ({ 
-  page 
+  page,
+  player,
+  staff
 }: KicksTableProps) => {
 
   const { lang, dictionary } = await language();
@@ -32,11 +36,12 @@ export const KicksTable = async ({
   const totalPages = Math.ceil(kickCount / 10);
 
   return (
-    <>
+    <div className="space-y-2">
+      <Filters player={player} staff={staff} />
       <ScrollArea className="shadow border-y lg:rounded-xl lg:border">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-muted/50">
               <TableHead className="text-center px-2">{localDictionary.table.heads.player}</TableHead>
               <TableHead className="text-center px-2">{localDictionary.table.heads.by}</TableHead>
               <TableHead>{localDictionary.table.heads.reason}</TableHead>
@@ -45,12 +50,12 @@ export const KicksTable = async ({
             </TableRow>
           </TableHeader>
           <Suspense fallback={<KicksBodySkeleton />}>
-            <KicksBodyData language={lang} page={page} />
+            <KicksBodyData language={lang} page={page} player={player} staff={staff} />
           </Suspense>
         </Table>
         <ScrollBar className="md:hidden" orientation="horizontal" />
       </ScrollArea>
-      <TablePagination className="mt-4" actualPage={page} totalPages={totalPages} />
-    </>
+      <TablePagination actualPage={page} totalPages={totalPages} />
+    </div>
   );
 };

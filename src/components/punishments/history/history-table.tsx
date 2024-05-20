@@ -15,6 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Filters } from "@/components/table/filters";
 
 interface HistoryTableProps {
   page: number;
@@ -36,6 +37,7 @@ export const HistoryTable = async ({
 
   return (
     <div className="space-y-2">
+      <Filters player={player} staff={staff} />
       <ScrollArea className="shadow border-y lg:rounded-xl lg:border">
         <Table>
           <TableHeader>

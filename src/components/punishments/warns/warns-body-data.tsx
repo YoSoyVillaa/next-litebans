@@ -13,18 +13,23 @@ import {
   TableCell,
   TableRow,
 } from "@/components/ui/table"
+import { AvatarName } from "@/components/table/avatar-name";
 
 interface WarnsBodyDataProps {
   language: string;
   page: number;
+  player?: string;
+  staff?: string;
 }
 
 export const WarnsBodyData = async ({
   language,
-  page
+  page,
+  player,
+  staff
 }: WarnsBodyDataProps) => {
 
-  const dbWarns = await getWarns(page);
+  const dbWarns = await getWarns(page, player, staff);
   const warns = await sanitizeWarns(dbWarns);
 
   return (  
@@ -32,20 +37,10 @@ export const WarnsBodyData = async ({
       {warns.map((warn) => (
         <TableRow key={warn.id}>
           <TableCell className="space-y-1 w-32 text-center">
-            <Link href={`/history?player=${warn.uuid}`}>
-              <PlayerAvatar uuid={warn.uuid!} name={warn.name!} />
-              <p>{warn.name}</p>
-            </Link>
+            <AvatarName query="player" name={warn.name!} uuid={warn.uuid!} />
           </TableCell>
           <TableCell className="space-y-1 w-32 text-center">
-            <Link href={`/history?staff=${warn.banned_by_uuid}`}>
-              {warn.console ? 
-                <ConsoleAvatar name={warn.banned_by_name!} />
-                : 
-                <PlayerAvatar uuid={warn.banned_by_uuid!} name={warn.banned_by_name!} />
-              }
-              <p>{warn.banned_by_name}</p>
-            </Link>
+            <AvatarName query="staff" name={warn.banned_by_name!} uuid={warn.banned_by_uuid!} console={warn.console} />
           </TableCell>
           <TableCell className="w-[250px]">
             {warn.reason}

@@ -6,7 +6,7 @@ import { SearchParams } from "@/types";
 
 import { DefaultPage } from "@/components/layout/default-page";
 import { MutesTable } from "@/components/punishments/mutes/mutes-table";
-import { getPage } from "@/utils/searchParams";
+import { getPage, getPlayer, getStaff } from "@/utils/searchParams";
 
 export async function generateMetadata() {
   
@@ -23,6 +23,8 @@ export default async function Mutes(searchParams: SearchParams) {
   const muteCount = await getMuteCount();
   
   const page = getPage(searchParams);
+  const player = getPlayer(searchParams);
+  const staff = getStaff(searchParams);
 
   return (
     <DefaultPage
@@ -32,7 +34,7 @@ export default async function Mutes(searchParams: SearchParams) {
       })}
       className="w-full lg:w-[975px]"
     >
-      <MutesTable page={page} />
+      <MutesTable page={page} player={player} staff={staff} />
     </DefaultPage>
   );
 }

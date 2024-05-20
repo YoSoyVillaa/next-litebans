@@ -7,8 +7,12 @@ const getWarnCount = async () => {
   return count;
 }
 
-const getWarns = async (page: number) => {
+const getWarns = async (page: number, player?: string, staff?: string) => {
   const warns =  await db.litebans_warnings.findMany({
+    where: {
+      uuid: player,
+      banned_by_uuid: staff
+    },
     take: 10,
     skip: (page - 1) * 10,
     select: {
