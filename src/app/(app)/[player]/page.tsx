@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: { player: string } 
   const playerName = params.player.replace("%40", '');
   const player = await getPlayerByName(playerName);
 
-  if (!player) {
+  if (!player || player.uuid === "CONSOLE") {
     return {
       title: dictionary.pages.errors.notFound.title
     }
@@ -48,13 +48,13 @@ export default async function History({
 }) {
   const { dictionary } = await language();
   const localDictionary = dictionary.pages.playerHistory;
-  
+
   const page = getPage({searchParams});
 
   const playerName = params.player.replace("%40", '');
   const player = await getPlayerByName(playerName);
 
-  if (!player) {
+  if (!player || player.uuid === "CONSOLE") {
     notFound();
   }
 

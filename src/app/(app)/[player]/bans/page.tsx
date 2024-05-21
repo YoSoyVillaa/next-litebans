@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { notFound } from "next/navigation";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { language } from "@/lib/language/dictionaries";
 import p from "@/lib/language/utils/parse";
@@ -22,6 +22,15 @@ import { BansTable } from "@/components/punishments/bans/bans-table";
 export async function generateMetadata({ params }: { params: { player: string } }) {
   
   const { dictionary } = await language();
+
+  const playerName = params.player.replace("%40", '');
+  const player = await getPlayerByName(playerName);
+
+  if (!player || player.uuid === "CONSOLE") {
+    return {
+      title: dictionary.pages.errors.notFound.title
+    }
+  }
   
   return {
     title: p(dictionary.pages.playerHistory.title, {
@@ -45,7 +54,7 @@ export default async function Bans({
   const playerName = params.player.replace("%40", '');
   const player = await getPlayerByName(playerName);
 
-  if (!player) {
+  if (!player || player.uuid === "CONSOLE") {
     notFound();
   }
 

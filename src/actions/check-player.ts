@@ -11,9 +11,12 @@ export const checkPlayer = async (name: string) => {
       date: 'desc'
     },
     select: {
-      name: true
+      name: true,
+      uuid: true
     }
   });
+
+  if (player && player.uuid === "CONSOLE") return { exists: false }
 
   return { 
     exists: player ? true : false,
