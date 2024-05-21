@@ -15,7 +15,7 @@ export const ConsoleAvatar = ({
   className
 }: ConsoleAvatarProps) => (
   <Image 
-    src={siteConfig.consoleIcon}
+    src={siteConfig.console.icon}
     alt={`${name}'s avatar`}
     width={size ?? 32}
     height={size ?? 32}
