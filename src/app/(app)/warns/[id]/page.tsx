@@ -1,16 +1,16 @@
 import { notFound } from "next/navigation";
 
-import { PiScrollFill } from "react-icons/pi";
 import { IoCalendar } from "react-icons/io5";
-import { MdOutlineNotificationsActive } from "react-icons/md";
+import { PiScrollFill } from "react-icons/pi";
 import { FaEarthEurope } from "react-icons/fa6";
+import { MdOutlineNotificationsActive } from "react-icons/md";
 
-import { language } from "@/lib/language/dictionaries";
-import { getWarn } from "@/lib/punishment/warn";
 import p from "@/lib/language/utils/parse";
+import { getWarn } from "@/lib/punishment/warn";
+import { language } from "@/lib/language/dictionaries";
 
-import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 import { PunishmentInfoCard } from "@/components/info/punishment-info-card";
+import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   

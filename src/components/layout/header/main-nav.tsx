@@ -1,12 +1,14 @@
 "use client"
 
-import { WebsiteLogo } from "@/components/images/website-logo"
-import { Badge } from "@/components/ui/badge"
-import { useLang } from "@/lib/language/components/LanguageProvider"
-import { cn } from "@/lib/utils"
-import { siteConfig } from "@config/site"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+
+import { cn } from "@/lib/utils"
+import { siteConfig } from "@config/site"
+
+import { Badge } from "@/components/ui/badge"
+import { WebsiteLogo } from "@/components/images/website-logo"
+import { useLang } from "@/lib/language/components/language-provider"
 
 interface MainNavProps {
   bans: number;

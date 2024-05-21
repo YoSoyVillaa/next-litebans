@@ -1,3 +1,4 @@
+import { getRelativeDifference, getRelativeDifferenceText } from "@/utils/date";
 
 import { 
   Tooltip,
@@ -5,7 +6,6 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { getRelativeDifference, getRelativeDifferenceText } from "@/utils/date";
 
 interface RelativeTimeTooltipProps {
   lang: string

@@ -19,7 +19,8 @@ interface PunishmentInfoCardProps {
 }
 
 export const PunishmentInfoCard = async ({ punishment, children }: PunishmentInfoCardProps) => {
-  const { lang, dictionary } = await language();
+  const { dictionary } = await language();
+  
   return (
     <div className="flex space-x-4 md:space-y-0 md:flex-row">
       <div className="order-1 space-y-8">

@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { language } from "@/lib/language/dictionaries";
 import { getWarnCount } from "@/lib/punishment/warn";
 
+import { Filters } from "@/components/table/filters";
 import { TablePagination } from "@/components/table/pagination";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { WarnsBodySkeleton } from "@/components/punishments/warns/warns-body-skeleton";
@@ -15,7 +16,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Filters } from "@/components/table/filters";
 
 interface WarnsTableProps {
   page: number;

@@ -1,6 +1,9 @@
 "use client"
 
+import { useCallback, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+
+import { useLang } from "@/lib/language/components/language-provider";
 
 import { 
   Pagination, 
@@ -10,8 +13,6 @@ import {
   PaginationNext, 
   PaginationPrevious 
 } from "@/components/ui/pagination";
-import { useCallback, useEffect } from "react";
-import { useLang } from "@/lib/language/components/LanguageProvider";
 
 interface TablePaginationProps {
   actualPage: number;

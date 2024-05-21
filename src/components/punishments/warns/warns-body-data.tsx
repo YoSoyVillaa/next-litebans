@@ -1,19 +1,16 @@
-import Link from "next/link";
 import { FaCheck } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
 
 import { getWarns, sanitizeWarns } from "@/lib/punishment/warn";
 
-import { PlayerAvatar } from "@/components/avatar/player-avatar";
+import { AvatarName } from "@/components/table/avatar-name";
 import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 import { PunishmentInfoButton } from "@/components/buttons/punishment-info-button";
-import { ConsoleAvatar } from "@/components/avatar/console-avatar";
 import {
   TableBody,
   TableCell,
   TableRow,
 } from "@/components/ui/table"
-import { AvatarName } from "@/components/table/avatar-name";
 
 interface WarnsBodyDataProps {
   language: string;

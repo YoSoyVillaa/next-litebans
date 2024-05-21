@@ -2,20 +2,20 @@
 
 import { Suspense } from "react";
 
-import { language } from "@/lib/language/dictionaries";
 import { getBanCount } from "@/lib/punishment/ban";
+import { language } from "@/lib/language/dictionaries";
 
+import { Filters } from "@/components/table/filters";
 import { TablePagination } from "@/components/table/pagination";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { BansBodySkeleton } from "@/components/punishments/bans/bans-body-skeleton";
 import { BansBodyData } from "@/components/punishments/bans/bans-body-data";
+import { BansBodySkeleton } from "@/components/punishments/bans/bans-body-skeleton";
 import {
   Table,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Filters } from "@/components/table/filters";
 
 interface BansTableProps {
   page: number;

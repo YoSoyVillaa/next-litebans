@@ -1,14 +1,16 @@
 "use client"
 
-import { useState, useTransition } from "react"
-import { Input } from "../ui/input"
-import { PlayerAvatar } from "../avatar/player-avatar"
-import { useRouter } from "next/navigation"
-import { checkPlayer } from "@/actions/check-player"
 import { toast } from "sonner"
+import { useRouter } from "next/navigation"
+import { useState, useTransition } from "react"
+
 import { cn } from "@/lib/utils"
-import { useLang } from "@/lib/language/components/LanguageProvider"
 import { siteConfig } from "@config/site"
+import { checkPlayer } from "@/actions/check-player"
+import { useLang } from "@/lib/language/components/language-provider"
+
+import { Input } from "@/components/ui/input"
+import { PlayerAvatar } from "@/components/avatar/player-avatar"
 
 export const PlayerInput = () => {
   const [playerName, setPlayerName] = useState("")

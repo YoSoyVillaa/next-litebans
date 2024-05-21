@@ -1,13 +1,13 @@
 import { getKicks, sanitizeKicks } from "@/lib/punishment/kick";
 
-import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
+import { AvatarName } from "@/components/table/avatar-name";
 import { PunishmentInfoButton } from "@/components/buttons/punishment-info-button";
+import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 import {
   TableBody,
   TableCell,
   TableRow,
 } from "@/components/ui/table"
-import { AvatarName } from "@/components/table/avatar-name";
 
 interface KicksBodyDataProps {
   language: string;

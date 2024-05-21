@@ -1,9 +1,11 @@
+import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { language } from "@/lib/language/dictionaries";
 import p from "@/lib/language/utils/parse";
 import q from "@/lib/language/utils/quantity";
+import { language } from "@/lib/language/dictionaries";
+import { getPage, getStaff } from "@/utils/searchParams";
 import { 
   getPlayerBanCount, 
   getPlayerByName, 
@@ -12,12 +14,9 @@ import {
   getPlayerWarnCount 
 } from "@/lib/punishment/player";
 
-import { getPage, getStaff } from "@/utils/searchParams";
-
-import { HistoryTable } from "@/components/punishments/history/history-table";
-import { Icons } from "@/components/layout/icons";
 import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
+import { Icons } from "@/components/layout/icons";
+import { HistoryTable } from "@/components/punishments/history/history-table";
 
 export async function generateMetadata({ params }: { params: { player: string } }) {
   

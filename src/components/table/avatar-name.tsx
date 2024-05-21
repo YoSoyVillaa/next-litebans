@@ -1,10 +1,11 @@
 "use client"
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
-import { PlayerAvatar } from "../avatar/player-avatar";
-import { ConsoleAvatar } from "../avatar/console-avatar";
+import { usePathname, useSearchParams } from "next/navigation";
+
+import { PlayerAvatar } from "@/components/avatar/player-avatar";
+import { ConsoleAvatar } from "@/components/avatar/console-avatar";
 
 interface AvatarName {
   query: "player" | "staff";

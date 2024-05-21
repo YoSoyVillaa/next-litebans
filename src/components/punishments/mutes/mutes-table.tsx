@@ -2,9 +2,10 @@
 
 import { Suspense } from "react";
 
-import { language } from "@/lib/language/dictionaries";
 import { getMuteCount } from "@/lib/punishment/mute";
+import { language } from "@/lib/language/dictionaries";
 
+import { Filters } from "@/components/table/filters";
 import { TablePagination } from "@/components/table/pagination";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { MutesBodySkeleton } from "@/components/punishments/mutes/mutes-body-skeleton";
@@ -15,7 +16,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Filters } from "@/components/table/filters";
 
 interface MutesTableProps {
   page: number;

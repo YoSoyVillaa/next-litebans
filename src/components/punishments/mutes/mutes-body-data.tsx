@@ -1,17 +1,15 @@
-import Link from "next/link";
-
 import { Dictionary } from "@/lib/language/types";
 import { getMutes, sanitizeMutes } from "@/lib/punishment/mute";
 
-import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
+import { AvatarName } from "@/components/table/avatar-name";
 import { PunishmentInfoButton } from "@/components/buttons/punishment-info-button";
 import { PunishmentStatusDot } from "@/components/punishments/punishment-status-dot";
+import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 import {
   TableBody,
   TableCell,
   TableRow,
 } from "@/components/ui/table"
-import { AvatarName } from "@/components/table/avatar-name";
 
 interface MutesBodyDataProps {
   language: string;

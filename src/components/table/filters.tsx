@@ -1,6 +1,7 @@
-import { getPlayerName } from "@/lib/punishment/punishment";
-import { PlayerFilter } from "./player-filter";
 import { siteConfig } from "@config/site";
+import { getPlayerName } from "@/lib/punishment/punishment";
+
+import { PlayerFilter } from "./player-filter";
 
 interface FiltersProps {
   player?: string;

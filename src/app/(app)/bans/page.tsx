@@ -1,12 +1,11 @@
-import { language } from "@/lib/language/dictionaries";
-import { getBanCount } from "@/lib/punishment/ban";
-import p from "@/lib/language/utils/parse";
-
 import { SearchParams } from "@/types";
+import p from "@/lib/language/utils/parse";
+import { getBanCount } from "@/lib/punishment/ban";
+import { language } from "@/lib/language/dictionaries";
 
 import { DefaultPage } from "@/components/layout/default-page";
-import { BansTable } from "@/components/punishments/bans/bans-table";
 import { getPage, getPlayer, getStaff } from "@/utils/searchParams";
+import { BansTable } from "@/components/punishments/bans/bans-table";
 
 export async function generateMetadata() {
   

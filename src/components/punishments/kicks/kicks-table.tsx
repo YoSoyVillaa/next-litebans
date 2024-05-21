@@ -2,8 +2,10 @@
 
 import { Suspense } from "react";
 
+import { getKickCount } from "@/lib/punishment/kick";
 import { language } from "@/lib/language/dictionaries";
 
+import { Filters } from "@/components/table/filters";
 import { TablePagination } from "@/components/table/pagination";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { KicksBodySkeleton } from "@/components/punishments/kicks/kicks-body-skeleton";
@@ -14,8 +16,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { getKickCount } from "@/lib/punishment/kick";
-import { Filters } from "@/components/table/filters";
 
 interface KicksTableProps {
   page: number;

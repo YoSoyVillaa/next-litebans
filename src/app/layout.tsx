@@ -1,11 +1,14 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
+
+import { Inter } from "next/font/google";
+
+import { siteConfig } from "@config/site";
 import { language } from "@/lib/language/dictionaries";
+import { LanguageProvider } from "@/lib/language/components/language-provider";
+
+import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { SiteHeader } from "@/components/layout/header/site-header";
-import { siteConfig } from "@config/site";
-import { LanguageProvider } from "@/lib/language/components/LanguageProvider";
-import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 

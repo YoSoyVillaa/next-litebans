@@ -1,9 +1,11 @@
 "use client";
 
-import { DefaultPage } from "@/components/layout/default-page";
-import { Button } from "@/components/ui/button"
-import { useLang } from "@/lib/language/components/LanguageProvider";
 import { useRouter } from "next/navigation";
+
+import { useLang } from "@/lib/language/components/language-provider";
+
+import { Button } from "@/components/ui/button"
+import { DefaultPage } from "@/components/layout/default-page";
 
 export const NotFound = () => {
   const router = useRouter();
@@ -12,7 +14,6 @@ export const NotFound = () => {
   const handleBack = () => {
     router.push("/");
   }
-
 
   return (
     <DefaultPage

@@ -2,20 +2,20 @@
 
 import { Suspense } from "react";
 
-import { getPunishmentCount } from "@/lib/punishment/punishment";
 import { language } from "@/lib/language/dictionaries";
+import { getPunishmentCount } from "@/lib/punishment/punishment";
 
+import { Filters } from "@/components/table/filters";
 import { TablePagination } from "@/components/table/pagination";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { HistoryBodySkeleton } from "@/components/punishments/history/history-body-skeleton";
 import { HistoryBodyData } from "@/components/punishments/history/history-body-data";
+import { HistoryBodySkeleton } from "@/components/punishments/history/history-body-skeleton";
 import {
   Table,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Filters } from "@/components/table/filters";
 
 interface HistoryTableProps {
   page: number;

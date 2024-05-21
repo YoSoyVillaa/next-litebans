@@ -5,15 +5,14 @@ import Link, { LinkProps } from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 
 import { cn } from "@/lib/utils"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
-import { WebsiteLogo } from "@/components/images/website-logo"
+import { useLang } from "@/lib/language/components/language-provider"
+
 import { siteConfig } from "@config/site"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { useLang } from "@/lib/language/components/LanguageProvider"
 import { Badge } from "@/components/ui/badge"
-import { LanguageChanger } from "@/lib/language/components/LanguageChanger"
-import { ThemeToggle } from "@/components/theme/theme-toggle"
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { WebsiteLogo } from "@/components/images/website-logo"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 interface MobileNavProps {
   dictionaries: Record<string, any>,

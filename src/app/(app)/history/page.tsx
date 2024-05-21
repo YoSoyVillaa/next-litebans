@@ -1,12 +1,11 @@
-import { language } from "@/lib/language/dictionaries";
-import p from "@/lib/language/utils/parse";
-
 import { SearchParams } from "@/types";
+import p from "@/lib/language/utils/parse";
+import { language } from "@/lib/language/dictionaries";
+import { getPunishmentCount } from "@/lib/punishment/punishment";
+import { getPage, getPlayer, getStaff } from "@/utils/searchParams";
 
 import { DefaultPage } from "@/components/layout/default-page";
 import { HistoryTable } from "@/components/punishments/history/history-table";
-import { getPage, getPlayer, getStaff } from "@/utils/searchParams";
-import { getPunishmentCount } from "@/lib/punishment/punishment";
 
 export async function generateMetadata() {
   

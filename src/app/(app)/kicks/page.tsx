@@ -1,12 +1,11 @@
-import { language } from "@/lib/language/dictionaries";
-import { getKickCount } from "@/lib/punishment/kick";
-import p from "@/lib/language/utils/parse";
-
 import { SearchParams } from "@/types";
+import p from "@/lib/language/utils/parse";
+import { getKickCount } from "@/lib/punishment/kick";
+import { language } from "@/lib/language/dictionaries";
 
 import { DefaultPage } from "@/components/layout/default-page";
-import { KicksTable } from "@/components/punishments/kicks/kicks-table";
 import { getPage, getPlayer, getStaff } from "@/utils/searchParams";
+import { KicksTable } from "@/components/punishments/kicks/kicks-table";
 
 export async function generateMetadata() {
   

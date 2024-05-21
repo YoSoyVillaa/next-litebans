@@ -1,5 +1,6 @@
-import { cn } from "@/lib/utils";
 import Balance from "react-wrap-balancer";
+
+import { cn } from "@/lib/utils";
 
 interface DefaultPageProps {
   title: string;

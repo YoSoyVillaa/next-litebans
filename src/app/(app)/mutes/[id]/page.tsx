@@ -1,18 +1,18 @@
 import { notFound } from "next/navigation";
 
-import { PiScrollFill } from "react-icons/pi";
 import { IoCalendar } from "react-icons/io5";
-import { PiClockCountdownBold } from "react-icons/pi";
+import { PiScrollFill } from "react-icons/pi";
 import { FaEarthEurope } from "react-icons/fa6";
+import { PiClockCountdownBold } from "react-icons/pi";
 
-import { language } from "@/lib/language/dictionaries";
-import { getMute } from "@/lib/punishment/mute";
 import p from "@/lib/language/utils/parse";
+import { getMute } from "@/lib/punishment/mute";
+import { language } from "@/lib/language/dictionaries";
 
 import { Badge } from "@/components/ui/badge";
+import { PunishmentInfoCard } from "@/components/info/punishment-info-card";
 import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 import { PunishmentStatusDot } from "@/components/punishments/punishment-status-dot";
-import { PunishmentInfoCard } from "@/components/info/punishment-info-card";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   

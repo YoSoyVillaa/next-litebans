@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Dictionary } from "@/lib/language/types"
 
 import { 
@@ -6,7 +7,6 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
 
 interface PunishmentStatusDotProps {
   dictionary: Dictionary

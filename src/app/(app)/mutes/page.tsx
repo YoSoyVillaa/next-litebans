@@ -1,12 +1,11 @@
-import { language } from "@/lib/language/dictionaries";
-import { getMuteCount } from "@/lib/punishment/mute";
-import p from "@/lib/language/utils/parse";
-
 import { SearchParams } from "@/types";
+import p from "@/lib/language/utils/parse";
+import { getMuteCount } from "@/lib/punishment/mute";
+import { language } from "@/lib/language/dictionaries";
+import { getPage, getPlayer, getStaff } from "@/utils/searchParams";
 
 import { DefaultPage } from "@/components/layout/default-page";
 import { MutesTable } from "@/components/punishments/mutes/mutes-table";
-import { getPage, getPlayer, getStaff } from "@/utils/searchParams";
 
 export async function generateMetadata() {
   

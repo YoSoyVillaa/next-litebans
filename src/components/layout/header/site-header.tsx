@@ -1,10 +1,12 @@
-import { ThemeToggle } from "@/components/theme/theme-toggle";
-import { LanguageChanger } from "@/lib/language/components/LanguageChanger";
+import { LanguageChanger } from "@/lib/language/components/language-changer";
 import { getDictionaries } from "@/lib/language/dictionaries";
-import { MainNav } from "./main-nav";
 import { getPunishmentCount } from "@/lib/punishment/punishment";
+
+import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { PlayerInput } from "@/components/input/player-lookup";
+
+import { MainNav } from "./main-nav";
 import { MobileNav } from "./mobile-nav";
-import { PlayerInput } from "@/components/input/PlayerLookup";
 
 export const SiteHeader = async () => {
   const dictionaries = getDictionaries();

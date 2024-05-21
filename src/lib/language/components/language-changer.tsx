@@ -1,7 +1,7 @@
 "use client"
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { useLang } from "./LanguageProvider";
+import { useLang } from "./language-provider";
 import { Button } from "@/components/ui/button";
 import ReactCountryFlag from "react-country-flag";
 import { siteConfig } from "@config/site";

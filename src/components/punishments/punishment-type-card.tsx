@@ -1,5 +1,10 @@
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+
+import { 
+  Card, 
+  CardContent, 
+  CardTitle 
+} from "@/components/ui/card";
 
 interface PunishmentTypeCardProps {
   title: string;

@@ -1,14 +1,17 @@
 "use client"
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
-import { Button } from "../ui/button";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
 import { CrossCircledIcon } from "@radix-ui/react-icons";
-import { useLang } from "@/lib/language/components/LanguageProvider";
-import { Separator } from "../ui/separator";
-import { Badge } from "../ui/badge";
-import { PlayerAvatar } from "../avatar/player-avatar";
-import { ConsoleAvatar } from "../avatar/console-avatar";
+
+import { useLang } from "@/lib/language/components/language-provider";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { PlayerAvatar } from "@/components/avatar/player-avatar";
+import { ConsoleAvatar } from "@/components/avatar/console-avatar";
 
 interface PlayerFilter {
   type: "player" | "staff";

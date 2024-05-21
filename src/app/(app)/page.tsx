@@ -1,14 +1,15 @@
-import { language } from "@/lib/language/dictionaries";
 import { db } from "@/lib/db";
-import { DefaultPage } from "@/components/layout/default-page";
+import { SearchParams } from "@/types";
 import { siteConfig } from "@config/site";
 import p from "@/lib/language/utils/parse";
 import q from "@/lib/language/utils/quantity";
-import { PunishmentTypeCard } from "@/components/punishments/punishment-type-card";
-import { Icons } from "@/components/layout/icons";
-import { HistoryTable } from "@/components/punishments/history/history-table";
-import { SearchParams } from "@/types";
+import { language } from "@/lib/language/dictionaries";
 import { getPage, getPlayer, getStaff } from "@/utils/searchParams";
+
+import { Icons } from "@/components/layout/icons";
+import { DefaultPage } from "@/components/layout/default-page";
+import { HistoryTable } from "@/components/punishments/history/history-table";
+import { PunishmentTypeCard } from "@/components/punishments/punishment-type-card";
 
 export async function generateMetadata() {
   

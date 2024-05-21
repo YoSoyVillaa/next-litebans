@@ -1,15 +1,15 @@
 import { notFound } from "next/navigation";
 
-import { PiScrollFill } from "react-icons/pi";
 import { IoCalendar } from "react-icons/io5";
+import { PiScrollFill } from "react-icons/pi";
 import { FaEarthEurope } from "react-icons/fa6";
 
-import { language } from "@/lib/language/dictionaries";
-import { getKick } from "@/lib/punishment/kick";
 import p from "@/lib/language/utils/parse";
+import { getKick } from "@/lib/punishment/kick";
+import { language } from "@/lib/language/dictionaries";
 
-import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 import { PunishmentInfoCard } from "@/components/info/punishment-info-card";
+import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   

@@ -1,20 +1,16 @@
-import Link from "next/link";
-
 import { Dictionary } from "@/lib/language/types";
 import { getPunishments, sanitizePunishments } from "@/lib/punishment/punishment";
 
-import { PlayerAvatar } from "@/components/avatar/player-avatar";
-import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
+import { Badge } from "@/components/ui/badge";
+import { AvatarName } from "@/components/table/avatar-name";
 import { PunishmentInfoButton } from "@/components/buttons/punishment-info-button";
 import { PunishmentStatusDot } from "@/components/punishments/punishment-status-dot";
-import { ConsoleAvatar } from "@/components/avatar/console-avatar";
-import { Badge } from "@/components/ui/badge";
+import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 import {
   TableBody,
   TableCell,
   TableRow,
 } from "@/components/ui/table"
-import { AvatarName } from "@/components/table/avatar-name";
 
 interface HistoryBodyDataProps {
   language: string;
