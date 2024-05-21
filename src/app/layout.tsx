@@ -36,6 +36,9 @@ export default async function RootLayout({
   return (
     <LanguageProvider lang={lang} dictionary={dictionary} defaultLang={siteConfig.languages.default}>
       <html lang={lang}>
+        <head>
+          <link rel="shortcut icon" href={siteConfig.favicon} />
+        </head>
         <body className={inter.className}>
           <ThemeProvider
             attribute="class"

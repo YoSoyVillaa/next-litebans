@@ -1,8 +1,12 @@
-# next-litebans
+<div align="center">
+  <img style="width:100px;" src="https://cdn.yosoyvillaa.dev/uploads/next-litebans.png" alt="MelodyMine Logo">
 
-A web interface for [LiteBans](https://www.spigotmc.org/resources/litebans.3715/), built on top of:
+  <h1 style="font-size: 38px">next-litebans </h1>
 
-[![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/) [![Prisma](https://img.shields.io/badge/Prisma-black?style=for-the-badge&logo=prisma&logoColor=white)](https://prisma.io/) [![shadcn/ui](https://cdn.yosoyvillaa.dev/uploads/shadcn.svg)](https://ui.shadcn.com/)
+  A web interface for [LiteBans](https://www.spigotmc.org/resources/litebans.3715/), built on top of:
+
+  [![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/) [![Prisma](https://img.shields.io/badge/Prisma-black?style=for-the-badge&logo=prisma&logoColor=white)](https://prisma.io/) [![shadcn/ui](https://cdn.yosoyvillaa.dev/uploads/shadcn.svg)](https://ui.shadcn.com/)
+</div>
 
 ## 👾 Demo
 
@@ -28,7 +32,7 @@ You can view a demo of the project [here](https://yosoyvillaa.dev/).
 
 ### PostgresSQL Configuration
 
-If you are using PostgreSQL, you need to delete all **models** in the `prisma/schema.prisma` and change the `provider` to `postgresql`, or replace the file content wuth:
+If you are using PostgreSQL, you need to delete all the **models** in the `prisma/schema.prisma` file and change the `provider` to `postgresql`, or replace the file content with:
 
 ```prisma
 generator client {
