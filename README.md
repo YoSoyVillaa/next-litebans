@@ -19,8 +19,8 @@ You can view a demo of the project [here](https://yosoyvillaa.dev/).
 
 1. Clone the repository with `git clone https://github.com/YoSoyVillaa/next-litebans.git`
 2. Install the dependencies with `npm install`
-3. If you are using PostgreSQL, check [PostgresSQL Configuration](#PostgresSQL-Configuration)
-4. Copy the `.env.example` file to `.env` and fill in the required fields
+3. Copy the `.env.example` file to `.env` and fill in the required fields
+4. If you are using PostgreSQL, check [PostgresSQL Configuration](#PostgresSQL-Configuration)
 5. Config the website ([configuration](#%EF%B8%8F-configuration))
 6. Run `npm run setup:db:generate` to generate the Prisma client
 7. Run `npm run build` to build the project

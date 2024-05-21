@@ -47,6 +47,7 @@ const sanitizeKicks = async (kicks: PunishmentListItem[]) => {
       id: kick.id.toString(),
       time: new Date(parseInt(kick.time.toString())),
       console: kick.banned_by_uuid === "[Console]",
+      active: Boolean(kick.active),
       name
     }
   }));

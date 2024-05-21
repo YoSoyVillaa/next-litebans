@@ -14,7 +14,7 @@ const getBanCount = async (player?: string, staff?: string) => {
 }
 
 const getBans = async (page: number, player?: string, staff?: string) => {
-  const bans =  await db.litebans_bans.findMany({
+  const bans =  (await db.litebans_bans.findMany({
     where: {
       uuid: player,
       banned_by_uuid: staff
@@ -34,7 +34,7 @@ const getBans = async (page: number, player?: string, staff?: string) => {
     orderBy: {
       time: "desc"
     }
-  });
+  })).map((ban) => ({...ban, active: Boolean(ban.active)}));
 
   return bans;
 }
@@ -53,6 +53,7 @@ const sanitizeBans = async (dictionary: Dictionary, bans: PunishmentListItem[]) 
                 (until < new Date() ? false : undefined),
       console: ban.banned_by_uuid === "[Console]",
       permanent: until == dictionary.table.permanent,
+      active: Boolean(ban.active),
       until,
       name,
     }
@@ -84,7 +85,7 @@ const getBan = async (id: number, dictionary: Dictionary) => {
     return null;
   }
   
-  const sanitized = (await sanitizeBans(dictionary, [ban]))[0];
+  const sanitized = (await sanitizeBans(dictionary, [{...ban, active: Boolean(ban.active)}]))[0];
 
   return {
     ...sanitized,

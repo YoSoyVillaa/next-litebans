@@ -53,6 +53,7 @@ const sanitizeMutes = async (dictionary: Dictionary, mutes: PunishmentListItem[]
                 (until < new Date() ? false : undefined),
       console: mute.banned_by_uuid === "[Console]",
       permanent: until == dictionary.table.permanent,
+      active: Boolean(mute.active),
       until,
       name
     }

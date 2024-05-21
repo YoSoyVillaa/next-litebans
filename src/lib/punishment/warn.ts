@@ -39,7 +39,7 @@ const getWarns = async (page: number, player?: string, staff?: string) => {
   return warns;
 }
 
-const sanitizeWarns = async (warns: (PunishmentListItem & { warned: boolean})[]) => {
+const sanitizeWarns = async (warns: (PunishmentListItem & { warned: boolean | string})[]) => {
 
   const sanitized = await Promise.all(warns.map(async (warn) => {
     const name = await getPlayerName(warn.uuid!);
@@ -48,6 +48,8 @@ const sanitizeWarns = async (warns: (PunishmentListItem & { warned: boolean})[])
       id: warn.id.toString(),
       time: new Date(parseInt(warn.time.toString())),
       console: warn.banned_by_uuid === "[Console]",
+      active: Boolean(warn.active),
+      warned: Boolean(warn.warned),
       name
     }
   }));
