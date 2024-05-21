@@ -54,4 +54,34 @@ const sanitizeKicks = async (kicks: PunishmentListItem[]) => {
   return sanitized;
 }
 
-export { getKickCount, getKicks, sanitizeKicks }
+const getKick = async (id: number) => {
+  const kick = await db.litebans_warnings.findUnique({
+    where: {
+      id
+    },
+    select: {
+      id: true,
+      uuid: true,
+      banned_by_name: true,
+      banned_by_uuid: true,
+      reason: true,
+      time: true,
+      until: true,
+      active: true,
+      server_origin: true,
+    }
+  });
+
+  if (!kick) {
+    return null;
+  }
+  
+  const sanitized = (await sanitizeKicks([kick]))[0];
+
+  return {
+    ...sanitized,
+    server: kick.server_origin
+  }
+}
+
+export { getKickCount, getKicks, sanitizeKicks, getKick }

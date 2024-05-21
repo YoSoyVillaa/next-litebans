@@ -23,8 +23,15 @@ const language = {
       singular: "Aviso",
       plural: "Avisos"
     },
+    yes: "Sí",
+    no: "No",
     player: "Jugador",
     staff: "Staff",
+    reason: "Razón",
+    date: "Fecha",
+    expires: "Expiración",
+    originServer: "Servidor de origen",
+    notified: "Notificado",
   },
   pages: {
     home: {
@@ -72,6 +79,15 @@ const language = {
           temporal: "Temporal",
           false: "Expirado"
         }
+      },
+      info: {
+        title: "Baneo #{id}",
+        badges: {
+          ipban: "Baneo de IP",
+          active: "Activo",
+          expired: "Expirado",
+          permanent: "Permanente",
+        }
       }
     },
     mutes: {
@@ -92,6 +108,15 @@ const language = {
           temporal: "Temporal",
           false: "Expirado"
         }
+      },
+      info: {
+        title: "Muteo #{id}",
+        badges: {
+          ipmute: "Muteo de IP",
+          active: "Activo",
+          expired: "Expirado",
+          permanent: "Permanente",
+        }
       }
     },
     warns: {
@@ -106,6 +131,9 @@ const language = {
           date: "Fecha",
           notified: "Notificado"
         }
+      },
+      info: {
+        title: "Aviso #{id}"
       }
     },
     kicks: {
@@ -119,6 +147,9 @@ const language = {
           reason: "Razón",
           date: "Fecha"
         }
+      },
+      info: {
+        title: "Expulsión #{id}"
       }
     },
     playerHistory: {

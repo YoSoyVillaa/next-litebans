@@ -52,6 +52,7 @@ const sanitizeMutes = async (dictionary: Dictionary, mutes: PunishmentListItem[]
                 (mute.active ? true : false) : 
                 (until < new Date() ? false : undefined),
       console: mute.banned_by_uuid === "[Console]",
+      permanent: until == dictionary.table.permanent,
       until,
       name
     }
@@ -60,4 +61,36 @@ const sanitizeMutes = async (dictionary: Dictionary, mutes: PunishmentListItem[]
   return sanitized;
 }
 
-export { getMuteCount, getMutes, sanitizeMutes }
+const getMute = async (id: number, dictionary: Dictionary) => {
+  const mute = await db.litebans_mutes.findUnique({
+    where: {
+      id
+    },
+    select: {
+      id: true,
+      uuid: true,
+      banned_by_name: true,
+      banned_by_uuid: true,
+      reason: true,
+      time: true,
+      until: true,
+      ipban: true,
+      active: true,
+      server_origin: true
+    }
+  });
+
+  if (!mute) {
+    return null;
+  }
+  
+  const sanitized = (await sanitizeMutes(dictionary, [mute]))[0];
+
+  return {
+    ...sanitized,
+    ipban: mute.ipban,
+    server: mute.server_origin
+  }
+}
+
+export { getMuteCount, getMutes, sanitizeMutes, getMute }

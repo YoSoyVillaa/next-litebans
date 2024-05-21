@@ -52,12 +52,45 @@ const sanitizeBans = async (dictionary: Dictionary, bans: PunishmentListItem[]) 
                 (ban.active ? true : false) : 
                 (until < new Date() ? false : undefined),
       console: ban.banned_by_uuid === "[Console]",
+      permanent: until == dictionary.table.permanent,
       until,
-      name
+      name,
     }
   }));
 
   return sanitized;
 }
 
-export { getBanCount, getBans, sanitizeBans }
+const getBan = async (id: number, dictionary: Dictionary) => {
+  const ban = await db.litebans_bans.findUnique({
+    where: {
+      id
+    },
+    select: {
+      id: true,
+      uuid: true,
+      banned_by_name: true,
+      banned_by_uuid: true,
+      reason: true,
+      time: true,
+      until: true,
+      ipban: true,
+      active: true,
+      server_origin: true
+    }
+  });
+
+  if (!ban) {
+    return null;
+  }
+  
+  const sanitized = (await sanitizeBans(dictionary, [ban]))[0];
+
+  return {
+    ...sanitized,
+    ipban: ban.ipban,
+    server: ban.server_origin
+  }
+}
+
+export { getBanCount, getBans, sanitizeBans, getBan }

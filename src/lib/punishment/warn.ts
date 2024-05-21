@@ -55,4 +55,35 @@ const sanitizeWarns = async (warns: (PunishmentListItem & { warned: boolean})[])
   return sanitized;
 }
 
-export { getWarnCount, getWarns, sanitizeWarns }
+const getWarn = async (id: number) => {
+  const warn = await db.litebans_warnings.findUnique({
+    where: {
+      id
+    },
+    select: {
+      id: true,
+      uuid: true,
+      banned_by_name: true,
+      banned_by_uuid: true,
+      reason: true,
+      time: true,
+      until: true,
+      active: true,
+      server_origin: true,
+      warned: true
+    }
+  });
+
+  if (!warn) {
+    return null;
+  }
+  
+  const sanitized = (await sanitizeWarns([warn]))[0];
+
+  return {
+    ...sanitized,
+    server: warn.server_origin
+  }
+}
+
+export { getWarnCount, getWarns, sanitizeWarns, getWarn }

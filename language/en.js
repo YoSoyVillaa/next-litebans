@@ -23,8 +23,15 @@ const language = {
       singular: "Warn",
       plural: "Warns"
     },
+    yes: "Yes",
+    no: "No",
     player: "Player",
     staff: "Staff",
+    reason: "Reason",
+    date: "Date",
+    expires: "Expires",
+    originServer: "Origin server",
+    notified: "Notified",
   },
   pages: {
     home: {
@@ -72,6 +79,15 @@ const language = {
           temporal: "Temporal",
           false: "Expired"
         }
+      },
+      info: {
+        title: "Ban #{id}",
+        badges: {
+          ipban: "IP Ban",
+          active: "Active",
+          expired: "Expired",
+          permanent: "Permanent",
+        }
       }
     },
     mutes: {
@@ -92,6 +108,15 @@ const language = {
           temporal: "Temporal",
           false: "Expired"
         }
+      },
+      info: {
+        title: "Mute #{id}",
+        badges: {
+          ipmute: "IP Mute",
+          active: "Active",
+          expired: "Expired",
+          permanent: "Permanent",
+        }
       }
     },
     warns: {
@@ -106,6 +131,9 @@ const language = {
           date: "Date",
           notified: "Notified"
         },
+      },
+      info: {
+        title: "Warn #{id}"
       }
     },
     kicks: {
@@ -119,6 +147,9 @@ const language = {
           reason: "Reason",
           date: "Date"
         }
+      },
+      info: {
+        title: "Kick #{id}"
       }
     },
     playerHistory: {
