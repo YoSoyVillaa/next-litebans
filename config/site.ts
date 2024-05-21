@@ -9,6 +9,7 @@ export const siteConfig = {
     default: "en",
   },
   console: {
+    name: "Console", // Just for filter badge
     icon: "/console.webp",
     body: "/console-body.webp",
     bust: "/console-bust.webp",

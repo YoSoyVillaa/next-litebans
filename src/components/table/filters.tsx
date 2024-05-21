@@ -1,5 +1,6 @@
 import { getPlayerName } from "@/lib/punishment/punishment";
 import { PlayerFilter } from "./player-filter";
+import { siteConfig } from "@config/site";
 
 interface FiltersProps {
   player?: string;
@@ -15,7 +16,8 @@ export const Filters = async ({ player, staff }: FiltersProps) => {
 
   let staffName;
   if (staff) {
-    staffName = await getPlayerName(staff);
+    if (staff === "[Console]") staffName = siteConfig.console.name;
+    else staffName = await getPlayerName(staff);
   }
   
   return (
