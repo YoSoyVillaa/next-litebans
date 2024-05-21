@@ -34,7 +34,7 @@ const getBans = async (page: number, player?: string, staff?: string) => {
     orderBy: {
       time: "desc"
     }
-  })).map((ban) => ({...ban, active: Boolean(ban.active)}));
+  }));
 
   return bans;
 }
@@ -44,16 +44,17 @@ const sanitizeBans = async (dictionary: Dictionary, bans: PunishmentListItem[]) 
   const sanitized = await Promise.all(bans.map(async (ban) => {
     const name = await getPlayerName(ban.uuid!);
     const until = ban.until.toString() === "0" ? dictionary.table.permanent : new Date(parseInt(ban.until.toString()));
+    const active = typeof ban.active === "boolean" ? ban.active : ban.active === "1";
     return {
       ...ban,
       id: ban.id.toString(),
       time: new Date(parseInt(ban.time.toString())),
       status: until == dictionary.table.permanent ? 
-                (ban.active ? true : false) : 
-                (until < new Date() ? false : undefined),
+                active : 
+                until < new Date() ? false : undefined,
       console: ban.banned_by_uuid === "[Console]",
       permanent: until == dictionary.table.permanent,
-      active: Boolean(ban.active),
+      active,
       until,
       name,
     }
@@ -85,7 +86,7 @@ const getBan = async (id: number, dictionary: Dictionary) => {
     return null;
   }
   
-  const sanitized = (await sanitizeBans(dictionary, [{...ban, active: Boolean(ban.active)}]))[0];
+  const sanitized = (await sanitizeBans(dictionary, [ban]))[0];
 
   return {
     ...sanitized,

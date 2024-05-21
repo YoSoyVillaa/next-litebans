@@ -44,16 +44,17 @@ const sanitizeMutes = async (dictionary: Dictionary, mutes: PunishmentListItem[]
   const sanitized = await Promise.all(mutes.map(async (mute) => {
     const name = await getPlayerName(mute.uuid!);
     const until = mute.until.toString() === "0" ? dictionary.table.permanent : new Date(parseInt(mute.until.toString()));
+    const active = typeof mute.active === "boolean" ? mute.active : mute.active === "1";
     return {
       ...mute,
       id: mute.id.toString(),
       time: new Date(parseInt(mute.time.toString())),
       status: until == dictionary.table.permanent ? 
-                (mute.active ? true : false) : 
+                (active ? true : false) : 
                 (until < new Date() ? false : undefined),
       console: mute.banned_by_uuid === "[Console]",
       permanent: until == dictionary.table.permanent,
-      active: Boolean(mute.active),
+      active,
       until,
       name
     }

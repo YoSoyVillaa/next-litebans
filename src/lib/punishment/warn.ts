@@ -48,8 +48,8 @@ const sanitizeWarns = async (warns: (PunishmentListItem & { warned: boolean | st
       id: warn.id.toString(),
       time: new Date(parseInt(warn.time.toString())),
       console: warn.banned_by_uuid === "[Console]",
-      active: Boolean(warn.active),
-      warned: Boolean(warn.warned),
+      active: typeof warn.active === "boolean" ? warn.active : warn.active === "1",
+      warned: typeof warn.warned === "boolean" ? warn.warned : warn.warned === "1",
       name
     }
   }));
