@@ -56,7 +56,7 @@ const sanitizeKicks = async (kicks: PunishmentListItem[]) => {
 }
 
 const getKick = async (id: number) => {
-  const kick = await db.litebans_warnings.findUnique({
+  const kick = await db.litebans_kicks.findUnique({
     where: {
       id
     },
