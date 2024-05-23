@@ -25,7 +25,7 @@ export const PunishmentInfoCard = async ({ punishment, children }: PunishmentInf
     <div className="flex space-x-4 md:space-y-0 md:flex-row">
       <div className="order-1 space-y-8">
         <h2 className="text-3xl font-bold text-center">{dictionary.words.player}</h2>
-        <Link href={`/history?player=${punishment.uuid}`} className="block">
+        <Link href={`/@${punishment.name}`} className="block">
           <AvatarBody 
             uuid={punishment.uuid!} 
             name={punishment.name!} 
