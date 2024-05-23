@@ -10,7 +10,9 @@
 
 ## 👾 Demo
 
-You can view a demo of the project [here](https://yosoyvillaa.dev/).
+You can view a demo of the project [here](https://next-litebans.yosoyvillaa.dev/). 
+
+_P.D: All punishments in the demo are randomly added to the database with a list of random premium player names as punished players, and with a predefined list of reasons._
 
 ## 🚀 Deployment
 
