@@ -19,7 +19,7 @@ export const RelativeTimeTooltip = ({
   <TooltipProvider delayDuration={50}>
     <Tooltip>
       <TooltipTrigger asChild>
-        <span className="cursor-default">{time.toLocaleString()}</span>
+        <span className="cursor-default">{time.toLocaleString(lang)}</span>
       </TooltipTrigger>
       <TooltipContent className={time instanceof Date ? "" : "hidden"}>
         {time instanceof Date && (
