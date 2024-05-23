@@ -65,7 +65,7 @@ export default async function Ban({
           {ban.active && (
             <Badge variant="secondary">{localDictionary.info.badges.active}</Badge>
           )}
-          {(!ban.status) && (
+          {(ban.status !== undefined && !ban.status) && (
             <Badge variant="secondary">{localDictionary.info.badges.expired}</Badge>
           )}
           {(ban.permanent && ban.status) && (

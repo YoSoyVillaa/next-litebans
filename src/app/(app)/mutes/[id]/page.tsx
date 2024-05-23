@@ -65,7 +65,7 @@ export default async function Mute({
           {mute.active && (
             <Badge variant="secondary">{localDictionary.info.badges.active}</Badge>
           )}
-          {(!mute.status) && (
+          {(mute.status !== undefined && !mute.status) && (
             <Badge variant="secondary">{localDictionary.info.badges.expired}</Badge>
           )}
           {(mute.permanent && mute.status) && (
