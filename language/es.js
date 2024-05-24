@@ -137,9 +137,9 @@ const language = {
       }
     },
     kicks: {
-      title: "Kicks",
+      title: "Expulsiones",
       // Placeholders: {total}
-      subtitle: "Kick count: {total}",
+      subtitle: "Expulsiones totales: {total}",
       table: {
         heads: {
           player: "Jugador",
