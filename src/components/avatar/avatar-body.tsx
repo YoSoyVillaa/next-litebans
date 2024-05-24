@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@config/site";
 
@@ -11,7 +9,8 @@ interface AvatarBodyProps {
 }
 
 export const AvatarBody = ({ name, uuid, console, className }: AvatarBodyProps) => (
-  <Image 
+  // eslint-disable-next-line @next/next/no-img-element
+  <img 
     src={console ? siteConfig.console.body : `https://skins.mcstats.com/body/front/${uuid}`} 
     alt={name}
     width={192}

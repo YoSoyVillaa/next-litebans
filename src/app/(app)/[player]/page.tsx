@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import p from "@/lib/language/utils/parse";
@@ -67,7 +66,8 @@ export default async function History({
   return (
     <div className="flex h-full flex-col items-center gap-4 py-8 md:py-12 md:pb-8 lg:py-18">
       <div className="space-y-2 md:flex md:space-x-4">
-        <Image 
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img 
           src={`https://skins.mcstats.com/bust/${player.uuid}`} 
           alt={playerName}
           width={192}
