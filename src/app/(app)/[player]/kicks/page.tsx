@@ -113,7 +113,7 @@ export default async function Kicks({
         </div>
       </div>
 
-      <section className="w-full lg:w-[761px]">
+      <section className="w-full lg:w-[1024px]">
         <KicksTable page={page} player={player.uuid!} staff={staff} />
       </section>
     </div>

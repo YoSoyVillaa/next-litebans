@@ -31,7 +31,7 @@ export default async function Bans(searchParams: SearchParams) {
       description={p(dictionary.subtitle, {
         total: banCount
       })}
-      className="w-full lg:w-[975px]"
+      className="w-full lg:w-[1024px]"
     >
       <BansTable page={page} player={player} staff={staff} />
     </DefaultPage>

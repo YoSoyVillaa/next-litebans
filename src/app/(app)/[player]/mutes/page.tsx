@@ -113,7 +113,7 @@ export default async function Mutes({
         </div>
       </div>
 
-      <section className="w-full lg:w-[975px]">
+      <section className="w-full lg:w-[1024px]">
         <MutesTable page={page} player={player.uuid!} staff={staff} />
       </section>
     </div>

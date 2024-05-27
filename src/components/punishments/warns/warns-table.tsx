@@ -42,11 +42,11 @@ export const WarnsTable = async ({
         <Table>
           <TableHeader>
             <TableRow className="bg-muted/50">
-              <TableHead className="text-center px-2">{localDictionary.table.heads.player}</TableHead>
-              <TableHead className="text-center px-2">{localDictionary.table.heads.by}</TableHead>
+              <TableHead className="text-center">{localDictionary.table.heads.player}</TableHead>
+              <TableHead className="text-center">{localDictionary.table.heads.by}</TableHead>
               <TableHead>{localDictionary.table.heads.reason}</TableHead>
               <TableHead>{localDictionary.table.heads.date}</TableHead>
-              <TableHead className="text-center px-2">{localDictionary.table.heads.notified}</TableHead>
+              <TableHead className="text-center">{localDictionary.table.heads.notified}</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>

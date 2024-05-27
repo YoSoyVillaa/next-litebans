@@ -73,4 +73,7 @@
   body {
     @apply bg-background text-foreground;
   }
+  td, th {
+    @apply !px-2;
+  }
 }

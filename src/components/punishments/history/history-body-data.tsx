@@ -36,24 +36,24 @@ export const HistoryBodyData = async ({
     <TableBody>
       {punishments.map((punishment) => (
         <TableRow key={`${punishment.type}:${punishment.id}`}>
-          <TableCell className="text-center w-24 px-0.5">
+          <TableCell className="text-center w-24 !px-0.5">
             <Badge variant={punishment.type} className="px-1">
               {dictionary.words[`${punishment.type!}s`].singular.toUpperCase()}
             </Badge>
           </TableCell>
-          <TableCell className="space-y-1 w-[7.5rem] text-center">
+          <TableCell className="space-y-1 w-[148px] text-center">
             <AvatarName query="player" name={punishment.name!} uuid={punishment.uuid!} />
           </TableCell>
-          <TableCell className="space-y-1 w-[122px] text-center">
+          <TableCell className="space-y-1 w-[148px] text-center">
             <AvatarName query="staff" name={punishment.banned_by_name!} uuid={punishment.banned_by_uuid!} console={punishment.console} />
           </TableCell>
-          <TableCell className="w-[200px]">
+          <TableCell className="w-[180px]">
             {punishment.reason}
           </TableCell>
           <TableCell className="w-[200px]">
             <RelativeTimeTooltip lang={language} time={punishment.time} />
           </TableCell>
-          <TableCell className="w-[216px]">
+          <TableCell className="w-[205px]">
             { (punishment.type == "ban" || punishment.type == "mute") ?
                 <p className="flex items-center">
                   <PunishmentStatusDot dictionary={localDictionary} status={punishment.status} />
@@ -62,7 +62,7 @@ export const HistoryBodyData = async ({
               : <p>{localDictionary.table.expire_not_applicable}</p>
             }
           </TableCell>
-          <TableCell className="w-[70px]">
+          <TableCell className="!pl-0 !pr-3">
             <PunishmentInfoButton type={punishment.type!} id={punishment.id} />
           </TableCell>
         </TableRow>

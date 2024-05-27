@@ -42,8 +42,8 @@ export const KicksTable = async ({
         <Table>
           <TableHeader>
             <TableRow className="bg-muted/50">
-              <TableHead className="text-center px-2">{localDictionary.table.heads.player}</TableHead>
-              <TableHead className="text-center px-2">{localDictionary.table.heads.by}</TableHead>
+              <TableHead className="text-center">{localDictionary.table.heads.player}</TableHead>
+              <TableHead className="text-center">{localDictionary.table.heads.by}</TableHead>
               <TableHead>{localDictionary.table.heads.reason}</TableHead>
               <TableHead>{localDictionary.table.heads.date}</TableHead>
               <TableHead></TableHead>

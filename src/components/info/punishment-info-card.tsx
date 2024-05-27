@@ -1,3 +1,5 @@
+"use server"
+
 import Link from "next/link";
 
 import { language } from "@/lib/language/dictionaries";

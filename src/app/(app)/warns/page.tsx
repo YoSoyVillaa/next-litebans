@@ -32,7 +32,7 @@ export default async function Warns(searchParams: SearchParams) {
       description={p(dictionary.subtitle, {
         total: warnCount
       })}
-      className="w-full lg:w-[876px]"
+      className="w-full lg:w-[1024px]"
     >
       <WarnsTable page={page} player={player} staff={staff} />
     </DefaultPage>

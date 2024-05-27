@@ -31,7 +31,7 @@ export default async function Kicks(searchParams: SearchParams) {
       description={p(dictionary.subtitle, {
         total: kickCount
       })}
-      className="w-full lg:w-[761px]"
+      className="w-full lg:w-[1024px]"
     >
       <KicksTable page={page} player={player} staff={staff} />
     </DefaultPage>

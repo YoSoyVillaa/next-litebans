@@ -31,7 +31,7 @@ export default async function Mutes(searchParams: SearchParams) {
       description={p(dictionary.subtitle, {
         total: muteCount
       })}
-      className="w-full lg:w-[975px]"
+      className="w-full lg:w-[1024px]"
     >
       <MutesTable page={page} player={player} staff={staff} />
     </DefaultPage>

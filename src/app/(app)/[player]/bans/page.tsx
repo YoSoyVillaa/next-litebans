@@ -113,7 +113,7 @@ export default async function Bans({
         </div>
       </div>
 
-      <section className="w-full lg:w-[975px]">
+      <section className="w-full lg:w-[1024px]">
         <BansTable page={page} player={player.uuid!} staff={staff} />
       </section>
     </div>

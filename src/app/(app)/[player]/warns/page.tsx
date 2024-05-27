@@ -113,7 +113,7 @@ export default async function Warns({
         </div>
       </div>
 
-      <section className="w-full lg:w-[876px]">
+      <section className="w-full lg:w-[1024px]">
         <WarnsTable page={page} player={player.uuid!} staff={staff} />
       </section>
     </div>
