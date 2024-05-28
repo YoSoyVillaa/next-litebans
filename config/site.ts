@@ -16,5 +16,10 @@ export const siteConfig = {
     bust: "/console-bust.webp",
   },
   defaultPlayerLookup: "YoSoyVilla",
+  // When enabled, body and bust images will show a steve skin
+  bedrock: {
+    enabled: false,
+    prefix: "BP_",
+  },
 }
 export type SiteConfig = typeof siteConfig;

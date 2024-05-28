@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@config/site";
+import { getSkinUUID } from "@/utils/bedrock";
 
 interface AvatarBodyProps {
   name: string;
@@ -11,7 +12,7 @@ interface AvatarBodyProps {
 export const AvatarBody = ({ name, uuid, console, className }: AvatarBodyProps) => (
   // eslint-disable-next-line @next/next/no-img-element
   <img 
-    src={console ? siteConfig.console.body : `https://skins.mcstats.com/body/front/${uuid}`} 
+    src={console ? siteConfig.console.body : `https://skins.mcstats.com/body/front/${getSkinUUID(name, uuid)}`} 
     alt={name}
     width={192}
     height={192}

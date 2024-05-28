@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import p from "@/lib/language/utils/parse";
 import q from "@/lib/language/utils/quantity";
+import { getSkinUUID } from "@/utils/bedrock";
 import { language } from "@/lib/language/dictionaries";
 import { getPage, getStaff } from "@/utils/searchParams";
 import { 
@@ -68,7 +69,7 @@ export default async function Kicks({
       <div className="space-y-2 md:flex md:space-x-4">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img 
-          src={`https://skins.mcstats.com/bust/${player.uuid}`} 
+          src={`https://skins.mcstats.com/bust/${getSkinUUID(playerName, player.uuid!)}`} 
           alt={playerName}
           width={192}
           height={192}

@@ -16,6 +16,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Icons } from "@/components/layout/icons";
 import { MutesTable } from "@/components/punishments/mutes/mutes-table";
+import { getSkinUUID } from "@/utils/bedrock";
 
 export async function generateMetadata({ params }: { params: { player: string } }) {
   
@@ -68,7 +69,7 @@ export default async function Mutes({
       <div className="space-y-2 md:flex md:space-x-4">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img 
-          src={`https://skins.mcstats.com/bust/${player.uuid}`} 
+          src={`https://skins.mcstats.com/bust/${getSkinUUID(playerName, player.uuid!)}`} 
           alt={playerName}
           width={192}
           height={192}

@@ -96,3 +96,14 @@ const nextConfig = {
 ### 🌍 Internacionalization
 
 To configure the available languages, you can edit the `config/site.ts` file, modifying the `languages` object, then, you can edit existing translations in the `language/` folder, or create new ones copying the existing ones and changing the values.
+
+### 👤 Bedrock compatibility
+
+If your server allow Bedrock players through [Geyser](https://github.com/GeyserMC/Geyser) and/or [Floodgate](https://github.com/GeyserMC/Floodgate), you can enable the Bedrock compatibility mode in the `config/site.ts` file, setting the `bedrock` property to `true`. Then, configure the name prefix for Bedrock players, to replace the skins with the default Steve skin.
+
+```js
+  bedrock: {
+    enabled: true,
+    prefix: "BP_", // Prefix for Bedrock players
+  },
+```
