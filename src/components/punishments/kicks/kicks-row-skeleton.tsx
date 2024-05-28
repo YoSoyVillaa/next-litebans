@@ -3,22 +3,22 @@ import { TableCell, TableRow } from "@/components/ui/table";
 
 export const KicksRowSkeleton = () => (
   <TableRow>
-    <TableCell className="space-y-1 w-32">
+    <TableCell className="space-y-1 w-40">
       <Skeleton className="mx-auto rounded-sm size-8" />
       <Skeleton className="mx-auto w-16 h-4 mt-1" />
     </TableCell>
-    <TableCell className="space-y-1 w-32">
+    <TableCell className="space-y-1 w-40">
       <Skeleton className="mx-auto rounded-sm size-8" />
       <Skeleton className="mx-auto w-16 h-4 mt-1" />
     </TableCell>
-    <TableCell className="w-[250px]">
+    <TableCell className="w-[442px]">
       <Skeleton className="w-20 md:w-40 h-4" />
     </TableCell>
-    <TableCell className="w-[185px]">
+    <TableCell className="w-[215px]">
       <Skeleton className="w-20 md:w-[132px] h-4" />
     </TableCell>
-    <TableCell>
-      <Skeleton className="size-9 rounded-md" />
+    <TableCell className="!pl-0 !pr-3">
+      <Skeleton className="size-8 rounded-md" />
     </TableCell>
   </TableRow>
 )

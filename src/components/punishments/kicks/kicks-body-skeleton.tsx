@@ -3,7 +3,7 @@ import { KicksRowSkeleton } from "@/components/punishments/kicks/kicks-row-skele
 
 export const KicksBodySkeleton = () => (
   <TableBody>
-    {Array.from({ length: 5 }).map((_, index) => (
+    {Array.from({ length: 10 }).map((_, index) => (
       <KicksRowSkeleton key={index} />
     ))}
   </TableBody>
