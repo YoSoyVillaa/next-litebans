@@ -25,12 +25,32 @@ _P.D: All punishments in the demo are randomly added to the database with a list
 
 1. Clone the repository with `git clone https://github.com/YoSoyVillaa/next-litebans.git`
 2. Install the dependencies with `npm install`
-3. Copy the `.env.example` file to `.env` and fill in the required fields
+3. Copy the `.env.example` file to `.env` and fill in the required fields. For help [check this](#database-url)
 4. If you are using PostgreSQL, check [PostgresSQL Configuration](#PostgresSQL-Configuration)
 5. Config the website ([configuration](#%EF%B8%8F-configuration))
 6. Run `npm run setup:db:generate` to generate the Prisma client
 7. Run `npm run build` to build the project
 8. Run `npm run start` to start the server
+
+### Database URL
+
+You will need to set the `DATABASE_URL` environment variable in the `.env` file. If you don't know the URL template, you can check the following examples for both MySQL and PostgreSQL:
+
+#### MySQL URL Configuration
+
+![MySQL](https://cdn.yosoyvillaa.dev/uploads/mysql.png)
+
+```env
+DATABASE_URL="mysql://user:password@host:port/database"
+```
+
+#### PostgreSQL URL Configuration
+
+![PostgreSQL](https://cdn.yosoyvillaa.dev/uploads/postgresql.png)
+
+```env
+DATABASE_URL="postgresql://user:password@host:port/database?schema=public"
+```
 
 ### PostgresSQL Configuration
 
@@ -46,6 +66,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 ```
+
+Update the URL in the `.env` file with the PostgreSQL connection string.
 
 Then, run `npm run setup:db:pull` to pull the database schema.
 
