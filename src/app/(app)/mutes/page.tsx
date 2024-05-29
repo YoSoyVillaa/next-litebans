@@ -19,11 +19,11 @@ export async function generateMetadata() {
 export default async function Mutes(searchParams: SearchParams) {
   const dictionary = (await language()).dictionary.pages.mutes;
   
-  const muteCount = await getMuteCount();
-  
   const page = getPage(searchParams);
   const player = getPlayer(searchParams);
   const staff = getStaff(searchParams);
+  
+  const muteCount = await getMuteCount(player, staff);
 
   return (
     <DefaultPage

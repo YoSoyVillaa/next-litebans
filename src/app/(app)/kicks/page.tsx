@@ -19,11 +19,11 @@ export async function generateMetadata() {
 export default async function Kicks(searchParams: SearchParams) {
   const dictionary = (await language()).dictionary.pages.kicks;
   
-  const kickCount = await getKickCount();
-  
   const page = getPage(searchParams);
   const player = getPlayer(searchParams);
   const staff = getStaff(searchParams);
+  
+  const kickCount = await getKickCount(player, staff);
 
   return (
     <DefaultPage

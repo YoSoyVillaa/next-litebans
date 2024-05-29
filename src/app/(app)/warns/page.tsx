@@ -20,11 +20,11 @@ export async function generateMetadata() {
 export default async function Warns(searchParams: SearchParams) {
   const dictionary = (await language()).dictionary.pages.warns;
   
-  const warnCount = await getWarnCount();
-  
   const page = getPage(searchParams);
   const player = getPlayer(searchParams);
   const staff = getStaff(searchParams);
+  
+  const warnCount = await getWarnCount(player, staff);
 
   return (
     <DefaultPage
