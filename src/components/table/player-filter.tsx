@@ -40,6 +40,7 @@ export const PlayerFilter = ({ type, name, uuid, console }: PlayerFilter) => {
     const query = createRemovedQueryString(type);
     if (query === "") {
       router.push(pathname);
+      router.refresh();
     } else {
       router.push(`${pathname}?${query}`);
     }
