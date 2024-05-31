@@ -11,9 +11,11 @@ import { useLang } from "@/lib/language/components/language-provider"
 
 import { Input } from "@/components/ui/input"
 import { PlayerAvatar } from "@/components/avatar/player-avatar"
+import { bedrockPrefixRegex } from "@/utils/bedrock"
 
 export const PlayerInput = () => {
   const [playerName, setPlayerName] = useState("")
+  const [iconPlayer, setIconPlayer] = useState("")
   const [isPending, startTransition] = useTransition()
   const [isError, setError] = useState(false)
   const router = useRouter()
@@ -23,6 +25,16 @@ export const PlayerInput = () => {
   const handlePlayerNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setError(false)
     setPlayerName(event.target.value)
+
+    if (siteConfig.bedrock.enabled) {
+      if (event.target.value.startsWith(siteConfig.bedrock.prefix)) {
+        setIconPlayer(event.target.value.replace(bedrockPrefixRegex, ""))
+      } else {
+        setIconPlayer(event.target.value)
+      }
+    } else {
+      setIconPlayer(siteConfig.defaultPlayerLookup)
+    }
   }
 
   const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -47,7 +59,7 @@ export const PlayerInput = () => {
 
   return (
     <div className={cn("relative h-10", isError ? "animate-shake" : "")}>
-      <PlayerAvatar className="absolute right-1 top-1/2 transform -translate-y-1/2 z-10" name={playerName != "" ? playerName : siteConfig.defaultPlayerLookup}/>
+      <PlayerAvatar className="absolute right-1 top-1/2 transform -translate-y-1/2 z-10" name={iconPlayer != "" ? iconPlayer : siteConfig.defaultPlayerLookup}/>
       <Input 
         type="text" 
         value={playerName} 
