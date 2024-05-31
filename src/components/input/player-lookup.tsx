@@ -33,7 +33,7 @@ export const PlayerInput = () => {
         setIconPlayer(event.target.value)
       }
     } else {
-      setIconPlayer(siteConfig.defaultPlayerLookup)
+      setIconPlayer(event.target.value)
     }
   }
 
