@@ -107,3 +107,6 @@ If your server allow Bedrock players through [Geyser](https://github.com/GeyserM
     prefix: "BP_", // Prefix for Bedrock players
   },
 ```
+
+> [!WARNING]
+> If you are using a special character for your Bedrock players, such as ``*.+?^${}()|[\]\\``, etc., you will need to enter ``src/utils/bedrock.ts``, and change the line 13 to ``const bedrockPrefixRegex = new RegExp(`^\\${siteConfig.bedrock.prefix}`);``, escaping the special character with a double backslash.
