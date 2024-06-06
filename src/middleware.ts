@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
 
   if (!lang || !siteConfig.languages.available.includes(lang)) {
     lang = siteConfig.languages.default
-    const response = NextResponse.redirect(request.url)
+    const response = NextResponse.rewrite(request.url)
     response.cookies.set({
       name: "lang",
       value: lang,
