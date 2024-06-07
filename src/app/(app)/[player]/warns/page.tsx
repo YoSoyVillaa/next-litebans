@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: { player: string } 
     }),
     openGraph: {
       images: `https://minotar.net/helm/${player.uuid}`,
-      description: p(siteConfig.openGraph.pages.player.bans.description, {
+      description: p(siteConfig.openGraph.pages.player.warns.description, {
         name: player.name,
         total: warnCount
       })

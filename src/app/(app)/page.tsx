@@ -17,7 +17,7 @@ export async function generateMetadata() {
   
   return {
     title: dictionary.pages.home.title,
-    opengraph: {
+    openGraph: {
       images: process.env.SITE_URL + siteConfig.logo,
       description: p(siteConfig.openGraph.pages.main.description, {
         bans: await db.litebans_bans.count(),
