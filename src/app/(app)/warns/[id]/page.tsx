@@ -5,9 +5,11 @@ import { PiScrollFill } from "react-icons/pi";
 import { FaEarthEurope } from "react-icons/fa6";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 
+import { formatDate } from "@/lib/date";
+import { siteConfig } from "@config/site";
 import p from "@/lib/language/utils/parse";
-import { getWarn } from "@/lib/punishment/warn";
 import { language } from "@/lib/language/dictionaries";
+import { getCachedWarn as getWarn } from "@/lib/punishment/warn";
 
 import { PunishmentInfoCard } from "@/components/info/punishment-info-card";
 import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
@@ -21,11 +23,27 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
       title: dictionary.pages.errors.notFound.title
     }
   }
+
+  const warn = await getWarn(parseInt(params.id));
+
+  if (!warn) {
+    return notFound();
+  }
   
   return {
     title: p(dictionary.pages.warns.info.title, {
       id: params.id
-    })
+    }),
+    openGraph: {
+      images: `https://minotar.net/helm/${warn?.uuid ?? warn?.name}`,
+      description: p(siteConfig.openGraph.punishments.warn.description, {
+        name: warn.name,
+        staff: warn.banned_by_name,
+        reason: warn.reason,
+        time: formatDate(warn.time),
+        server: warn.server
+      })
+    }
   }
 }
 

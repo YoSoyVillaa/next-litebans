@@ -1,3 +1,4 @@
+import { db } from "@/lib/db";
 import { SearchParams } from "@/types";
 import p from "@/lib/language/utils/parse";
 import { language } from "@/lib/language/dictionaries";
@@ -6,13 +7,29 @@ import { getPage, getPlayer, getStaff } from "@/utils/searchParams";
 
 import { DefaultPage } from "@/components/layout/default-page";
 import { HistoryTable } from "@/components/punishments/history/history-table";
+import { siteConfig } from "@config/site";
 
 export async function generateMetadata() {
   
   const { dictionary } = await language();
+
+  const banCount = await db.litebans_bans.count();
+  const muteCount = await db.litebans_mutes.count();
+  const warnCount = await db.litebans_warnings.count();
+  const kickCount = await db.litebans_kicks.count();
   
   return {
-    title: dictionary.pages.history.title
+    title: dictionary.pages.history.title,
+    openGraph: {
+      images: process.env.SITE_URL + siteConfig.logo,
+      description: p(siteConfig.openGraph.pages.history.description, {
+        bans: banCount,
+        mutes: muteCount,
+        warns: warnCount,
+        kicks: kickCount,
+        total: banCount + muteCount + warnCount + kickCount
+      })
+    }
   }
 }
 

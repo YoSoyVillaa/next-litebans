@@ -5,9 +5,11 @@ import { PiScrollFill } from "react-icons/pi";
 import { FaEarthEurope } from "react-icons/fa6";
 import { PiClockCountdownBold } from "react-icons/pi";
 
+import { siteConfig } from "@config/site";
 import p from "@/lib/language/utils/parse";
-import { getMute } from "@/lib/punishment/mute";
 import { language } from "@/lib/language/dictionaries";
+import { formatDate, formatDuration } from "@/lib/date";
+import { getCachedMute as getMute } from "@/lib/punishment/mute";
 
 import { Badge } from "@/components/ui/badge";
 import { PunishmentInfoCard } from "@/components/info/punishment-info-card";
@@ -16,18 +18,35 @@ import { PunishmentStatusDot } from "@/components/punishments/punishment-status-
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   
-  const { dictionary } = await language();
+  const { lang, dictionary } = await language();
 
   if (isNaN(parseInt(params.id))) {
     return {
       title: dictionary.pages.errors.notFound.title
     }
   }
+
+  const mute = await getMute(parseInt(params.id), dictionary.pages.mutes);
+
+  if (!mute) {
+    return notFound();
+  }
   
   return {
     title: p(dictionary.pages.mutes.info.title, {
       id: params.id
-    })
+    }),
+    openGraph: {
+      images: `https://minotar.net/helm/${mute?.uuid ?? mute?.name}`,
+      description: p(siteConfig.openGraph.punishments.mute.description, {
+        name: mute.name,
+        staff: mute.banned_by_name,
+        reason: mute.reason,
+        time: formatDate(mute.time),
+        duration: mute.until instanceof Date ? formatDuration(mute.time, mute.until, lang) : mute.until,
+        server: mute.server
+      })
+    }
   }
 }
 

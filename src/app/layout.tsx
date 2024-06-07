@@ -22,6 +22,13 @@ export async function generateMetadata() {
       default: siteConfig.title,
     },
     description: dictionary.site.description,
+    openGraph: {
+      images: process.env.SITE_URL + siteConfig.logo,
+    },
+    twitter: {
+      card: "summary",
+      creator: "@yosoyvillaa"
+    }
   }
 }
 

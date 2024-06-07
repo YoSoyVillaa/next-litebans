@@ -1,7 +1,10 @@
+import { cache } from "react";
+
 import { PunishmentListItem } from "@/types";
+
 import { db } from "../db";
-import { Dictionary } from "../language/types";
 import { getPlayerName } from "./punishment";
+import { Dictionary } from "../language/types";
 
 const getBanCount = async (player?: string, staff?: string) => {
   const count = await db.litebans_bans.count({
@@ -95,4 +98,8 @@ const getBan = async (id: number, dictionary: Dictionary) => {
   }
 }
 
-export { getBanCount, getBans, sanitizeBans, getBan }
+const getCachedBan = cache(
+  async (id: number, dictionary: Dictionary) => getBan(id, dictionary)
+);
+
+export { getBanCount, getBans, sanitizeBans, getBan, getCachedBan }

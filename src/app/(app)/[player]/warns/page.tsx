@@ -17,6 +17,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Icons } from "@/components/layout/icons";
 import { WarnsTable } from "@/components/punishments/warns/warns-table";
+import { siteConfig } from "@config/site";
 
 export async function generateMetadata({ params }: { params: { player: string } }) {
   
@@ -31,10 +32,19 @@ export async function generateMetadata({ params }: { params: { player: string } 
     }
   }
   
+  const warnCount = await getPlayerWarnCount(player.uuid!);
+  
   return {
     title: p(dictionary.pages.playerHistory.title, {
       player: params.player.replace("%40", '')
-    })
+    }),
+    openGraph: {
+      images: `https://minotar.net/helm/${player.uuid}`,
+      description: p(siteConfig.openGraph.pages.player.bans.description, {
+        name: player.name,
+        total: warnCount
+      })
+    }
   }
 }
 

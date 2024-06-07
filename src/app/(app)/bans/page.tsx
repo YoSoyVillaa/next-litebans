@@ -1,4 +1,5 @@
 import { SearchParams } from "@/types";
+import { siteConfig } from "@config/site";
 import p from "@/lib/language/utils/parse";
 import { getBanCount } from "@/lib/punishment/ban";
 import { language } from "@/lib/language/dictionaries";
@@ -10,9 +11,17 @@ import { BansTable } from "@/components/punishments/bans/bans-table";
 export async function generateMetadata() {
   
   const { dictionary } = await language();
+
+  const banCount = await getBanCount();
   
   return {
-    title: dictionary.pages.bans.title
+    title: dictionary.pages.bans.title,
+    openGraph: {
+      images: process.env.SITE_URL + siteConfig.logo,
+      description: p(siteConfig.openGraph.pages.bans.description, {
+        total: banCount
+      })
+    }
   }
 }
 

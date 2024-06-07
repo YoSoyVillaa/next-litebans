@@ -4,9 +4,11 @@ import { IoCalendar } from "react-icons/io5";
 import { PiScrollFill } from "react-icons/pi";
 import { FaEarthEurope } from "react-icons/fa6";
 
+import { formatDate } from "@/lib/date";
+import { siteConfig } from "@config/site";
 import p from "@/lib/language/utils/parse";
-import { getKick } from "@/lib/punishment/kick";
 import { language } from "@/lib/language/dictionaries";
+import { getCachedKick as getKick } from "@/lib/punishment/kick";
 
 import { PunishmentInfoCard } from "@/components/info/punishment-info-card";
 import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
@@ -20,11 +22,27 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
       title: dictionary.pages.errors.notFound.title
     }
   }
+
+  const kick = await getKick(parseInt(params.id));
+
+  if (!kick) {
+    return notFound();
+  }
   
   return {
     title: p(dictionary.pages.kicks.info.title, {
       id: params.id
-    })
+    }),
+    openGraph: {
+      images: `https://minotar.net/helm/${kick?.uuid ?? kick?.name}`,
+      description: p(siteConfig.openGraph.punishments.kick.description, {
+        name: kick.name,
+        staff: kick.banned_by_name,
+        reason: kick.reason,
+        time: formatDate(kick.time),
+        server: kick.server
+      })
+    }
   }
 }
 

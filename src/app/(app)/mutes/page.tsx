@@ -1,4 +1,5 @@
 import { SearchParams } from "@/types";
+import { siteConfig } from "@config/site";
 import p from "@/lib/language/utils/parse";
 import { getMuteCount } from "@/lib/punishment/mute";
 import { language } from "@/lib/language/dictionaries";
@@ -11,8 +12,16 @@ export async function generateMetadata() {
   
   const { dictionary } = await language();
   
+  const muteCount = await getMuteCount();
+  
   return {
-    title: dictionary.pages.mutes.title
+    title: dictionary.pages.mutes.title,
+    openGraph: {
+      images: process.env.SITE_URL + siteConfig.logo,
+      description: p(siteConfig.openGraph.pages.mutes.description, {
+        total: muteCount
+      })
+    }
   }
 }
 

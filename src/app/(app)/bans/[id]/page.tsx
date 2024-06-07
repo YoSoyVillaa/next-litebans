@@ -5,9 +5,11 @@ import { PiScrollFill } from "react-icons/pi";
 import { FaEarthEurope } from "react-icons/fa6";
 import { PiClockCountdownBold } from "react-icons/pi";
 
+import { siteConfig } from "@config/site";
 import p from "@/lib/language/utils/parse";
-import { getBan } from "@/lib/punishment/ban";
 import { language } from "@/lib/language/dictionaries";
+import { formatDate, formatDuration } from "@/lib/date";
+import { getCachedBan as getBan } from "@/lib/punishment/ban";
 
 import { Badge } from "@/components/ui/badge";
 import { PunishmentInfoCard } from "@/components/info/punishment-info-card";
@@ -16,18 +18,34 @@ import { PunishmentStatusDot } from "@/components/punishments/punishment-status-
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   
-  const { dictionary } = await language();
+  const { lang, dictionary } = await language();
+  const localDictionary = dictionary.pages.bans;
 
   if (isNaN(parseInt(params.id))) {
-    return {
-      title: dictionary.pages.errors.notFound.title
-    }
+    return notFound();
+  }
+
+  const ban = await getBan(parseInt(params.id), localDictionary);
+
+  if (!ban) {
+    return notFound();
   }
   
   return {
     title: p(dictionary.pages.bans.info.title, {
       id: params.id
-    })
+    }),
+    openGraph: {
+      images: `https://minotar.net/helm/${ban?.uuid ?? ban?.name}`,
+      description: p(siteConfig.openGraph.punishments.ban.description, {
+        name: ban.name,
+        staff: ban.banned_by_name,
+        reason: ban.reason,
+        time: formatDate(ban.time),
+        duration: ban.until instanceof Date ? formatDuration(ban.time, ban.until, lang) : ban.until,
+        server: ban.server
+      })
+    }
   }
 }
 

@@ -16,7 +16,17 @@ export async function generateMetadata() {
   const { dictionary } = await language();
   
   return {
-    title: dictionary.pages.home.title
+    title: dictionary.pages.home.title,
+    opengraph: {
+      images: process.env.SITE_URL + siteConfig.logo,
+      description: p(siteConfig.openGraph.pages.main.description, {
+        bans: await db.litebans_bans.count(),
+        mutes: await db.litebans_mutes.count(),
+        warns: await db.litebans_warnings.count(),
+        kicks: await db.litebans_kicks.count(),
+        total: await db.litebans_bans.count() + await db.litebans_mutes.count() + await db.litebans_warnings.count() + await db.litebans_kicks.count()
+      })
+    }
   }
 }
 

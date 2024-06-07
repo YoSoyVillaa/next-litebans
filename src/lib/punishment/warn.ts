@@ -1,4 +1,7 @@
+import { cache } from "react";
+
 import { PunishmentListItem } from "@/types";
+
 import { db } from "../db";
 import { getPlayerName } from "./punishment";
 
@@ -88,4 +91,8 @@ const getWarn = async (id: number) => {
   }
 }
 
-export { getWarnCount, getWarns, sanitizeWarns, getWarn }
+const getCachedWarn = cache(
+  async (id: number) => getWarn(id)
+);
+
+export { getWarnCount, getWarns, sanitizeWarns, getWarn, getCachedWarn }

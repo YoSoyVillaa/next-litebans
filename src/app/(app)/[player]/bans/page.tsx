@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { siteConfig } from "@config/site";
 import p from "@/lib/language/utils/parse";
 import q from "@/lib/language/utils/quantity";
 import { getSkinUUID } from "@/utils/bedrock";
@@ -30,11 +31,20 @@ export async function generateMetadata({ params }: { params: { player: string } 
       title: dictionary.pages.errors.notFound.title
     }
   }
+
+  const banCount = await getPlayerBanCount(player.uuid!);
   
   return {
     title: p(dictionary.pages.playerHistory.title, {
       player: params.player.replace("%40", '')
-    })
+    }),
+    openGraph: {
+      images: `https://minotar.net/helm/${player.uuid}`,
+      description: p(siteConfig.openGraph.pages.player.bans.description, {
+        name: player.name,
+        total: banCount
+      })
+    }
   }
 }
 

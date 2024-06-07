@@ -1,4 +1,5 @@
 import { SearchParams } from "@/types";
+import { siteConfig } from "@config/site";
 import p from "@/lib/language/utils/parse";
 import { getKickCount } from "@/lib/punishment/kick";
 import { language } from "@/lib/language/dictionaries";
@@ -11,8 +12,16 @@ export async function generateMetadata() {
   
   const { dictionary } = await language();
   
+  const kickCount = await getKickCount();
+  
   return {
-    title: dictionary.pages.kicks.title
+    title: dictionary.pages.kicks.title,
+    openGraph: {
+      images: process.env.SITE_URL + siteConfig.logo,
+      description: p(siteConfig.openGraph.pages.kicks.description, {
+        total: kickCount
+      })
+    }
   }
 }
 

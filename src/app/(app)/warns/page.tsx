@@ -1,4 +1,5 @@
 import { SearchParams } from "@/types";
+import { siteConfig } from "@config/site";
 import p from "@/lib/language/utils/parse";
 import { getWarnCount } from "@/lib/punishment/warn";
 import { language } from "@/lib/language/dictionaries";
@@ -12,8 +13,16 @@ export async function generateMetadata() {
   
   const { dictionary } = await language();
   
+  const warnCount = await getWarnCount();
+  
   return {
-    title: dictionary.pages.warns.title
+    title: dictionary.pages.warns.title,
+    openGraph: {
+      images: process.env.SITE_URL + siteConfig.logo,
+      description: p(siteConfig.openGraph.pages.warns.description, {
+        total: warnCount
+      })
+    }
   }
 }
 
