@@ -1,5 +1,6 @@
 import { cache } from "react";
 
+import { siteConfig } from "@config/site";
 import { PunishmentListItem } from "@/types";
 
 import { db } from "../db";
@@ -55,7 +56,7 @@ const sanitizeBans = async (dictionary: Dictionary, bans: PunishmentListItem[]) 
       status: until == dictionary.table.permanent ? 
                 active : 
                 until < new Date() ? false : undefined,
-      console: ban.banned_by_uuid === "[Console]",
+      console: ban.banned_by_uuid === siteConfig.console.uuid,
       permanent: until == dictionary.table.permanent,
       active,
       until,

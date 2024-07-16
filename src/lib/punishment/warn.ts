@@ -1,5 +1,6 @@
 import { cache } from "react";
 
+import { siteConfig } from "@config/site";
 import { PunishmentListItem } from "@/types";
 
 import { db } from "../db";
@@ -50,7 +51,7 @@ const sanitizeWarns = async (warns: (PunishmentListItem & { warned: boolean | st
       ...warn,
       id: warn.id.toString(),
       time: new Date(parseInt(warn.time.toString())),
-      console: warn.banned_by_uuid === "[Console]",
+      console: warn.banned_by_uuid === siteConfig.console.uuid,
       active: typeof warn.active === "boolean" ? warn.active : warn.active === "1",
       warned: typeof warn.warned === "boolean" ? warn.warned : warn.warned === "1",
       name

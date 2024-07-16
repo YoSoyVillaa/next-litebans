@@ -17,7 +17,7 @@ export const Filters = async ({ player, staff }: FiltersProps) => {
 
   let staffName;
   if (staff) {
-    if (staff === "[Console]") staffName = siteConfig.console.name;
+    if (staff === siteConfig.console.uuid) staffName = siteConfig.console.name;
     else staffName = await getPlayerName(staff);
   }
   
@@ -37,7 +37,7 @@ export const Filters = async ({ player, staff }: FiltersProps) => {
               type="staff"
               name={staffName!}
               uuid={staff}
-              console={staff === "[Console]"}
+              console={staff === siteConfig.console.uuid}
             />
           )}
         </div>

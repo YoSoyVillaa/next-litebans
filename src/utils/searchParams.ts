@@ -1,4 +1,5 @@
 import { SearchParams } from "@/types";
+import { siteConfig } from "@config/site";
 
 const getPage = ({ searchParams }: SearchParams) => {
   let page = searchParams.page ? parseInt(searchParams.page as string) : 1;
@@ -21,7 +22,7 @@ const getPlayer = ({ searchParams }: SearchParams) => {
 
 const getStaff = ({ searchParams }: SearchParams) => {
   const staff = searchParams.staff as string;
-  if (!/^[a-f\d]{8}-[a-f\d]{4}-[1-5][a-f\d]{3}-[89ab][a-f\d]{3}-[a-f\d]{12}$/i.test(staff) && staff !== '[Console]') {
+  if (!/^[a-f\d]{8}-[a-f\d]{4}-[1-5][a-f\d]{3}-[89ab][a-f\d]{3}-[a-f\d]{12}$/i.test(staff) && staff !== siteConfig.console.uuid) {
     return undefined;
   }
 

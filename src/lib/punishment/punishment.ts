@@ -1,6 +1,8 @@
 import { Prisma } from "@prisma/client";
-import { db } from "../db";
+import { siteConfig } from "@config/site";
 import { PunishmentListItem } from "@/types";
+
+import { db } from "../db";
 import { Dictionary } from "../language/types";
 
 const getPunishmentCount = async (player?: string, staff?: string) => {
@@ -85,7 +87,7 @@ const sanitizePunishments = async (dictionary: Dictionary, punishments: Punishme
       ...punishment,
       id: punishment.id.toString(),
       time: new Date(parseInt(punishment.time.toString())),
-      console: punishment.banned_by_uuid === "[Console]",
+      console: punishment.banned_by_uuid === siteConfig.console.uuid,
       status,
       until,
       name

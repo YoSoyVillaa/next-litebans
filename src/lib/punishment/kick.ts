@@ -1,5 +1,6 @@
 import { cache } from "react";
 
+import { siteConfig } from "@config/site";
 import { PunishmentListItem } from "@/types";
 
 import { db } from "../db";
@@ -49,7 +50,7 @@ const sanitizeKicks = async (kicks: PunishmentListItem[]) => {
       ...kick,
       id: kick.id.toString(),
       time: new Date(parseInt(kick.time.toString())),
-      console: kick.banned_by_uuid === "[Console]",
+      console: kick.banned_by_uuid === siteConfig.console.uuid,
       active: typeof kick.active === "boolean" ? kick.active : kick.active === "1",
       name
     }
