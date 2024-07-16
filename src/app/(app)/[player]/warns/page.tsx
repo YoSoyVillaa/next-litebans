@@ -79,7 +79,7 @@ export default async function Warns({
       <div className="space-y-2 md:flex md:space-x-4">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img 
-          src={`https://skins.mcstats.com/bust/${getSkinUUID(playerName, player.uuid!)}`} 
+          src={`https://visage.surgeplay.com/bust/512/${getSkinUUID(playerName, player.uuid!)}`} 
           alt={playerName}
           width={192}
           height={192}

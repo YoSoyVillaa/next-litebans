@@ -1,12 +1,12 @@
 "use server"
 
 import Link from "next/link";
+import Image from "next/image";
 
 import { language } from "@/lib/language/dictionaries";
 
 import { AvatarBody } from "@/components/avatar/avatar-body";
 import { AvatarBust } from "@/components/avatar/avatar-bust";
-import { PlayerAvatar } from "@/components/avatar/player-avatar";
 import { ConsoleAvatar } from "@/components/avatar/console-avatar";
 
 interface PunishmentInfoCardProps {
@@ -40,7 +40,13 @@ export const PunishmentInfoCard = async ({ punishment, children }: PunishmentInf
           />
         </Link>
         <div className="flex space-x-2 justify-center">
-          <PlayerAvatar uuid={punishment.uuid!} name={punishment.name!} size={28} className="!mx-0 mr-1" />
+          <Image 
+            src={`https://visage.surgeplay.com/face/128/${punishment.uuid}`}
+            alt={`${punishment.name}'s avatar`}
+            width={28}
+            height={28}
+            className="rounded-sm mx-0 mr-1"
+          />
           <p className="text-xl">{punishment.name}</p>
         </div>
       </div>
@@ -69,7 +75,13 @@ export const PunishmentInfoCard = async ({ punishment, children }: PunishmentInf
           {punishment.console ? 
             <ConsoleAvatar name={punishment.banned_by_name!} size={28} className="!mx-0 mr-1" />
             :
-            <PlayerAvatar uuid={punishment.banned_by_uuid!} name={punishment.banned_by_name!} size={28} className="!mx-0 mr-1" /> 
+            <Image 
+              src={`https://visage.surgeplay.com/face/128/${punishment.banned_by_uuid}`}
+              alt={`${punishment.banned_by_name}'s avatar`}
+              width={28}
+              height={28}
+              className="rounded-sm mx-0 mr-1"
+            />
           }
           <p className="text-xl">{punishment.banned_by_name}</p>
         </div>

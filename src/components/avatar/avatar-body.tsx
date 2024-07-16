@@ -12,7 +12,7 @@ interface AvatarBodyProps {
 export const AvatarBody = ({ name, uuid, console, className }: AvatarBodyProps) => (
   // eslint-disable-next-line @next/next/no-img-element
   <img 
-    src={console ? siteConfig.console.body : `https://skins.mcstats.com/body/front/${getSkinUUID(name, uuid)}`} 
+    src={console ? siteConfig.console.body : `https://visage.surgeplay.com/full/512/${getSkinUUID(name, uuid)}`} 
     alt={name}
     width={192}
     height={192}
