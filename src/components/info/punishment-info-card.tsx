@@ -1,7 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 "use server"
 
 import Link from "next/link";
-import Image from "next/image";
 
 import { language } from "@/lib/language/dictionaries";
 
@@ -40,7 +40,7 @@ export const PunishmentInfoCard = async ({ punishment, children }: PunishmentInf
           />
         </Link>
         <div className="flex space-x-2 justify-center">
-          <Image 
+          <img 
             src={`https://visage.surgeplay.com/face/128/${punishment.uuid}`}
             alt={`${punishment.name}'s avatar`}
             width={28}
@@ -75,7 +75,7 @@ export const PunishmentInfoCard = async ({ punishment, children }: PunishmentInf
           {punishment.console ? 
             <ConsoleAvatar name={punishment.banned_by_name!} size={28} className="!mx-0 mr-1" />
             :
-            <Image 
+            <img 
               src={`https://visage.surgeplay.com/face/128/${punishment.banned_by_uuid}`}
               alt={`${punishment.banned_by_name}'s avatar`}
               width={28}
