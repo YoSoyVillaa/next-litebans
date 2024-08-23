@@ -57,27 +57,31 @@ export default async function Home(searchParams: SearchParams) {
       <div className="mx-auto grid gap-4 sm:grid-cols-2 sm:w-[496px] lg:grid-cols-4 lg:w-[1024px]">
         <PunishmentTypeCard
           title={q(dictionary.words.bans, banCount)}
+          fromGradient="from-red-500/10"
           count={banCount}
           href="/bans"
-          punishmentIcon={Icons.ban({ color: 'red', className: "size-[8.5rem] opacity-20 absolute top-[-35px] right-[-25px]" })}
+          punishmentIcon={Icons.ban({ color: 'red', className: "size-[8.5rem] opacity-20 absolute top-[-35px] right-[-25px] blur-sm transition duration-700 group-hover:opacity-40 group-hover:scale-[1.15]" })}
         />
         <PunishmentTypeCard
           title={q(dictionary.words.mutes, muteCount)}
+          fromGradient="from-neutral-500/10"
           count={muteCount}
           href="/mutes"
-          punishmentIcon={Icons.mute({ color: 'gray', className: "size-[8.5rem] opacity-20 absolute top-[-35px] right-[-25px]" })}
+          punishmentIcon={Icons.mute({ color: 'gray', className: "size-[8.5rem] opacity-20 absolute top-[-35px] right-[-25px] blur-sm transition duration-700 group-hover:opacity-40 group-hover:scale-[1.15]" })}
         />
         <PunishmentTypeCard
           title={q(dictionary.words.warns, warnCount)}
+          fromGradient="from-yellow-600/10"
           count={warnCount}
           href="/warns"
-          punishmentIcon={Icons.warn({ className: "size-[8.5rem] opacity-20 absolute top-[-35px] right-[-25px] text-yellow-500 ml-2" })}
+          punishmentIcon={Icons.warn({ className: "size-[8.5rem] opacity-20 absolute top-[-35px] right-[-25px] text-yellow-500 ml-2 blur-sm transition duration-700 group-hover:opacity-40 group-hover:scale-[1.15]" })}
         />
         <PunishmentTypeCard
           title={q(dictionary.words.kicks, kickCount)}
+          fromGradient="from-sky-600/5"
           count={kickCount}
           href="/kicks"
-          punishmentIcon={Icons.kick({ className: "size-[8.5rem] opacity-20 absolute top-[-35px] right-[-25px] text-sky-600 ml-2" })}
+          punishmentIcon={Icons.kick({ className: "size-[8.5rem] opacity-20 absolute top-[-35px] right-[-25px] text-sky-600 ml-2 blur-sm transition duration-700 group-hover:opacity-40 group-hover:scale-110" })}
         />
       </div>
       <div className="mx-auto w-full lg:w-[1024px]">
