@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 
+import { getSkinUUID } from "@/utils/bedrock";
 import { language } from "@/lib/language/dictionaries";
 
 import { AvatarBody } from "@/components/avatar/avatar-body";
@@ -41,7 +42,7 @@ export const PunishmentInfoCard = async ({ punishment, children }: PunishmentInf
         </Link>
         <div className="flex space-x-2 justify-center">
           <img 
-            src={`https://visage.surgeplay.com/face/128/${punishment.uuid}`}
+            src={`https://visage.surgeplay.com/face/128/${getSkinUUID(punishment.name!, punishment.uuid!)}`}
             alt={`${punishment.name}'s avatar`}
             width={28}
             height={28}
