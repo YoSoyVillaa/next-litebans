@@ -46,7 +46,7 @@ const language = {
       table: {
         heads: {
           type: "Tipo",
-          player: "Juagador",
+          player: "Jugador",
           by: "Sancionado por",
           reason: "Razón",
           date: "Fecha",
