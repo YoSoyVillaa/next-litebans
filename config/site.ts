@@ -1,5 +1,5 @@
 export const siteConfig = {
-  title: "Next Litebans",
+  title: "MineBolt",
   logo: "/logo.webp",
   favicon: "/logo.webp",
   languages: {
@@ -16,7 +16,7 @@ export const siteConfig = {
     body: "/console-body.webp",
     bust: "/console-bust.webp",
   },
-  defaultPlayerLookup: "YoSoyVilla",
+  defaultPlayerLookup: "J4im3x0",
   // When enabled, body and bust images will show a steve skin
   bedrock: {
     enabled: false,

@@ -37,7 +37,7 @@ const language = {
     home: {
       title: "Inicio",
       // Placeholders: {total}, {bans}, {mutes}, {kicks}, {warns}
-      subtitle: "¡Bienvenido a la interfaz web de Litebans!"
+      subtitle: "¡Bienvenido a la interfaz web de sanciones!"
     },
     history: {
       title: "Historial",
