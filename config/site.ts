@@ -6,6 +6,7 @@ export const siteConfig = {
     available: [
       "en",
       "es",
+      "zh",
     ],
     default: "en",
   },
